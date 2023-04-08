@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.development';
 export class UserService {
 
   private uriseg = environment.baseUrl;
+  public responseItem : any;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,12 @@ export class UserService {
 
     return this.http.post(URI, inputdata).pipe(map(response => {
       console.log(response);
-      // localStorage.setItem('token', JSON.stringify(response));
+      this.responseItem = response;
+      localStorage.setItem('token', JSON.stringify(this.responseItem.token));
     }));
+  }
+
+  IsLoggedIn() {
+    return localStorage.getItem('token') != null
   }
 }

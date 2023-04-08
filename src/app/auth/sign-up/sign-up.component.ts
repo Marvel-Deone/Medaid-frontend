@@ -18,7 +18,7 @@ export class SignUpComponent {
   errorMessage?: any;
   status ?: boolean;
 
-  constructor(private fb: FormBuilder, public router: Router, public service: UserService, private _snackbar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, public router: Router, public service: UserService, private _snackBar: MatSnackBar) {}
 
 
   ngOnInit(): void {
@@ -45,7 +45,13 @@ export class SignUpComponent {
     this.service.Register(form.value).subscribe(item => {
       this.respdata = item;
       // this._snackbar.open("Registration Successful", "X");
-      this.status = true;
+      this._snackBar.open("Registeration Successful!", "OK", {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['green-snackbar', 'login-snackbar'],
+       });
+
       this.router.navigate(['sign-in']);
       this.loading = false;
     },
@@ -54,6 +60,17 @@ export class SignUpComponent {
         this.errorMessage = errorResponse.error.message;
         this.status = errorResponse.error.status;
         console.log('Registration Failed', errorResponse.error.message);
+        this.errorMessage ? this._snackBar.open(this.errorMessage, "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+         }) : this._snackBar.open("Pls check your internet connection","OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+         });
         // this._snackbar.open(errorResponse.error.message, "X");
       })
       

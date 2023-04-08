@@ -24,8 +24,6 @@
                       <label class="form-label">Last Name</label>
                       <input type="text" class="form-control">
                     </div> -->
-                    <div *ngIf="status" class="alert alert-success">Registered successfully</div>
-                    <div *ngIf="errorMessage && !status" class="alert alert-danger">{{errorMessage}}</div>
                     <div class="form-floating mb-3 px-3 input-outline pt-2 pb-3">
                         <input type="text" formControlName="username" class="form-control inp px-3 mt-2 pb-3" id="myUsername" placeholder="Enter your username">
                         <label for="myUsername" class="px-2">Username</label>

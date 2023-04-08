@@ -4,13 +4,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { NotificationComponent } from './notification/notification.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'sign-in', pathMatch: 'full'  },
   {path: 'sign-in', component: SignInComponent  },
   {path: 'sign-up', component: SignUpComponent  },
-   {path: 'dashboard', component: DashboardComponent  },
-   {path: 'notifications', component: NotificationComponent  },
+   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
+   {path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({
