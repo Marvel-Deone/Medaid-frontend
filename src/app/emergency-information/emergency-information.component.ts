@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-emergency-information',
+  templateUrl: './emergency-information.component.html',
+  styleUrls: ['./emergency-information.component.css']
 })
-export class ProfileComponent {
-  public profileTitle: string = 'update_profile';
+export class EmergencyInformationComponent {
+  public profileTitle: string = 'medical_info';
+
   constructor(private router: Router) {}
 
   logout() {
