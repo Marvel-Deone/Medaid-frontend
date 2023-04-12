@@ -1,0 +1,16 @@
+.body{
+    display:flex;
+    overflow:hidden !important;
+}
+.sideBar{
+    flex:5.17;
+}
+/* message container */
+.message-container{
+    flex:12;
+}
+
+::-webkit-scrollbar{
+    display:none !important;
+
+}

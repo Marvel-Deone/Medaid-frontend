@@ -19,7 +19,12 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
-
+import { SidebarsideComponent } from './chat/sidebarside/sidebarside.component';
+import { MessagecontainerComponent } from './chat/messagecontainer/messagecontainer.component';
+import { ChatContainerComponent } from './chat/chat-container/chat-container.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 registerLocaleData(en);
 
 @NgModule({
@@ -32,6 +37,9 @@ registerLocaleData(en);
     SignUpComponent,
     ProfileComponent,
     NotificationComponent,
+    SidebarsideComponent,
+    MessagecontainerComponent,
+    ChatContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +49,10 @@ registerLocaleData(en);
     HttpClientModule,
     MatSnackBarModule,
     FormsModule,
-    NzNotificationModule
+    NzNotificationModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

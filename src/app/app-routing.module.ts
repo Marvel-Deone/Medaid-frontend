@@ -1,3 +1,4 @@
+import { ChatContainerComponent } from './chat/chat-container/chat-container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent  },
    {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
    {path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard]  },
+   {path: 'chat', component: ChatContainerComponent,  },
 ];
 
 @NgModule({
