@@ -1,0 +1,41 @@
+<main class="main-content  mt-0">
+    <section>
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('../../../assets/img/Inbox\ cleanup-amico.png'); background-size: cover;">
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="font-weight-bolder">Email Verification</h4>
+                  <p class="mb-0">We have sent code to your email.</p>
+                </div>
+                <div class="card-body">
+                 
+                   
+                    <div class="form-floating mb-3 px-3 input-outline pt-2 pb-3">
+                        <input type="number"  class="form-control inp px-3 mt-2 pb-3" placeholder="Enter your pin" [(ngModel)]="userPin">
+                        <label for="myUsername" class="px-2">Pin</label>
+                      </div>
+
+
+                  
+                    
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" (click)="verifyEmail()">Verify Email</button>
+                    </div>
+                  
+                </div>
+                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

@@ -25,6 +25,7 @@ import { ChatContainerComponent } from './chat/chat-container/chat-container.com
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { EmailVeryComponent } from './auth/email-very/email-very.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -40,6 +41,7 @@ registerLocaleData(en);
     SidebarsideComponent,
     MessagecontainerComponent,
     ChatContainerComponent,
+    EmailVeryComponent,
   ],
   imports: [
     BrowserModule,

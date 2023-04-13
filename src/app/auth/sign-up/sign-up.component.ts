@@ -40,8 +40,8 @@ export class SignUpComponent {
   get signup() { return this.signupForm.controls };
 
   onSubmit(form: FormGroup) {
-    console.log(form.value);
-
+ 
+    sessionStorage.setItem('med-email', form.value.email);
     this.service.Register(form.value).subscribe(item => {
       this.respdata = item;
       // this._snackbar.open("Registration Successful", "X");
@@ -52,7 +52,7 @@ export class SignUpComponent {
         panelClass: ['green-snackbar', 'login-snackbar'],
        });
 
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['email-verification']);
       this.loading = false;
     },
       errorResponse => {
