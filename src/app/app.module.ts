@@ -20,7 +20,6 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { EmergencyInformationComponent } from './emergency-information/emergency-information.component';
-import { BlogComponent } from './blog/blog.component';
 
 registerLocaleData(en);
 
@@ -35,7 +34,6 @@ registerLocaleData(en);
     ProfileComponent,
     NotificationComponent,
     EmergencyInformationComponent,
-    BlogComponent,
   ],
   imports: [
     BrowserModule,

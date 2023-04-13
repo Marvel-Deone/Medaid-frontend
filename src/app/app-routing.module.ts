@@ -7,7 +7,6 @@ import { NotificationComponent } from './notification/notification.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EmergencyInformationComponent } from './emergency-information/emergency-information.component';
-import { BlogComponent } from './blog/blog.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'sign-in', pathMatch: 'full'  },
@@ -17,7 +16,6 @@ const routes: Routes = [
    {path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard]  },
    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
    {path: 'emergency-information', component: EmergencyInformationComponent, canActivate: [AuthGuard]  },
-   {path: 'blog', component: BlogComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({
