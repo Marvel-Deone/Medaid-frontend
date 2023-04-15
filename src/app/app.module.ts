@@ -26,6 +26,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { EmailVeryComponent } from './auth/email-very/email-very.component';
+import { RecommendedComponent } from './chunk_component/recommended/recommended.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -42,6 +43,7 @@ registerLocaleData(en);
     MessagecontainerComponent,
     ChatContainerComponent,
     EmailVeryComponent,
+    RecommendedComponent,
   ],
   imports: [
     BrowserModule,

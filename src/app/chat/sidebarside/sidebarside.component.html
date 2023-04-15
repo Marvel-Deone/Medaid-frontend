@@ -24,170 +24,22 @@
 </div>
 
 <div class="sidebar-chats">
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
+    <div class="sidebar-chat"  (click)="onClickChat(i)" *ngFor="let user of allUsers; let i = index "> 
+            <div class="chat-avater">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
+            </div>
+            <div class="chat-info">
+                <h4>{{user.username}}</h4>
+                <p>Last message</p>
+            </div>
+            <div class="time">
+                <p>2:44pm</p>
+    
+            
 
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
 
-        </div>
-    </div><div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div><div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div><div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
-    </div>
-    <div class="sidebar-chat">
-        <div class="chat-avater">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
-        </div>
-        <div class="chat-info">
-            <h4>Dapo Oye</h4>
-            <p>Last message</p>
-        </div>
-        <div class="time">
-            <p>2:44pm</p>
-
-        </div>
+        
+  
+    
     </div>
 </div>

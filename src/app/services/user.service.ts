@@ -52,9 +52,16 @@ export class UserService {
     })
 
   }
-
+  GetCurrentUser(currentUser:any){
+    return this.http.get(`${this.uriseg}/user/currentuser/${currentUser}`);
+  }
   GetAllUser(currentUser:any){
     return this.http.get(`${this.uriseg}/user/allUsers/${currentUser}`);
   }
+
+  SendMessage(messageDetails:any){
+   return this.http.post(`${this.uriseg}/messages/addmessage`,messageDetails)
+  }
+
 
 }

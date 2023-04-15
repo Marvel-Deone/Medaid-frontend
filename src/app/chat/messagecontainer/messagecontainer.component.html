@@ -7,7 +7,7 @@
       />
     </div>
     <div class="message-header-content">
-      <h6>Ayodeji Abiola</h6>
+      <h6>{{currentChatPicked?.username}}</h6>
       <p>Active</p>
     </div>
   </div>
@@ -107,9 +107,9 @@
     face
     </span>
   
-<input type="text" placeholder="type a message">
-<span class="material-symbols-sharp">
-  mic
-  </span>
+<input type="text" placeholder="type a message" [(ngModel)]="messageInp" >
+
+<button class="sendBtn" *ngIf="messageInp !== ''"><span class="material-symbols-sharp" (click)="sendMsg()">send</span></button>
+
 
 </div>

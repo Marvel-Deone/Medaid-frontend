@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./chat-container.component.css']
 })
 export class ChatContainerComponent {
-
+  public index!: number;
+    
 }
