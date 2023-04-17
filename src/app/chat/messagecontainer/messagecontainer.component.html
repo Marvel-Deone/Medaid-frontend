@@ -1,100 +1,53 @@
-<div class="header">
-  <div class="chat-title">
-    <div class="avater">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU"
-        alt=""
-      />
+  <div class="header">
+    <div class="chat-title">
+      <div class="avater">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU"
+          alt=""
+        />
+      </div>
+      <div class="message-header-content">
+        <h6>{{currentChatPicked?.username}}</h6>
+        <p>Active</p>
+      </div>
     </div>
-    <div class="message-header-content">
-      <h6>{{currentChatPicked?.username}}</h6>
-      <p>Active</p>
-    </div>
-  </div>
-  <div class="chat-header-right">
-    <span class="material-symbols-sharp">
-     
-      </span>
-
+    <div class="chat-header-right">
       <span class="material-symbols-sharp">
-       
+      
         </span>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon> videocam</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon> group</mat-icon>
-            <span>Peer to Peer video</span>
+
+        <span class="material-symbols-sharp">
+        
+          </span>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon> videocam</mat-icon>
           </button>
-         
-          <button mat-menu-item>
-            <mat-icon>  diversity_3</mat-icon>
-            <span>Group video</span>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon> group</mat-icon>
+              <span>Peer to Peer video</span>
+            </button>
+          
+            <button mat-menu-item>
+              <mat-icon>  diversity_3</mat-icon>
+              <span>Group video</span>
           </button>
         </mat-menu>
 
     <span class="material-symbols-sharp"> more_vert </span>
   </div>
 </div>
-<div class="message-content">
-  <p class="chat-message chat-sent">
+<div class="message-content" #chatContainer> 
+  <!-- <p class="chat-message chat-sent">
     This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-  <p class="chat-message chat-sent">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-  <p class="chat-message chat-sent">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-  <p class="chat-message chat-sent">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message chat-sent">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message chat-sent">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message chat-sent">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
-  <p class="chat-message chat-sent">
-    This is a message  <span class="chat-timestamp">11:30pm</span>
-  </p>
-   
+  </p> -->
+  
+ 
+  <p class="chat-message" *ngFor="let chat of chats; let i = index"
+  [class.chat-sent]="chat.fromSelf">
+  {{ chat.message }} <span class="chat-timestamp">11:30pm</span>
+</p>
+  
 
 </div>
 

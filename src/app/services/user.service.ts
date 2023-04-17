@@ -50,8 +50,8 @@ export class UserService {
         "content-Type":"application/json"
       }
     })
-
   }
+  
   GetCurrentUser(currentUser:any){
     return this.http.get(`${this.uriseg}/user/currentuser/${currentUser}`);
   }
@@ -61,6 +61,9 @@ export class UserService {
 
   SendMessage(messageDetails:any){
    return this.http.post(`${this.uriseg}/messages/addmessage`,messageDetails)
+  }
+  GetAllMessages(messageDetails:any){
+    return this.http.post(`${this.uriseg}/messages/getallmessages`,messageDetails)
   }
 
 
