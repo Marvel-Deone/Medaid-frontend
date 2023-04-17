@@ -32,12 +32,13 @@ export class SignInComponent {
 
   onSubmit(form: FormGroup) {
     this.loading = true;
-    console.log(form.value);
+ 
     this.service.Login(form.value).subscribe(
       item => {
         this.loading = false;
         this.respData = item;
         // this._snackBar.open("Login successful", "X");
+        sessionStorage.setItem('med-email', form.value.email);
         this._snackBar.open("Login Successful", "OK", {
           duration: 3000,
           horizontalPosition: 'right',

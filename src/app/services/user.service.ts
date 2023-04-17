@@ -20,6 +20,12 @@ export class UserService {
       console.log(response);
     }));
   }
+  VerifyEmail(inputdata: any){
+    const URI = this.uriseg + '/auth/verifyemail';
+    return this.http.post(`${URI}`, 
+      inputdata
+    );
+  }
 
   Login(inputdata: any) {
     const URI = this.uriseg + '/auth/login';
@@ -34,4 +40,28 @@ export class UserService {
   IsLoggedIn() {
     return localStorage.getItem('token') != null
   }
+
+
+  GetDashboard (token:any){
+    return this.http.get(`${this.uriseg}/user/dashboard`,{
+      headers:{
+        "Authorization":`Bearer ${token}`,
+        "Accept":"application/json",
+        "content-Type":"application/json"
+      }
+    })
+
+  }
+  GetCurrentUser(currentUser:any){
+    return this.http.get(`${this.uriseg}/user/currentuser/${currentUser}`);
+  }
+  GetAllUser(currentUser:any){
+    return this.http.get(`${this.uriseg}/user/allUsers/${currentUser}`);
+  }
+
+  SendMessage(messageDetails:any){
+   return this.http.post(`${this.uriseg}/messages/addmessage`,messageDetails)
+  }
+
+
 }

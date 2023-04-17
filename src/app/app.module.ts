@@ -19,8 +19,19 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+<<<<<<< HEAD
 import { EmergencyInformationComponent } from './emergency-information/emergency-information.component';
 
+=======
+import { SidebarsideComponent } from './chat/sidebarside/sidebarside.component';
+import { MessagecontainerComponent } from './chat/messagecontainer/messagecontainer.component';
+import { ChatContainerComponent } from './chat/chat-container/chat-container.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { EmailVeryComponent } from './auth/email-very/email-very.component';
+import { RecommendedComponent } from './chunk_component/recommended/recommended.component';
+>>>>>>> c2ecbe75aba72c006bc6d1861100c30143d9278d
 registerLocaleData(en);
 
 @NgModule({
@@ -33,7 +44,15 @@ registerLocaleData(en);
     SignUpComponent,
     ProfileComponent,
     NotificationComponent,
+<<<<<<< HEAD
     EmergencyInformationComponent,
+=======
+    SidebarsideComponent,
+    MessagecontainerComponent,
+    ChatContainerComponent,
+    EmailVeryComponent,
+    RecommendedComponent,
+>>>>>>> c2ecbe75aba72c006bc6d1861100c30143d9278d
   ],
   imports: [
     BrowserModule,
@@ -43,7 +62,10 @@ registerLocaleData(en);
     HttpClientModule,
     MatSnackBarModule,
     FormsModule,
-    NzNotificationModule
+    NzNotificationModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

@@ -53,6 +53,7 @@
 .mdc-snackbar__label {
     color: #000 !important;
 }
+<<<<<<< HEAD
 
 .input-outline2:focus {
     border: 1px solid #c5d3e0;
@@ -69,3 +70,5 @@ label {
     display: flex !important;
     justify-content: end !important;
 }
+=======
+>>>>>>> c2ecbe75aba72c006bc6d1861100c30143d9278d
