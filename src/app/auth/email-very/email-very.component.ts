@@ -29,6 +29,7 @@ export class EmailVeryComponent {
       panelClass: ['green-snackbar', 'login-snackbar'],
      });
   }else{
+    console.log('hello');
     
     this.service.VerifyEmail({userpin:this.userPin,email:this.userEmail}).subscribe(item=>{
       this.response= item
