@@ -14,4 +14,5 @@ export class SidebarComponent {
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']);
   }
+  
 }

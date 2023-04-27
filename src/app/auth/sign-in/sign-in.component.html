@@ -14,13 +14,13 @@
                         <div class="card-body">
                             <form role="form" class="text-start" [formGroup]="signinForm"
                                 (ngSubmit)="onSubmit(signinForm)">
-                                <div class="input-group input-group-outline my-3">
+                                <div class="form-floating mb-3 px-3 input-outline pt-2 pb-3">
                                     <input type="email" class="form-control inp px-3 mt-2 pb-3" id="myemail" formControlName="email" placeholder="">
-                                    <label class="form-label" for="myEmail">Email</label>
+                                    <label for="myPassword" class="px-2">Email</label>
                                 </div>
-                                <div class="input-group input-group-outline mb-3">
-                                    <input type="password" class="form-control inp px-3 mt-2 pb-3" id="myPassword" formControlName="password" placeholder="">
-                                    <label class="form-label" for="myPassword">Password</label>
+                                <div class="form-floating mb-3 px-3 input-outline pt-2 pb-3">
+                                    <input type="password" class="form-control inp px-3 mt-2 pb-3" id="floatingInput" formControlName="password" placeholder="">
+                                    <label for="floatingInput" class="px-2">Password</label>
                                 </div>
                                 <div class="form-check form-switch d-flex align-items-center mb-3">
                                     <input class="form-check-input" type="checkbox" id="rememberMe">
@@ -31,7 +31,7 @@
                                         in</button>
                                 </div>
                                 <div *ngIf="loading" class="text-center">
-                                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">
+                                    <button type="submit" disabled class="btn bg-gradient-primary w-100 my-4 mb-2">
                                         <span>Loading</span>
                                         <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px" height="26px">
                                     </button>

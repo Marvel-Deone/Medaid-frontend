@@ -17,6 +17,9 @@ export class DashboardComponent {
   public buttonState: boolean = true;
   buttonStates: boolean[] = [];
   public userProfile:any;
+  public role_id: any;
+  public showmenu: boolean = false;
+
 
   constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService) { }
   ngOnInit(): void {
@@ -26,6 +29,9 @@ export class DashboardComponent {
       data=> {
         const response = data;
         this.userProfile = response.profile;
+        this.role_id = this.userProfile.role_id;
+        console.log(this.role_id);
+        
       }, 
       error=> {
         const errorResponse = error;
@@ -56,6 +62,12 @@ export class DashboardComponent {
       this.allUsers = item.users
     })
 
+  }
+
+  
+  changeMenuStatus() {
+    this.showmenu = !this.showmenu;
+    alert(this.showmenu);
   }
 
   logout() {

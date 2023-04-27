@@ -40,10 +40,11 @@ export class SignUpComponent {
   get signup() { return this.signupForm.controls };
 
   onSubmit(form: FormGroup) {
- 
+    this.loading = true;
     sessionStorage.setItem('med-email', form.value.email);
     this.service.Register(form.value).subscribe(item => {
       this.respdata = item;
+      this.loading = false;
       // this._snackbar.open("Registration Successful", "X");
       this._snackBar.open("Registeration Successful!", "OK", {
         duration: 3000,

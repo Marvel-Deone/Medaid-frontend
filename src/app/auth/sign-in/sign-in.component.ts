@@ -70,15 +70,16 @@ export class SignInComponent {
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
           console.log('errorMessage', errorResponse);
-        } else if(!errorResponse.error.message) {
-          this._snackBar.open("Pls check your internet connection", "OK", {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            panelClass: ['green-snackbar', 'login-snackbar'],
-          });
-          console.log('errorMessage', errorResponse);
-        }
+        } 
+        // else if(!errorResponse.error.message) {
+        //   this._snackBar.open("Pls check your internet connection", "OK", {
+        //     duration: 3000,
+        //     horizontalPosition: 'right',
+        //     verticalPosition: 'bottom',
+        //     panelClass: ['green-snackbar', 'login-snackbar'],
+        //   });
+        //   console.log('errorMessage', errorResponse);
+        // }
         // form.reset();
       });
   }

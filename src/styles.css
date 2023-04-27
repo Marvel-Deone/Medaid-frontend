@@ -61,6 +61,16 @@
     border-bottom-left-radius: 0.375rem !important;
 }
 
+.input-outline3 {
+    border-bottom: 1px solid #d2d6da;
+    border-radius: 0 !important;
+}
+
+.input-outline3:focus {
+    border-bottom: 1px solid #c5d3e0;
+    border-radius: 0 !important;
+}
+
 label {
     cursor: default !important;
 }
@@ -68,4 +78,23 @@ label {
 .save_btn {
     display: flex !important;
     justify-content: end !important;
+}
+
+
+.mobileMenu {
+    position: inherit;
+    bottom: 0;
+    z-index: 1000;
+    flex-grow: 1;
+    visibility: visible !important;
+    background-color: transparent;
+    border-right: 0;
+    border-left: 0;
+    transition: none;
+    transform: none;
+    top: 0;
+    left: 0;
+    width: 400px;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    transform: translateX(-100%);
 }

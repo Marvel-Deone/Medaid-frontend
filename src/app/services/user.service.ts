@@ -70,10 +70,6 @@
       return this.http.post(URI, inputdata, {headers: {  Authorization: `${token}` }} ).pipe(map(response => {
         return response;
       }));
-      // return this.http.post(URI, inputdata).pipe(map(response => {
-      //   console.log("Profile", response);
-      //   return response;
-      // }));
     }
 
 

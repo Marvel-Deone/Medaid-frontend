@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-emergency-information',
@@ -9,6 +10,8 @@ import { UserService } from '../services/user.service';
 })
 export class EmergencyInformationComponent {
   public profileTitle: string = 'medical_info';
+  public loading = false;
+  public errorMessage: any;
 
   public userProfile = {
     firstName: '',
@@ -29,7 +32,7 @@ export class EmergencyInformationComponent {
     medical_note: ''
   };
 
-  constructor(private router: Router,  private service: UserService) {}
+  constructor(private router: Router,  private service: UserService,  private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.service.GetProfile().subscribe(
@@ -72,6 +75,35 @@ export class EmergencyInformationComponent {
 
   changeProfileTitle(title: string) {
     this.profileTitle = title;
+  }
+
+  updateProfile() {
+    this.loading = true;
+    console.log('userProfile', this.userProfile);
+    this.service.UpdateProfile(this.userProfile).subscribe(
+      data => {
+        const response = data;
+        console.log('response', response);
+        
+        this.loading = false;
+             this._snackBar.open("Emergency Info updated successfully", "OK", {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+      },
+      error => {
+        this.loading = false;
+        this.errorMessage = error.message;
+             this._snackBar.open(this.errorMessage, "OK", {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+      }
+    )
   }
 
 }

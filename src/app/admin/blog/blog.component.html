@@ -1,10 +1,11 @@
-<aside
+<aside *ngIf="role_id == 1 || role_id == 2"
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-white"
     id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer
-            
-            opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+                            
+                            opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true"
+            id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
             target="_blank">
             <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
@@ -122,8 +123,72 @@
     </div>
 </aside>
 
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
-    style="background-color: #F8FAFB;">
+<aside *ngIf="role_id == 3"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-white"
+    id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer
+                            
+                            opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true"
+            id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+            target="_blank">
+            <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold text-dark">Medaid</span>
+        </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-dark active bg-gradient-primary" routerLink="/dashboard">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
+                </h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark " routerLink="/profile">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark " routerLink="/admin/blog">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">view_in_ar</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Blog</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark " routerLink="/notifications">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">notifications</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Notifications</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidenav-footer position-absolute w-100 bottom-0" style="font-size: 14px !important;">
+        <div class="mx-3">
+            <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
+                <i class="material-icons opacity-10">login</i>
+                <span class="ms-2">Logout</span>
+            </a>
+        </div>
+    </div>
+</aside>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl shadow bg-white mb-3"
         style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;"
@@ -131,11 +196,11 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">User</a>
+                    <li class=""><a class=" text-dark">Hi, {{ userProfile?.username}}</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
+                    <li class=" text-sm text-dark active" aria-current="page"></li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Profile</h6>
+                <h6 class="font-weight-bolder mb-0">How are you feeling today?</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -253,179 +318,132 @@
             </div>
         </div>
     </nav>
+    <!-- End Navbar -->
 
-    <div class="container-fluid py-4 mt-5" style="margin-top: 9% !important;">
-        <div class="card card-body mx-3 mx-md-4 mt-n6">
-            <div class="row gx-4 mb-2">
-                <!-- <div class="col-auto my-auto text-center"> -->
-                <h4 class="text-center mt-2">Emergency Information</h4>
-                <!-- </div> -->
-
-                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                    <div class="nav-wrapper position-relative end-0">
-                        <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                            <li class="nav-item" (click)="changeProfileTitle('medical_info')">
-                                <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                                    aria-selected="false">
-                                    <i class="fas fa-user-edit text-sm" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Edit Profile"></i>
-                                    <span class="ms-1">Medical Info</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" (click)="changeProfileTitle('emergency_contact')">
-                                <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                                    aria-selected="false">
-                                    <i class="material-icons text-lg position-relative">settings</i>
-                                    <span class="ms-1">Emergency Contact</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <div>
+        <div class="px-4">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control input-outline3" id="floatingInput"
+                    placeholder="Blog Title">
+                <label for="floatingInput">Title</label>
             </div>
+        </div>
+        <div class="container-fluid gap-3">
+            <mat-icon class="ms-3" style="cursor: pointer; border-right: solid #aaa 1px;">edit</mat-icon>
+            <button title="Font type" class="ms-3" style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu">
+                <mat-icon>font_download</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <span>Arial</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Courier</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Georgia</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Times</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Verdana</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Cursive</span>
+                </button>
+            </mat-menu>
+            <button title="Font size" class="ms-3" style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="fontSizeMenu"
+                aria-label="Example icon-button with a menu">
+                <mat-icon> format_size</mat-icon>
+            </button>
+            <mat-menu #fontSizeMenu="matMenu">
+                <button mat-menu-item>
+                    <span>Smallest</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Small</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Normal</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Medium</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Large</span>
+                </button>
+                <button mat-menu-item>
+                    <span>Largest</span>
+                </button>
+            </mat-menu>
+            <button class="ms-3" style="margin-top: -20px !important;" mat-button [matMenuTriggerFor]="paragraphMenu">Paragraph</button>
+            <mat-menu #paragraphMenu="matMenu">
+                <button mat-menu-item>Major heading</button>
+                <button mat-menu-item>Heading</button>
+                <button mat-menu-item>Sub-heading</button>
+                <button mat-menu-item>Minor heading</button>
+                <button mat-menu-item>Paragraph</button>
+                <button mat-menu-item>Normal</button>
+            </mat-menu>
+            <mat-icon title="Bold" class="ms-3" style="cursor: pointer;"> format_bold</mat-icon>
+            <mat-icon title="Italics" class="ms-3" style="cursor: pointer;"> format_italic</mat-icon>
+            <mat-icon title="Underline" class="ms-3" style="cursor: pointer;"> format_underlined</mat-icon>
+            <mat-icon title="Strikethrough" class="ms-3" style="cursor: pointer;"> format_strikethrough</mat-icon>
+            <mat-icon title="Text color" class="ms-3" style="cursor: pointer;"> format_color_text</mat-icon>
+            <mat-icon title="Text background color" class="ms-3" style="cursor: pointer;"> format_color_fill</mat-icon>
+            <mat-icon title="Insert link" class="ms-3" style="cursor: pointer;"> insert_link</mat-icon>
+            <mat-icon title="Insert image" class="ms-3" style="cursor: pointer;"> insert_photo</mat-icon>
+            <mat-icon title="Insert special character" class="ms-3" style="cursor: pointer;"> tag_faces</mat-icon>
+            <button class="ms-3" mat-icon-button [matMenuTriggerFor]="alignMenu" aria-label="">
+                <mat-icon>format_align_left</mat-icon>
+            </button>
+              <mat-menu #alignMenu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>format_align_left</mat-icon>
+                  <span>Left align</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>format_align_center</mat-icon>
+                  <span>Center align</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>format_align_right</mat-icon>
+                  <span>Right align</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>format_align_justify</mat-icon>
+                  <span>Justify</span>
+                </button>
+              </mat-menu>
+              <mat-icon title="Increase indent" class="ms-3" style="cursor: pointer;"> format_indent_decrease</mat-icon>
+              <mat-icon title="Decrease indent" class="ms-3" style="cursor: pointer;"> format_indent_increase</mat-icon>
+              <button class="ms-3" mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="">
+                <mat-icon> more_horiz</mat-icon>
+              </button>
+              <mat-menu #moreMenu="matMenu" style="display: flex !important;">
+                <button mat-menu-item>
+                  <mat-icon title="Bulleted list">format_list_bulleted</mat-icon>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon title="Numbered list">format_list_numbered</mat-icon>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon title="Left to Right layout">format_textdirection_l_to_r</mat-icon>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon title="Right to Left layout">format_textdirection_r_to_l</mat-icon>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon title="Clear formatting">format_clear</mat-icon>
+                </button>
+              </mat-menu>
+        </div>
 
-            <!-- Info -->
-            <div class="row" *ngIf="profileTitle == 'medical_info'">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card card-plain h-100">
-                            <div class="card-body p-3">
-                                <ul class="list-group">
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                for="flexSwitchCheckDefault">Address</label>
-                                        </div>
-                                        <div class="col-6 px-4">
-                                            <input type="text" [(ngModel)]="userProfile.address"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder="Home Address">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                for="flexSwitchCheckDefault">Blood Type</label>
-                                        </div>
-                                        <div class="col-6 px-4">
-                                            <select class="form-select px-3 py-1 input-outline2" [(ngModel)]="userProfile.blood_group">
-                                                <option value="A+">A positive (A+)</option>
-                                                <option value="A-">A negative (A-)</option>
-                                                <option value="B+">B positive (B+)</option>
-                                                <option value="B-">B negative (B-)</option>
-                                                <option value="AB+">AB positive (AB+)</option>
-                                                <option value="AB-">AB negative (AB-)</option>
-                                                <option value="O+">O positive (O+)</option>
-                                                <option value="O-">O negative (O-)</option>
-                                              </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                for="flexSwitchCheckDefault">Allergies</label>
-                                        </div>
-                                        <div class="col-6 px-4">
-                                            <input type="text" [(ngModel)]="userProfile.allergies"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                for="flexSwitchCheckDefault">Current Medical Condition</label>
-                                        </div>
-                                        <div class="col-6 px-4">
-                                            <input type="text" [(ngModel)]="userProfile.current_medical_condition"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                for="flexSwitchCheckDefault">Genotype</label>
-                                        </div>
-                                        <div class="col-6 px-4">
-                                            <select class="form-select px-3 py-1 input-outline2" [(ngModel)]="userProfile.genotype">
-                                                <option value="AA">AA</option>
-                                                <option value="As">As</option>
-                                                <option value="AC">AC</option>
-                                                <option value="SS">SS</option>
-                                                <option value="Sc">Sc</option>
-                                              </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                for="flexSwitchCheckDefault">Medication</label>
-                                        </div>
-                                        <div class="col-6 px-4">
-                                            <input type="text" [(ngModel)]="userProfile.medication"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                for="flexSwitchCheckDefault">Medical Note</label>
-                                        </div>
-                                        <div class="col-6 px-4">
-                                            <textarea type="text" [(ngModel)]="userProfile.medical_note"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder=""></textarea>
-                                        </div>
-                                    </div>
+        <div class="bg-secondary">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. At reiciendis, cumque magni nesciunt culpa ex commodi nobis ipsum debitis provident ut maiores. Eum recusandae dolor architecto sed nam quaerat minima!
+        </div>
+    </div>
 
-                                </ul>
-                                <div class="save_btn">
-                                    <button class="btn btn-primary mt-3" (click)="updateProfile()">Save Changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Emergency Contact -->
-            <div class="row" *ngIf="profileTitle == 'emergency_contact'">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card card-plain h-100">
-                            <div class="card-body p-3">
-                                <div class="save_btn">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">Add Contact</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">New Contact</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row px-3">
-                                <input type="text" placeholder="Contact Owner"
-                                    class="form-control input-outline2 col-3 px-3">
-                                <input type="text" placeholder="Contact No"
-                                    class="form-control input-outline2 col-3 px-3 mt-3">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
+</main>
