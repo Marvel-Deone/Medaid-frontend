@@ -29,14 +29,14 @@ export class ProfileComponent {
     past_medical_condition: '',
   };
 
-  constructor(private router: Router, private service: UserService, private _snackBar: MatSnackBar) {};
+  constructor(private router: Router, private service: UserService, private _snackBar: MatSnackBar) { };
 
   ngOnInit(): void {
     this.service.GetProfile().subscribe(
-      data=> {
+      data => {
         const response = data;
         console.log('response: ' + response);
-        
+
         this.userProfile.firstName = response.profile.firstName;
         this.userProfile.lastName = response.profile.lastName;
         this.userProfile.middleName = response.profile.middleName;
@@ -50,8 +50,8 @@ export class ProfileComponent {
         this.userProfile.genotype = response.profile.genotype;
         this.userProfile.current_medical_condition = response.profile.current_medical_condition;
         this.userProfile.past_medical_condition = response.profile.past_medical_condition;
-      }, 
-      error=> {
+      },
+      error => {
         const errorResponse = error;
         console.log('errorResponse', errorResponse);
         if (errorResponse.error.message == 'jwt expired') {
@@ -78,22 +78,22 @@ export class ProfileComponent {
       data => {
         const response = data;
         this.loading = false;
-             this._snackBar.open("Profile updated successfully", "OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-          });
+        this._snackBar.open("Profile updated successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
       },
-      error => {
+      errorResponse => {
         this.loading = false;
-        this.errorMessage = error.message;
-             this._snackBar.open(this.errorMessage, "OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-          });
+        this.errorMessage = errorResponse.error.message;
+        this._snackBar.open(this.errorMessage, "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
       }
     )
   }

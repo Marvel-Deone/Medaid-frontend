@@ -63,7 +63,7 @@ export class SignInComponent {
           });
           console.log('errorMessage', errorResponse.message);
         } else if (this.error.includes("Http failure response for")) {
-          this._snackBar.open("Something went wrong, try again", "OK", {
+          this._snackBar.open("Pls check your internet connection", "OK", {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom',

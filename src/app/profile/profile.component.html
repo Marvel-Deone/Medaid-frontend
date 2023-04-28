@@ -495,7 +495,10 @@
                   </div>
                 </ul>
                 <div class="save_btn">
-                  <button class="btn btn-primary mt-3" (click)="updateProfile()">Save Changes</button>
+                  <button *ngIf="!loading" class="btn btn-primary mt-3" (click)="updateProfile()">Save Changes</button>
+                  <button *ngIf="loading" disabled class="btn btn-primary mt-3"> 
+                    <span>Saving</span>
+                    <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px" height="26px"></button>
                 </div>
               </div>
             </div>
