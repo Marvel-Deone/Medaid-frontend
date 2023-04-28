@@ -32,6 +32,8 @@ export class EmergencyInformationComponent {
     medical_note: ''
   };
 
+  public showmenu: boolean = false;
+
   constructor(private router: Router,  private service: UserService,  private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
@@ -106,4 +108,9 @@ export class EmergencyInformationComponent {
     )
   }
 
+  changeMenuStatus() {
+    this.showmenu = !this.showmenu;
+    // alert(this.showmenu);
+  }
+  
 }

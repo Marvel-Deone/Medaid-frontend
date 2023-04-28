@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 export class BlogComponent {
   public userProfile: any;
   public role_id: any;
+  public showmenu: boolean = false;
+
 
   constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService) {}
   ngOnInit(): void {
@@ -41,6 +43,11 @@ export class BlogComponent {
       panelClass: ['green-snackbar', 'login-snackbar'],
     });
     this.router.navigate(['/sign-in']);
+  }
+
+  changeMenuStatus() {
+    this.showmenu = !this.showmenu;
+    // alert(this.showmenu);
   }
 
 }

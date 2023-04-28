@@ -67,7 +67,7 @@ export class DashboardComponent {
   
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
-    alert(this.showmenu);
+    // alert(this.showmenu);
   }
 
   logout() {

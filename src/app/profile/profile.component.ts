@@ -28,6 +28,8 @@ export class ProfileComponent {
     current_medical_condition: '',
     past_medical_condition: '',
   };
+  public showmenu: boolean = false;
+
 
   constructor(private router: Router, private service: UserService, private _snackBar: MatSnackBar) { };
 
@@ -96,6 +98,11 @@ export class ProfileComponent {
         });
       }
     )
+  }
+
+  changeMenuStatus() {
+    this.showmenu = !this.showmenu;
+    // alert(this.showmenu);
   }
 
 }
