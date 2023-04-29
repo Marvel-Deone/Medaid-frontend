@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-dark active bg-gradient-primary" routerLink="/dashboard">
+                    <a class="nav-link text-dark" routerLink="/dashboard" routerLinkActive="active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -26,7 +26,7 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " routerLink="/profile">
+                    <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " routerLink="/emergency-information">
+                    <a class="nav-link text-dark" routerLink="/emergency-information" routerLinkActive="active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " href="./pages/profile.html">
+                    <a class="nav-link text-dark" href="./pages/profile.html">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " href="./pages/profile.html">
+                    <a class="nav-link text-dark" href="./pages/profile.html">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " href="./pages/profile.html">
+                    <a class="nav-link text-dark" href="./pages/profile.html">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " href="./pages/billing.html">
+                    <a class="nav-link text-dark" href="./pages/billing.html">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " href="./pages/profile.html">
+                    <a class="nav-link text-dark" href="./pages/profile.html">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -90,8 +90,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item"  *ngIf="role_id == 3">
-                    <a class="nav-link text-dark " routerLink="/admin/blog">
+                <li class="nav-item" *ngIf="role_id == 3">
+                    <a class="nav-link text-dark" routerLink="/admin/blog" routerLinkActive="active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">view_in_ar</i>
                         </div>
@@ -100,7 +100,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark " href="./pages/rtl.html">
+                    <a class="nav-link text-dark" href="./pages/rtl.html">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                         </div>
@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " routerLink="/notifications">
+                    <a class="nav-link text-dark" routerLink="/notifications" routerLinkActive="active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">notifications</i>
                         </div>
@@ -353,8 +353,8 @@
                 </div>
             </aside>
             <!-- <div style="position: fixed !important; display: flex !important; justify-items: end !important;">
-                <mat-icon class="bg-danger">clear</mat-icon>
-            </div> -->
+                    <mat-icon class="bg-danger">clear</mat-icon>
+                </div> -->
         </div>
         <!-- End Navbar -->
 
