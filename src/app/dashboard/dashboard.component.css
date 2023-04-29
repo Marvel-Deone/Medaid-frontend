@@ -93,3 +93,8 @@ suggested professional side */
 .upSecPics:not(:last-child) {
   margin-right: 10px;
 }
+
+.mat-icon {
+  position: fixed;
+  display: flex !important;
+}

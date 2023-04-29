@@ -1,530 +1,487 @@
-<aside *ngIf="role_id == 1 || role_id == 2"
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-white"
-    id="sidenav-main">
-    <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer
-                            
-                            opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true"
-            id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
-            target="_blank">
-            <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-dark">Medaid</span>
-        </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-dark active bg-gradient-primary" routerLink="/dashboard">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
-                </h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " routerLink="/profile">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " routerLink="/emergency-information">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Emergency Information</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="./pages/profile.html">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">SOS</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="./pages/profile.html">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Medication & Reminder</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="./pages/profile.html">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Self Assesement</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="./pages/billing.html">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Forum</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="./pages/profile.html">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Consultation</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="https://medaid-delta.vercel.app/blog" target="_blank">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">view_in_ar</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Blog</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="./pages/rtl.html">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Tell me</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " routerLink="/notifications">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Notifications</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account pages
-                </h6>
-            </li>
-        </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0" style="font-size: 14px !important;">
-        <div class="mx-3">
-            <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
-                <i class="material-icons opacity-10">login</i>
-                <span class="ms-2">Logout</span>
+    <aside
+        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-white"
+        id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
+                routerLink="/dashboard">
+                <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
             </a>
         </div>
-    </div>
-</aside>
+        <hr class="horizontal light mt-0 mb-2">
+        <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark active bg-gradient-primary" routerLink="/dashboard">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">dashboard</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
+                    </h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " routerLink="/profile">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " routerLink="/emergency-information">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Emergency Information</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="./pages/profile.html">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">SOS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="./pages/profile.html">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Medication & Reminder</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="./pages/profile.html">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Self Assesement</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="./pages/billing.html">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">receipt_long</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Forum</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="./pages/profile.html">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Consultation</span>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role_id == 1 || role_id == 2">
+                    <a class="nav-link text-dark " href="https://medaid-delta.vercel.app/blog" target="_blank">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">view_in_ar</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Blog</span>
+                    </a>
+                </li>
 
-<aside *ngIf="role_id == 3"
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-white"
-    id="sidenav-main">
-    <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer
-                            
-                            opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true"
-            id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
-            target="_blank">
-            <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-dark">Medaid</span>
-        </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-dark active bg-gradient-primary" routerLink="/dashboard">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
-                </h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " routerLink="/profile">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " routerLink="/admin/blog">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">view_in_ar</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Blog</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " routerLink="/notifications">
-                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Notifications</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0" style="font-size: 14px !important;">
-        <div class="mx-3">
-            <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
-                <i class="material-icons opacity-10">login</i>
-                <span class="ms-2">Logout</span>
-            </a>
+                <li class="nav-item"  *ngIf="role_id == 3">
+                    <a class="nav-link text-dark " routerLink="/admin/blog">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">view_in_ar</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Blog</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="./pages/rtl.html">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Tell me</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " routerLink="/notifications">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">notifications</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Notifications</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account pages
+                    </h6>
+                </li>
+            </ul>
         </div>
-    </div>
-</aside>
-
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-      <!-- Navbar -->
-      <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl shadow bg-white mb-3" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;" id="navbarBlur"
-      navbar-scroll="true">
-      <div class="container-fluid py-1 px-3">
-          <nav aria-label="breadcrumb">
-              <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                  <li class=""><a class=" text-dark" >Hi,  {{ userProfile?.username}}</a>
-                  </li>
-                  <li class=" text-sm text-dark active" aria-current="page"></li>
-              </ol>
-              <h6 class="font-weight-bolder mb-0">How are you  feeling today?</h6>
-          </nav>
-          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                  <div class="input-group input-group-outline">
-                      <label class="form-label">Type here...</label>
-                      <input type="text" class="form-control">
-                  </div>
-              </div>
-              <ul class="navbar-nav  justify-content-end">
-                  <li class="nav-item d-flex align-items-center">
-                      <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                          <i class="fa fa-user me-sm-1"></i>
-                          <!-- <i class="material-icons opacity-10">notifications</i> -->
-                          <!-- <span class="d-sm-inline d-none">Sign In</span> -->
-                      </a>
-                  </li>
-                  <li (click)="changeMenuStatus()" class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                      <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                          <div class="sidenav-toggler-inner">
-                              <i class="sidenav-toggler-line"></i>
-                              <i class="sidenav-toggler-line"></i>
-                              <i class="sidenav-toggler-line"></i>
-                          </div>
-                      </a>
-                  </li>
-                  <li class="nav-item px-3 d-flex align-items-center">
-                      <a href="javascript:;" class="nav-link text-body p-0">
-                          <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                      </a>
-                  </li>
-                  <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                      <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
-                          data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-bell cursor-pointer"></i>
-                      </a>
-                      <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
-                          aria-labelledby="dropdownMenuButton">
-                          <li class="mb-2">
-                              <a class="dropdown-item border-radius-md" href="javascript:;">
-                                  <div class="d-flex py-1">
-                                      <div class="my-auto">
-                                          <img src="./assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                                      </div>
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="text-sm font-weight-normal mb-1">
-                                              <span class="font-weight-bold">New message</span> from Laur
-                                          </h6>
-                                          <p class="text-xs text-secondary mb-0">
-                                              <i class="fa fa-clock me-1"></i>
-                                              13 minutes ago
-                                          </p>
-                                      </div>
-                                  </div>
-                              </a>
-                          </li>
-                          <li class="mb-2">
-                              <a class="dropdown-item border-radius-md" href="javascript:;">
-                                  <div class="d-flex py-1">
-                                      <div class="my-auto">
-                                          <img src="./assets/img/small-logos/logo-spotify.svg"
-                                              class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                      </div>
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="text-sm font-weight-normal mb-1">
-                                              <span class="font-weight-bold">New album</span> by Travis Scott
-                                          </h6>
-                                          <p class="text-xs text-secondary mb-0">
-                                              <i class="fa fa-clock me-1"></i>
-                                              1 day
-                                          </p>
-                                      </div>
-                                  </div>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item border-radius-md" href="javascript:;">
-                                  <div class="d-flex py-1">
-                                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                          <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              xmlns:xlink="http://www.w3.org/1999/xlink">
-                                              <title>credit-card</title>
-                                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                  <g transform="translate(-2169.000000, -745.000000)"
-                                                      fill="#FFFFFF" fill-rule="nonzero">
-                                                      <g transform="translate(1716.000000, 291.000000)">
-                                                          <g transform="translate(453.000000, 454.000000)">
-                                                              <path class="color-background"
-                                                                  d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                                  opacity="0.593633743"></path>
-                                                              <path class="color-background"
-                                                                  d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                                              </path>
-                                                          </g>
-                                                      </g>
-                                                  </g>
-                                              </g>
-                                          </svg>
-                                      </div>
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="text-sm font-weight-normal mb-1">
-                                              Payment successfully completed
-                                          </h6>
-                                          <p class="text-xs text-secondary mb-0">
-                                              <i class="fa fa-clock me-1"></i>
-                                              2 days
-                                          </p>
-                                      </div>
-                                  </div>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </div>
-      </div>
-  </nav>
-  <div *ngIf="showmenu" class="mobileMenu" (click)="changeMenuStatus()" >
-     <aside class="mobileMenu-aside">
-      <div class="sidenav-header">
-          <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-          <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;" routerLink="/dashboard">
-          <img src="./assets/img/logo.png" class="navbar-brand-img h-100" style="width: 3rem; height: 9vh !important;" alt="main_logo">
-          <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
-          </a>
-      </div>
-      <div class="d-flex flex-column">
-          <a  routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">dashboard</i>
-              <span>Dashboard</span>
-          </a>
-
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
-          </h6>
-          
-          <a routerLink="/profile" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Profile</span>
-          </a>
-
-          <a routerLink="/emergency-information" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Emergency Information</span>
-          </a>
-
-          <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>SOS</span>
-          </a>
-
-          <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Medication & Reminder</span>
-          </a>
-
-          <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Self Assesment</span>
-          </a>
-
-          <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Forum</span>
-          </a>
-
-          <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Consultation</span>
-          </a>
-
-          <a  href="https://medaid-delta.vercel.app/blog" target="_blank" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Blog</span>
-          </a>
-
-          <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Tell me</span>
-          </a>
-
-          <a routerLink="/notifications" class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-              <i class="material-icons opacity-10">person</i>
-              <span>Notification</span>
-          </a>
-
-          <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
-              <div>
-              <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
-                  <i class="material-icons opacity-10">login</i>
-                  <span class="ms-2">Logout</span>
-              </a>
-              </div>
-          </div>
-      </div>
-     </aside>
-     <!-- <div style="position: fixed !important; display: flex !important; justify-items: end !important;">
-         <mat-icon class="bg-danger">clear</mat-icon>
-     </div> -->
-  </div>
-  <!-- End Navbar -->
-
-    <div>
-        <div class="px-4">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control input-outline3" id="floatingInput"
-                    placeholder="Blog Title">
-                <label for="floatingInput">Title</label>
+        <div class="sidenav-footer position-absolute w-100 bottom-0" style="font-size: 14px !important;">
+            <div class="mx-3">
+                <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
+                    <i class="material-icons opacity-10">login</i>
+                    <span class="ms-2">Logout</span>
+                </a>
             </div>
         </div>
-        <div class="container-fluid gap-3">
-            <mat-icon class="ms-3" style="cursor: pointer; border-right: solid #aaa 1px;">edit</mat-icon>
-            <button title="Font type" class="ms-3" style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu"
-                aria-label="Example icon-button with a menu">
-                <mat-icon>font_download</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <span>Arial</span>
+    </aside>
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl shadow bg-white mb-3"
+            style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;"
+            id="navbarBlur" navbar-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class=""><a class=" text-dark">Hi, {{ userProfile?.username}}</a>
+                        </li>
+                        <li class=" text-sm text-dark active" aria-current="page"></li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">How are you feeling today?</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group input-group-outline">
+                            <label class="form-label">Type here...</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <ul class="navbar-nav  justify-content-end">
+                        <li class="nav-item d-flex align-items-center">
+                            <a routerLink="/profile" class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1"></i>
+                                <!-- <i class="material-icons opacity-10">notifications</i> -->
+                                <!-- <span class="d-sm-inline d-none">Sign In</span> -->
+                            </a>
+                        </li>
+                        <li (click)="changeMenuStatus()" class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0">
+                                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a routerLink="/notifications" class="nav-link text-body p-0" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-bell cursor-pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                                aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <img src="./assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">New message</span> from Laur
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    13 minutes ago
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <img src="./assets/img/small-logos/logo-spotify.svg"
+                                                    class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">New album</span> by Travis Scott
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    1 day
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                                <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>credit-card</title>
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
+                                                            fill-rule="nonzero">
+                                                            <g transform="translate(1716.000000, 291.000000)">
+                                                                <g transform="translate(453.000000, 454.000000)">
+                                                                    <path class="color-background"
+                                                                        d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                                                        opacity="0.593633743"></path>
+                                                                    <path class="color-background"
+                                                                        d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
+                                                                    </path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    Payment successfully completed
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    2 days
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div *ngIf="showmenu" class="mobileMenu" (click)="changeMenuStatus()">
+            <aside class="mobileMenu-aside">
+                <div class="sidenav-header">
+                    <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                        aria-hidden="true" id="iconSidenav"></i>
+                    <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
+                        routerLink="/dashboard">
+                        <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-50" alt="main_logo">
+                        <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">dashboard</i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
+                    </h6>
+
+                    <a routerLink="/profile" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Profile</span>
+                    </a>
+
+                    <a routerLink="/emergency-information" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Emergency Information</span>
+                    </a>
+
+                    <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>SOS</span>
+                    </a>
+
+                    <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Medication & Reminder</span>
+                    </a>
+
+                    <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Self Assesment</span>
+                    </a>
+
+                    <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Forum</span>
+                    </a>
+
+                    <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Consultation</span>
+                    </a>
+
+                    <a href="https://medaid-delta.vercel.app/blog" target="_blank"
+                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Blog</span>
+                    </a>
+
+                    <a routerLink="/dashboard" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Tell me</span>
+                    </a>
+
+                    <a routerLink="/notifications" class="px-1 py-3 d-flex gap-2 align-items-center"
+                        style="color: #344767 !important;">
+                        <i class="material-icons opacity-10">person</i>
+                        <span>Notification</span>
+                    </a>
+
+                    <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
+                        <div>
+                            <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
+                                <i class="material-icons opacity-10">login</i>
+                                <span class="ms-2">Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!-- <div style="position: fixed !important; display: flex !important; justify-items: end !important;">
+                <mat-icon class="bg-danger">clear</mat-icon>
+            </div> -->
+        </div>
+        <!-- End Navbar -->
+
+        <div>
+            <div class="px-4">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control input-outline3" id="floatingInput" placeholder="Blog Title">
+                    <label for="floatingInput">Title</label>
+                </div>
+            </div>
+            <div class="container-fluid gap-3 mb-4">
+                <mat-icon class="ms-3" style="cursor: pointer;">edit</mat-icon>
+                <button title="Font type" class="ms-3" style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu"
+                    aria-label="Example icon-button with a menu">
+                    <mat-icon>font_download</mat-icon>
                 </button>
-                <button mat-menu-item>
-                    <span>Courier</span>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <span>Arial</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Courier</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Georgia</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Times</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Verdana</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Cursive</span>
+                    </button>
+                </mat-menu>
+                <button title="Font size" class="ms-3" style="cursor: pointer;" mat-icon-button
+                    [matMenuTriggerFor]="fontSizeMenu" aria-label="Example icon-button with a menu">
+                    <mat-icon> format_size</mat-icon>
                 </button>
-                <button mat-menu-item>
-                    <span>Georgia</span>
+                <mat-menu #fontSizeMenu="matMenu">
+                    <button mat-menu-item>
+                        <span>Smallest</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Small</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Normal</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Medium</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Large</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Largest</span>
+                    </button>
+                </mat-menu>
+                <button class="ms-3" style="margin-top: -20px !important;" mat-button
+                    [matMenuTriggerFor]="paragraphMenu">Paragraph</button>
+                <mat-menu #paragraphMenu="matMenu">
+                    <button mat-menu-item>Major heading</button>
+                    <button mat-menu-item>Heading</button>
+                    <button mat-menu-item>Sub-heading</button>
+                    <button mat-menu-item>Minor heading</button>
+                    <button mat-menu-item>Paragraph</button>
+                    <button mat-menu-item>Normal</button>
+                </mat-menu>
+                <mat-icon title="Bold" class="ms-3" style="cursor: pointer;"> format_bold</mat-icon>
+                <mat-icon title="Italics" class="ms-3" style="cursor: pointer;"> format_italic</mat-icon>
+                <mat-icon title="Underline" class="ms-3" style="cursor: pointer;"> format_underlined</mat-icon>
+                <mat-icon title="Strikethrough" class="ms-3" style="cursor: pointer;"> format_strikethrough</mat-icon>
+                <mat-icon title="Text color" class="ms-3" style="cursor: pointer;"> format_color_text</mat-icon>
+                <mat-icon title="Text background color" class="ms-3" style="cursor: pointer;"> format_color_fill</mat-icon>
+                <mat-icon title="Insert link" class="ms-3" style="cursor: pointer;"> insert_link</mat-icon>
+                <mat-icon title="Insert image" class="ms-3" style="cursor: pointer;"> insert_photo</mat-icon>
+                <mat-icon title="Insert special character" class="ms-3" style="cursor: pointer;"> tag_faces</mat-icon>
+                <button class="ms-3" mat-icon-button [matMenuTriggerFor]="alignMenu" aria-label="">
+                    <mat-icon>format_align_left</mat-icon>
                 </button>
-                <button mat-menu-item>
-                    <span>Times</span>
+                <mat-menu #alignMenu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>format_align_left</mat-icon>
+                        <span>Left align</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>format_align_center</mat-icon>
+                        <span>Center align</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>format_align_right</mat-icon>
+                        <span>Right align</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>format_align_justify</mat-icon>
+                        <span>Justify</span>
+                    </button>
+                </mat-menu>
+                <mat-icon title="Increase indent" class="ms-3" style="cursor: pointer;"> format_indent_decrease</mat-icon>
+                <mat-icon title="Decrease indent" class="ms-3" style="cursor: pointer;"> format_indent_increase</mat-icon>
+                <button class="ms-3" mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="">
+                    <mat-icon> more_horiz</mat-icon>
                 </button>
-                <button mat-menu-item>
-                    <span>Verdana</span>
-                </button>
-                <button mat-menu-item>
-                    <span>Cursive</span>
-                </button>
-            </mat-menu>
-            <button title="Font size" class="ms-3" style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="fontSizeMenu"
-                aria-label="Example icon-button with a menu">
-                <mat-icon> format_size</mat-icon>
-            </button>
-            <mat-menu #fontSizeMenu="matMenu">
-                <button mat-menu-item>
-                    <span>Smallest</span>
-                </button>
-                <button mat-menu-item>
-                    <span>Small</span>
-                </button>
-                <button mat-menu-item>
-                    <span>Normal</span>
-                </button>
-                <button mat-menu-item>
-                    <span>Medium</span>
-                </button>
-                <button mat-menu-item>
-                    <span>Large</span>
-                </button>
-                <button mat-menu-item>
-                    <span>Largest</span>
-                </button>
-            </mat-menu>
-            <button class="ms-3" style="margin-top: -20px !important;" mat-button [matMenuTriggerFor]="paragraphMenu">Paragraph</button>
-            <mat-menu #paragraphMenu="matMenu">
-                <button mat-menu-item>Major heading</button>
-                <button mat-menu-item>Heading</button>
-                <button mat-menu-item>Sub-heading</button>
-                <button mat-menu-item>Minor heading</button>
-                <button mat-menu-item>Paragraph</button>
-                <button mat-menu-item>Normal</button>
-            </mat-menu>
-            <mat-icon title="Bold" class="ms-3" style="cursor: pointer;"> format_bold</mat-icon>
-            <mat-icon title="Italics" class="ms-3" style="cursor: pointer;"> format_italic</mat-icon>
-            <mat-icon title="Underline" class="ms-3" style="cursor: pointer;"> format_underlined</mat-icon>
-            <mat-icon title="Strikethrough" class="ms-3" style="cursor: pointer;"> format_strikethrough</mat-icon>
-            <mat-icon title="Text color" class="ms-3" style="cursor: pointer;"> format_color_text</mat-icon>
-            <mat-icon title="Text background color" class="ms-3" style="cursor: pointer;"> format_color_fill</mat-icon>
-            <mat-icon title="Insert link" class="ms-3" style="cursor: pointer;"> insert_link</mat-icon>
-            <mat-icon title="Insert image" class="ms-3" style="cursor: pointer;"> insert_photo</mat-icon>
-            <mat-icon title="Insert special character" class="ms-3" style="cursor: pointer;"> tag_faces</mat-icon>
-            <button class="ms-3" mat-icon-button [matMenuTriggerFor]="alignMenu" aria-label="">
-                <mat-icon>format_align_left</mat-icon>
-            </button>
-              <mat-menu #alignMenu="matMenu">
-                <button mat-menu-item>
-                  <mat-icon>format_align_left</mat-icon>
-                  <span>Left align</span>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon>format_align_center</mat-icon>
-                  <span>Center align</span>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon>format_align_right</mat-icon>
-                  <span>Right align</span>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon>format_align_justify</mat-icon>
-                  <span>Justify</span>
-                </button>
-              </mat-menu>
-              <mat-icon title="Increase indent" class="ms-3" style="cursor: pointer;"> format_indent_decrease</mat-icon>
-              <mat-icon title="Decrease indent" class="ms-3" style="cursor: pointer;"> format_indent_increase</mat-icon>
-              <button class="ms-3" mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="">
-                <mat-icon> more_horiz</mat-icon>
-              </button>
-              <mat-menu #moreMenu="matMenu" style="display: flex !important;">
-                <button mat-menu-item>
-                  <mat-icon title="Bulleted list">format_list_bulleted</mat-icon>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon title="Numbered list">format_list_numbered</mat-icon>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon title="Left to Right layout">format_textdirection_l_to_r</mat-icon>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon title="Right to Left layout">format_textdirection_r_to_l</mat-icon>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon title="Clear formatting">format_clear</mat-icon>
-                </button>
-              </mat-menu>
+                <mat-menu #moreMenu="matMenu" style="display: flex !important;">
+                    <button mat-menu-item>
+                        <mat-icon title="Bulleted list">format_list_bulleted</mat-icon>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon title="Numbered list">format_list_numbered</mat-icon>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon title="Left to Right layout">format_textdirection_l_to_r</mat-icon>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon title="Right to Left layout">format_textdirection_r_to_l</mat-icon>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon title="Clear formatting">format_clear</mat-icon>
+                    </button>
+                </mat-menu>
+            </div>
+
+            <div class="px-4">
+                <textarea class="bg-transparent px-3 py-2 " id="text-editor"></textarea>
+            </div>
         </div>
 
-        <div class="bg-secondary">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. At reiciendis, cumque magni nesciunt culpa ex commodi nobis ipsum debitis provident ut maiores. Eum recusandae dolor architecto sed nam quaerat minima!
-        </div>
-    </div>
-
-</main>
+    </main>

@@ -9,6 +9,7 @@ import { UserService } from '../services/user.service';
 })
 export class NotificationComponent {
   public showmenu: boolean = false;
+  public role_id: any;
 
   constructor(private router: Router, private service: UserService) {}
 
@@ -38,6 +39,7 @@ export class NotificationComponent {
         console.log('response: ' + response);
         
         this.userProfile.username = response.profile.username;
+        this.role_id = response.profile.role_id;
       }, 
       error=> {
         const errorResponse = error;

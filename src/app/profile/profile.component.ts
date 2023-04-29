@@ -29,6 +29,8 @@ export class ProfileComponent {
     past_medical_condition: '',
   };
   public showmenu: boolean = false;
+  role_id: any;
+  user_fullname: any;
 
 
   constructor(private router: Router, private service: UserService, private _snackBar: MatSnackBar) { };
@@ -52,6 +54,9 @@ export class ProfileComponent {
         this.userProfile.genotype = response.profile.genotype;
         this.userProfile.current_medical_condition = response.profile.current_medical_condition;
         this.userProfile.past_medical_condition = response.profile.past_medical_condition;
+        this.role_id = response.profile.role_id;
+
+        this.user_fullname = response.profile.firstName + ' ' + response.profile.lastName;
       },
       error => {
         const errorResponse = error;
@@ -86,11 +91,14 @@ export class ProfileComponent {
           verticalPosition: 'bottom',
           panelClass: ['green-snackbar', 'login-snackbar'],
         });
+        this.ngOnInit();
       },
       errorResponse => {
         this.loading = false;
         this.errorMessage = errorResponse.error.message;
-        this._snackBar.open(this.errorMessage, "OK", {
+        console.log('errorMessage', this.errorMessage);
+        
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
           duration: 3000,
           horizontalPosition: 'right',
           verticalPosition: 'bottom',
@@ -102,7 +110,6 @@ export class ProfileComponent {
 
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
-    // alert(this.showmenu);
   }
 
 }

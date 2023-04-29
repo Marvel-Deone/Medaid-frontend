@@ -30,8 +30,6 @@ export class DashboardComponent {
         const response = data;
         this.userProfile = response.profile;
         this.role_id = this.userProfile.role_id;
-        console.log(this.role_id);
-        
       }, 
       error=> {
         const errorResponse = error;
