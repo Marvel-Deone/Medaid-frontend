@@ -27,6 +27,7 @@ export class ProfileComponent {
     genotype: '',
     current_medical_condition: '',
     past_medical_condition: '',
+    sosContact: []
   };
   public showmenu: boolean = false;
   role_id: any;
@@ -54,6 +55,7 @@ export class ProfileComponent {
         this.userProfile.genotype = response.profile.genotype;
         this.userProfile.current_medical_condition = response.profile.current_medical_condition;
         this.userProfile.past_medical_condition = response.profile.past_medical_condition;
+        this.userProfile.sosContact = response.profile.sosContact;
         this.role_id = response.profile.role_id;
 
         this.user_fullname = response.profile.firstName + ' ' + response.profile.lastName;

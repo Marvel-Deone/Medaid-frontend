@@ -30,6 +30,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { EmailVeryComponent } from './auth/email-very/email-very.component';
 import { RecommendedComponent } from './chunk_component/recommended/recommended.component';
 import { BlogComponent } from './admin/blog/blog.component';
+import { SosComponent } from './sos/sos.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -49,6 +50,7 @@ registerLocaleData(en);
     EmailVeryComponent,
     RecommendedComponent,
     BlogComponent,
+    SosComponent,
   ],
   imports: [
     BrowserModule,

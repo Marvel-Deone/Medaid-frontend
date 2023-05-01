@@ -10,17 +10,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EmergencyInformationComponent {
   public profileTitle: string = 'medical_info';
-  public loading = false;
+  public loading = false; 
   public errorMessage: any;
+  contact_owner:any;
+  contact_no:any;
 
-  public userProfile = {
+  public userProfile: any = {
     firstName: '',
     lastName: '',
     username: '',
     email: '',
     phone: '',
     address: '',
-    gender: '',
+    gender: '',       
     middleName: '',
     dob: '',
     blood_group: '',
@@ -29,9 +31,12 @@ export class EmergencyInformationComponent {
     past_medical_condition: '',
     allergies: '',
     medication: '',
-    medical_note: ''
+    medical_note: '',
+    sosContact: []
   };
 
+  sosContactInfo: Object[] = [];
+  
   public showmenu: boolean = false;
 
   constructor(private router: Router,  private service: UserService,  private _snackBar: MatSnackBar) {}
@@ -58,6 +63,7 @@ export class EmergencyInformationComponent {
         this.userProfile.allergies = response.profile.allergies;
         this.userProfile.medication = response.profile.medication;
         this.userProfile.medication = response.profile.medication;
+        this.userProfile.sosContact = response.profile.sosContact;
       }, 
       error=> {
         const errorResponse = error;
@@ -108,9 +114,46 @@ export class EmergencyInformationComponent {
     )
   }
 
+  updateSosContact() {
+    this.loading = true;
+    console.log('userProfileContact', this.userProfile.sosContact);
+
+    this.sosContactInfo.push({
+      contactName:  this.contact_owner,
+      contactNumber: this.contact_no
+    });
+    this.userProfile.sosContact = this.sosContactInfo;
+    
+    this.service.UpdateProfile(this.userProfile).subscribe(
+      data => {
+        const response = data;
+        console.log('response', response);
+        
+        this.loading = false;
+             this._snackBar.open("Emergency Info updated successfully", "OK", {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+      },
+      error => {
+        this.loading = false;
+        this.errorMessage = error.message;
+             this._snackBar.open(this.errorMessage, "OK", {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+      }
+    )
+
+    console.log('userProfile', this.userProfile);
+  }
+
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
-    // alert(this.showmenu);
   }
   
 }

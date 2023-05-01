@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/dashboard" routerLinkActive="active">
+                    <a class="nav-link text-dark" routerLink="/dashboard" routerLinkActive="menu_active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -26,7 +26,7 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="active">
+                    <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="menu_active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/emergency-information" routerLinkActive="active">
+                    <a class="nav-link text-dark" routerLink="/emergency-information" routerLinkActive="menu_active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
@@ -99,7 +99,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/notifications" routerLinkActive="active">
+                    <a class="nav-link text-dark" routerLink="/notifications" routerLinkActive="menu_active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">notifications</i>
                         </div>
@@ -513,15 +513,15 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row px-3">
-                                    <input type="text" placeholder="Contact Owner"
+                                    <input type="text" placeholder="Contact Owner" [(ngModel)]="contact_owner"
                                         class="form-control input-outline2 col-3 px-3">
-                                    <input type="text" placeholder="Contact No"
+                                    <input type="text" placeholder="Contact No" [(ngModel)]="contact_no"
                                         class="form-control input-outline2 col-3 px-3 mt-3">
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateSosContact()">Save</button>
                             </div>
                         </div>
                     </div>
