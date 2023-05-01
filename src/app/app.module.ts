@@ -27,6 +27,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { EmailVeryComponent } from './auth/email-very/email-very.component';
 import { RecommendedComponent } from './chunk_component/recommended/recommended.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PeertopeerDialogueComponent } from './dialogues/peertopeer-dialogue/peertopeer-dialogue.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { PeertopeerComponent } from './peertopeer/peertopeer.component';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -44,6 +49,8 @@ registerLocaleData(en);
     ChatContainerComponent,
     EmailVeryComponent,
     RecommendedComponent,
+    PeertopeerDialogueComponent,
+    PeertopeerComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +63,9 @@ registerLocaleData(en);
     NzNotificationModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

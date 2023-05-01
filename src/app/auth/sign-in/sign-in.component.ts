@@ -18,10 +18,11 @@ export class SignInComponent {
   errorMessage?: any;
   public hide: boolean = true;
   respData: any;
+  
 
-  constructor(private fb: FormBuilder, private service: UserService, private router: Router, private notification: NzNotificationService, private _snackBar: MatSnackBar) { }
-
-
+   
+ 
+  constructor(private router: Router, private _snackBar: MatSnackBar,  private service: UserService,private fb: FormBuilder,) {}
   ngOnInit(): void {
     this.signinForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -47,7 +48,7 @@ export class SignInComponent {
          });
         this.router.navigate(['/dashboard']);
       },
-      errorResponse => {
+      (errorResponse:any) => {
         this.loading = false;
         this.errorMessage = errorResponse.error.message;
         this.errorMessage ? this._snackBar.open(this.errorMessage, "OK", {

@@ -1,0 +1,26 @@
+<div *ngIf="!showLink">
+    <div class="button-container">
+        <button class="session-btn" (click)="createSession()" >Create Session</button>
+        <button  class="session-btn">Join Session</button>
+    </div>
+    <div mat-dialog-actions class="d-flex justify-content-end">
+      <button mat-raised-button mat-dialog-close>Close</button>
+    </div>
+</div>
+
+
+<div *ngIf="showLink">
+    <h3 class="text-center">Share this with the participant</h3>
+<div class="copy-box">
+    <input type="text"  readonly>
+    <button class="copy-button" ><span class="material-symbols-outlined">
+        content_copy
+        </span></button>
+
+        <div class="">
+            <button  class="session-btn w-100">Join Session</button>
+
+        </div>
+    
+  </div>
+</div>
