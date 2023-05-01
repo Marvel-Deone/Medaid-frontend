@@ -44,7 +44,7 @@ export class MessagecontainerComponent {
     });
 
     this.service.GetAllUser(this.currentUserEmail).subscribe((item: any) => {
-      console.log(item);
+     
       this.allUsers = item.users;
       console.log(this.allUsers);
       this.service

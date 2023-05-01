@@ -47,3 +47,21 @@
     background-color: #ddd;
   }
   
+  .copy-button {
+    background-color:  #5CB1E0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .copy-button:hover {
+    background-color:  transparent;
+    border: thin solid #5CB1E0;
+    color: #5CB1E0;
+}
+  
