@@ -24,7 +24,7 @@ export class SidebarsideComponent {
   }
 
   onClickChat(i:any){
-   this.indexEmitter.emit(i)
+   this.indexEmitter.emit(i,)
   }
 
 }

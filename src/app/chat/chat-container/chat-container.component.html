@@ -1,8 +1,22 @@
-
+<!-- 
 <div class="body">
-    <app-sidebarside class="sideBar" (indexEmitter)="child2.handleIndex($event)"></app-sidebarside>
-    <app-messagecontainer class="message-container" #child2></app-messagecontainer>
+    <app-sidebarside class="sideBar" (indexEmitter)="child2.handleIndex($event)"  ></app-sidebarside>
+
+    <app-messagecontainer class="message-container"  #child2  ></app-messagecontainer>
+
+   
 
 </div>
 
- 
+  
+
+   -->
+
+   <div class="body">
+    <app-sidebarside class="sideBar" (indexEmitter)="child2.handleIndex($event)"
+      [class.hide-on-small-screen]="index === undefined || showSidebar"></app-sidebarside>
+  
+    <app-messagecontainer class="message-container" #child2
+      [class.show-on-small-screen]="index !== undefined && !showSidebar"></app-messagecontainer>
+  </div>
+  

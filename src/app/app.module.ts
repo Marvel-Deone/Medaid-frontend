@@ -31,6 +31,11 @@ import { EmailVeryComponent } from './auth/email-very/email-very.component';
 import { RecommendedComponent } from './chunk_component/recommended/recommended.component';
 import { BlogComponent } from './admin/blog/blog.component';
 import { SosComponent } from './sos/sos.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { PeertopeerDialogueComponent } from './dialogues/peertopeer-dialogue/peertopeer-dialogue.component';
+import { PeertopeerComponent } from './peertopeer/peertopeer.component';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -51,6 +56,8 @@ registerLocaleData(en);
     RecommendedComponent,
     BlogComponent,
     SosComponent,
+    PeertopeerDialogueComponent,
+    PeertopeerComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,9 @@ registerLocaleData(en);
     NzNotificationModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

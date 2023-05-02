@@ -73,28 +73,29 @@
     }
 
 
-    GetDashboard(token: any) {
-      return this.http.get(`${this.uriseg}/user/dashboard`, {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/json",
-          "content-Type": "application/json"
-        }
-      })
-
-    }
-
-    GetCurrentUser(currentUser: any) {
-      return this.http.get(`${this.uriseg}/user/currentuser/${currentUser}`);
-    }
-
-    GetAllUser(currentUser: any) {
-      return this.http.get(`${this.uriseg}/user/allUsers/${currentUser}`);
-    }
-
-    SendMessage(messageDetails: any) {
-      return this.http.post(`${this.uriseg}/messages/addmessage`, messageDetails)
-    }
-
-
+  GetDashboard (token:any){
+    return this.http.get(`${this.uriseg}/user/dashboard`,{
+      headers:{
+        "Authorization":`Bearer ${token}`,
+        "Accept":"application/json",
+        "content-Type":"application/json"
+      }
+    })
   }
+  
+  GetCurrentUser(currentUser:any){
+    return this.http.get(`${this.uriseg}/user/currentuser/${currentUser}`);
+  }
+  GetAllUser(currentUser:any){
+    return this.http.get(`${this.uriseg}/user/allUsers/${currentUser}`);
+  }
+
+  SendMessage(messageDetails:any){
+   return this.http.post(`${this.uriseg}/messages/addmessage`,messageDetails)
+  }
+  GetAllMessages(messageDetails:any){
+    return this.http.post(`${this.uriseg}/messages/getallmessages`,messageDetails)
+  }
+
+
+}
