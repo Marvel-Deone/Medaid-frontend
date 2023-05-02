@@ -130,3 +130,7 @@ label {
     color: #fff !important;
 }
 
+.btn-primary:active + .btn-primary:focus{
+    box-shadow: 0 0 0 0.2rem rgba(92, 177, 224, 0.5) !important;
+}
+

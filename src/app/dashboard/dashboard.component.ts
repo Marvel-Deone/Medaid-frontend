@@ -28,7 +28,12 @@ export class DashboardComponent {
     this.service.GetProfile().subscribe(
       data=> {
         const response = data;
+        console.log('response', response);
+        
         this.userProfile = response.profile;
+
+        console.log('userProfile', this.userProfile.sosContact);
+        
         this.role_id = this.userProfile.role_id;
       }, 
       error=> {

@@ -42,23 +42,24 @@ export class ProfileComponent {
         const response = data;
         console.log('response: ' + response);
 
-        this.userProfile.firstName = response.profile.firstName;
-        this.userProfile.lastName = response.profile.lastName;
-        this.userProfile.middleName = response.profile.middleName;
-        this.userProfile.username = response.profile.username;
-        this.userProfile.gender = response.profile.gender;
-        this.userProfile.dob = response.profile.dob;
-        this.userProfile.phone = response.profile.phone;
-        this.userProfile.email = response.profile.email;
-        this.userProfile.address = response.profile.address;
-        this.userProfile.blood_group = response.profile.blood_group;
-        this.userProfile.genotype = response.profile.genotype;
-        this.userProfile.current_medical_condition = response.profile.current_medical_condition;
-        this.userProfile.past_medical_condition = response.profile.past_medical_condition;
-        this.userProfile.sosContact = response.profile.sosContact;
-        this.role_id = response.profile.role_id;
+        // this.userProfile.firstName = response.profile.firstName;
+        // this.userProfile.lastName = response.profile.lastName;
+        // this.userProfile.middleName = response.profile.middleName;
+        // this.userProfile.username = response.profile.username;
+        // this.userProfile.gender = response.profile.gender;
+        // this.userProfile.dob = response.profile.dob;
+        // this.userProfile.phone = response.profile.phone;
+        // this.userProfile.email = response.profile.email;
+        // this.userProfile.address = response.profile.address;
+        // this.userProfile.blood_group = response.profile.blood_group;
+        // this.userProfile.genotype = response.profile.genotype;
+        // this.userProfile.current_medical_condition = response.profile.current_medical_condition;
+        // this.userProfile.past_medical_condition = response.profile.past_medical_condition;
+        // this.userProfile.sosContact = response.profile.sosContact;
+        // this.role_id = response.profile.role_id;
+        this.role_id = 1;
 
-        this.user_fullname = response.profile.firstName + ' ' + response.profile.lastName;
+        // this.user_fullname = response.profile.firstName + ' ' + response.profile.lastName;
       },
       error => {
         const errorResponse = error;

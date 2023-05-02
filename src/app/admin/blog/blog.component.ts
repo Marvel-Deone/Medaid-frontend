@@ -48,6 +48,6 @@ export class BlogComponent {
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
     // alert(this.showmenu);
-  }
+  }   
 
 }
