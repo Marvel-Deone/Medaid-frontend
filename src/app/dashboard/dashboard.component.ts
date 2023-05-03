@@ -41,7 +41,7 @@ export class DashboardComponent {
         console.log('errorResponse', errorResponse);
         
       }
-    )
+    );
 
     this.service.GetDashboard(this.userToken).subscribe(
       item=> {
