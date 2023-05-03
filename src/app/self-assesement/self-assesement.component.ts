@@ -57,4 +57,9 @@ export class SelfAssesementComponent {
     });
     this.router.navigate(['/sign-in']);
   }
+
+  changeCondition() {
+    console.log('selected', this.selectedCondition);
+    
+  }
 }
