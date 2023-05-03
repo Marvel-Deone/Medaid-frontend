@@ -35,6 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { PeertopeerDialogueComponent } from './dialogues/peertopeer-dialogue/peertopeer-dialogue.component';
 import { PeertopeerComponent } from './peertopeer/peertopeer.component';
+import { SelfAssesementComponent } from './self-assesement/self-assesement.component';
+import {MatSelectModule} from '@angular/material/select';
 
 registerLocaleData(en);
 
@@ -58,6 +60,7 @@ registerLocaleData(en);
     SosComponent,
     PeertopeerDialogueComponent,
     PeertopeerComponent,
+    SelfAssesementComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ registerLocaleData(en);
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

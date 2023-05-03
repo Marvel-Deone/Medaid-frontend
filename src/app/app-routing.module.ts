@@ -11,6 +11,7 @@ import { EmergencyInformationComponent } from './emergency-information/emergency
 import { EmailVeryComponent } from './auth/email-very/email-very.component';
 import { BlogComponent } from './admin/blog/blog.component';
 import { SosComponent } from './sos/sos.component';
+import { SelfAssesementComponent } from './self-assesement/self-assesement.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'sign-in', pathMatch: 'full'  },
@@ -24,6 +25,7 @@ const routes: Routes = [
    {path: 'chat', component: ChatContainerComponent, canActivate: [AuthGuard] },
    {path: 'admin/blog', component: BlogComponent, canActivate: [AuthGuard] },
    {path: 'sos', component: SosComponent, canActivate: [AuthGuard] },
+   {path: 'self-assessement', component: SelfAssesementComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
