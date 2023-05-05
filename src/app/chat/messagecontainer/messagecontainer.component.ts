@@ -19,11 +19,13 @@ export class MessagecontainerComponent {
   public messages: any;
   public chats: any;
   private socket!: Socket;
-  
+  public showMsgBox =false
+
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
   constructor(private service: UserService, private ngZone: NgZone, public dialog: MatDialog) {}
   ngOnInit(): void {
-    this.currentUserEmail = sessionStorage.getItem('med-email');
+  
+    this.currentUserEmail = sessionStorage.getItem('med-email')
     // Create a socket connection
     this.socket = io('http://localhost:5000').connect();
     console.log('Socket connected:', this.socket.connected);
@@ -44,7 +46,7 @@ export class MessagecontainerComponent {
     });
 
     this.service.GetAllUser(this.currentUserEmail).subscribe((item: any) => {
-     
+
       this.allUsers = item.users;
       console.log(this.allUsers);
       this.service
@@ -61,7 +63,12 @@ export class MessagecontainerComponent {
     this.scrollToBottom();
   }
   public handleIndex(index: number) {
+
     this.currentChatPicked = this.allUsers[index];
+    // to Update the global currentUserPicked
+    this.service.currentChatPicked = index
+    this.showMsgBox =true
+
     this.service
       .GetAllMessages({
         from: this.currentUser?._id,
