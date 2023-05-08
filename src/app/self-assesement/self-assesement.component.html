@@ -1,805 +1,806 @@
     <aside
-        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-white"
-        id="sidenav-main">
-        <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-                aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
-                routerLink="/dashboard">
-                <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 shadow"
+    id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+            aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
+            routerLink="/dashboard">
+            <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
+        </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <!-- <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main"> -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/dashboard" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
+                </h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/emergency-information" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Emergency Information</span>
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">SOS</span>
+                </a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/medication-reminder" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Medication & Reminder</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/self-assessement" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Self Assesement</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" target="_blank" routerLink="/chat" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Forum</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/consultation" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Consultation</span>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="role_id == 1 || role_id == 2">
+                <a class="nav-link text-dark " href="https://medaid-delta.vercel.app/blog" target="_blank">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">view_in_ar</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Blog</span>
+                </a>
+            </li>
+
+            <li class="nav-item" *ngIf="role_id == 3">
+                <a class="nav-link text-dark" routerLink="/admin/blog" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">view_in_ar</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Blog</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/tell-me" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Tell me</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="/notifications" routerLinkActive="menu_active">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">notifications</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Notifications</span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account pages
+                </h6>
+            </li>
+        </ul>
+    <!-- </div> -->
+    <div class=" w-100" style="font-size: 14px !important;">
+        <div class="mx-3">
+            <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
+                <i class="material-icons opacity-10">login</i>
+                <span class="ms-2">Logout</span>
             </a>
         </div>
-        <hr class="horizontal light mt-0 mb-2">
-        <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/dashboard" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">dashboard</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
-                    </h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/emergency-information" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Emergency Information</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">SOS</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/medication-reminder" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Medication & Reminder</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/self-assessement" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Self Assesement</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" target="_blank" routerLink="/chat" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Forum</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/consultation" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Consultation</span>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="role_id == 1 || role_id == 2">
-                    <a class="nav-link text-dark " href="https://medaid-delta.vercel.app/blog" target="_blank">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">view_in_ar</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Blog</span>
-                    </a>
-                </li>
-
-                <li class="nav-item" *ngIf="role_id == 3">
-                    <a class="nav-link text-dark" routerLink="/admin/blog" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">view_in_ar</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Blog</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/tell-me" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tell me</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" routerLink="/notifications" routerLinkActive="menu_active">
-                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">notifications</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Notifications</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account pages
-                    </h6>
-                </li>
-            </ul>
-        </div>
-        <div class="sidenav-footer position-absolute w-100 bottom-0" style="font-size: 14px !important;">
-            <div class="mx-3">
-                <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
-                    <i class="material-icons opacity-10">login</i>
-                    <span class="ms-2">Logout</span>
-                </a>
-            </div>
-        </div>
+    </div>
     </aside>
 
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl shadow bg-white"
-            style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;"
-            id="navbarBlur" navbar-scroll="true">
-            <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class=""><a class=" text-dark">Hi, {{ userProfile?.username}}</a>
-                        </li>
-                        <li class=" text-sm text-dark active" aria-current="page"></li>
-                    </ol>
-                    <h6 class="font-weight-bolder mb-0">How are you feeling today?</h6>
-                </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                        <div class="input-group input-group-outline">
-                            <label class="form-label">Type here...</label>
-                            <input type="text" class="form-control">
+        <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg" style="margin-top: 2%;">
+            <!-- Navbar -->
+            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl shadow bg-white"
+                style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;"
+                id="navbarBlur" navbar-scroll="true">
+                <div class="container-fluid py-1 px-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                            <li class=""><a class=" text-dark">Hi, {{ userProfile?.username}}</a>
+                            </li>
+                            <li class=" text-sm text-dark active" aria-current="page"></li>
+                        </ol>
+                        <h6 class="font-weight-bolder mb-0">How are you feeling today?</h6>
+                    </nav>
+                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                            <div class="input-group input-group-outline">
+                                <label class="form-label">Type here...</label>
+                                <input type="text" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <ul class="navbar-nav  justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
-                            <a routerLink="/profile" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1"></i>
-                                <!-- <i class="material-icons opacity-10">notifications</i> -->
-                                <!-- <span class="d-sm-inline d-none">Sign In</span> -->
-                            </a>
-                        </li>
-                        <li (click)="changeMenuStatus()" class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item px-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-body p-0">
-                                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                            <a routerLink="/notifications" class="nav-link text-body p-0" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-bell cursor-pointer"></i>
-                            </a>
-                            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
-                                aria-labelledby="dropdownMenuButton">
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="my-auto">
-                                                <img src="./assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <ul class="navbar-nav  justify-content-end">
+                            <li class="nav-item d-flex align-items-center">
+                                <a routerLink="/profile" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1"></i>
+                                    <!-- <i class="material-icons opacity-10">notifications</i> -->
+                                    <!-- <span class="d-sm-inline d-none">Sign In</span> -->
+                                </a>
+                            </li>
+                            <li (click)="changeMenuStatus()" class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                                <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                    <div class="sidenav-toggler-inner">
+                                        <i class="sidenav-toggler-line"></i>
+                                        <i class="sidenav-toggler-line"></i>
+                                        <i class="sidenav-toggler-line"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item px-3 d-flex align-items-center">
+                                <a href="javascript:;" class="nav-link text-body p-0">
+                                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                                <a routerLink="/notifications" class="nav-link text-body p-0" id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-bell cursor-pointer"></i>
+                                </a>
+                                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                                    aria-labelledby="dropdownMenuButton">
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex py-1">
+                                                <div class="my-auto">
+                                                    <img src="./assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        <span class="font-weight-bold">New message</span> from Laur
+                                                    </h6>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="fa fa-clock me-1"></i>
+                                                        13 minutes ago
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">
-                                                    <span class="font-weight-bold">New message</span> from Laur
-                                                </h6>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    <i class="fa fa-clock me-1"></i>
-                                                    13 minutes ago
-                                                </p>
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex py-1">
+                                                <div class="my-auto">
+                                                    <img src="./assets/img/small-logos/logo-spotify.svg"
+                                                        class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        <span class="font-weight-bold">New album</span> by Travis Scott
+                                                    </h6>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="fa fa-clock me-1"></i>
+                                                        1 day
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="my-auto">
-                                                <img src="./assets/img/small-logos/logo-spotify.svg"
-                                                    class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">
-                                                    <span class="font-weight-bold">New album</span> by Travis Scott
-                                                </h6>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    <i class="fa fa-clock me-1"></i>
-                                                    1 day
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                                <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>credit-card</title>
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
-                                                            fill-rule="nonzero">
-                                                            <g transform="translate(1716.000000, 291.000000)">
-                                                                <g transform="translate(453.000000, 454.000000)">
-                                                                    <path class="color-background"
-                                                                        d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                                        opacity="0.593633743"></path>
-                                                                    <path class="color-background"
-                                                                        d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                                                    </path>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex py-1">
+                                                <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                                    <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <title>credit-card</title>
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
+                                                                fill-rule="nonzero">
+                                                                <g transform="translate(1716.000000, 291.000000)">
+                                                                    <g transform="translate(453.000000, 454.000000)">
+                                                                        <path class="color-background"
+                                                                            d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                                                            opacity="0.593633743"></path>
+                                                                        <path class="color-background"
+                                                                            d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
+                                                                        </path>
+                                                                    </g>
                                                                 </g>
                                                             </g>
                                                         </g>
-                                                    </g>
-                                                </svg>
+                                                    </svg>
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        Payment successfully completed
+                                                    </h6>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="fa fa-clock me-1"></i>
+                                                        2 days
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">
-                                                    Payment successfully completed
-                                                </h6>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    <i class="fa fa-clock me-1"></i>
-                                                    2 days
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+            </nav>
+
+            <div *ngIf="showmenu" class="mobileMenu" (click)="changeMenuStatus()">
+                <aside class="mobileMenu-aside" *ngIf="role_id == 1 || role_id == 2">
+                    <div class="sidenav-header">
+                        <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                            aria-hidden="true" id="iconSidenav"></i>
+                        <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
+                            routerLink="/dashboard">
+                            <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-50" alt="main_logo">
+                            <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <a routerLink="/dashboard" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
+                        </h6>
+
+                        <a routerLink="/profile" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Profile</span>
+                        </a>
+
+                        <a routerLink="/emergency-information" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Emergency Information</span>
+                        </a>
+
+                        <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
+                            style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>SOS</span>
+                        </a>
+
+                        <a routerLink="/medication-reminder" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Medication & Reminder</span>
+                        </a>
+
+                        <a routerLink="/self-assessment" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Self Assesment</span>
+                        </a>
+
+                        <a routerLink="/chat" class="px-1 py-3 d-flex gap-2 align-items-center"
+                            style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Forum</span>
+                        </a>
+
+                        <a routerLink="/consultation" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Consultation</span>
+                        </a>
+
+                        <a href="https://medaid-delta.vercel.app/blog" target="_blank"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Blog</span>
+                        </a>
+
+                        <a routerLink="/tell-me" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Tell me</span>
+                        </a>
+
+                        <a routerLink="/notifications" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Notification</span>
+                        </a>
+
+                        <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
+                            <div>
+                                <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
+                                    <i class="material-icons opacity-10">login</i>
+                                    <span class="ms-2">Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <aside class="mobileMenu-aside" *ngIf="role_id == 3">
+                    <div class="sidenav-header">
+                        <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                            aria-hidden="true" id="iconSidenav"></i>
+                        <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
+                            routerLink="/dashboard">
+                            <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-50" alt="main_logo">
+                            <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <a routerLink="/dashboard" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
+                        </h6>
+
+                        <a routerLink="/profile" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Profile</span>
+                        </a>
+
+                        <a routerLink="/admin/blog" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Blog</span>
+                        </a>
+
+                        <a routerLink="/notifications" routerLinkActive="menu_active"
+                            class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
+                            <i class="material-icons opacity-10">person</i>
+                            <span>Notification</span>
+                        </a>
+
+                        <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
+                            <div>
+                                <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
+                                    <i class="material-icons opacity-10">login</i>
+                                    <span class="ms-2">Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!-- <div style="position: fixed !important; display: flex !important; justify-items: end !important;">
+                                            <mat-icon class="bg-danger">clear</mat-icon>
+                                        </div> -->
             </div>
-        </nav>
+            <!-- End Navbar -->
 
-        <div *ngIf="showmenu" class="mobileMenu" (click)="changeMenuStatus()">
-            <aside class="mobileMenu-aside" *ngIf="role_id == 1 || role_id == 2">
-                <div class="sidenav-header">
-                    <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-                        aria-hidden="true" id="iconSidenav"></i>
-                    <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
-                        routerLink="/dashboard">
-                        <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-50" alt="main_logo">
-                        <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
-                    </a>
-                </div>
-                <div class="d-flex flex-column">
-                    <a routerLink="/dashboard" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">dashboard</i>
-                        <span>Dashboard</span>
-                    </a>
+            <div class="container-fluid py-4 mt-5" style="margin-top: 9% !important;">
+                <div class="card card-body mx-3 mx-md-4 mt-n6">
+                    <div class="row gx-4 mb-2">
+                        <!-- <div class="col-auto my-auto text-center"> -->
+                        <h4 class="text-center mt-2">Self Assessement</h4>
+                        <!-- </div> -->
 
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
-                    </h6>
-
-                    <a routerLink="/profile" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Profile</span>
-                    </a>
-
-                    <a routerLink="/emergency-information" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Emergency Information</span>
-                    </a>
-
-                    <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
-                        style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>SOS</span>
-                    </a>
-
-                    <a routerLink="/medication-reminder" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Medication & Reminder</span>
-                    </a>
-
-                    <a routerLink="/self-assessment" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Self Assesment</span>
-                    </a>
-
-                    <a routerLink="/chat" class="px-1 py-3 d-flex gap-2 align-items-center"
-                        style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Forum</span>
-                    </a>
-
-                    <a routerLink="/consultation" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Consultation</span>
-                    </a>
-
-                    <a href="https://medaid-delta.vercel.app/blog" target="_blank"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Blog</span>
-                    </a>
-
-                    <a routerLink="/tell-me" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Tell me</span>
-                    </a>
-
-                    <a routerLink="/notifications" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Notification</span>
-                    </a>
-
-                    <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
-                        <div>
-                            <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
-                                <i class="material-icons opacity-10">login</i>
-                                <span class="ms-2">Logout</span>
-                            </a>
+                        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                            <div class="nav-wrapper position-relative end-0">
+                                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                                        <select class="form-select w-100 px-3" name="" id="" [(ngModel)]="selectedCondition" (change)="changeCondition()">
+                                            <option value="choose your condition">Choose your condition</option>
+                                            <option value={{condition}} *ngFor="let condition of conditions">{{condition}}</option>
+                                        </select>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </aside>
 
-            <aside class="mobileMenu-aside" *ngIf="role_id == 3">
-                <div class="sidenav-header">
-                    <i class="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-                        aria-hidden="true" id="iconSidenav"></i>
-                    <a class="navbar-brand m-0 d-flex gap-2" style="align-items: center; text-align: center;"
-                        routerLink="/dashboard">
-                        <img src="./assets/img/logo.png" class="navbar-brand-img w-25 h-50" alt="main_logo">
-                        <span class="ms-1 font-weight-bold text-dark text-capitalize">Medaid</span>
-                    </a>
-                </div>
-                <div class="d-flex flex-column">
-                    <a routerLink="/dashboard" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">dashboard</i>
-                        <span>Dashboard</span>
-                    </a>
-
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Personal
-                    </h6>
-
-                    <a routerLink="/profile" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Profile</span>
-                    </a>
-
-                    <a routerLink="/admin/blog" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Blog</span>
-                    </a>
-
-                    <a routerLink="/notifications" routerLinkActive="menu_active"
-                        class="px-1 py-3 d-flex gap-2 align-items-center" style="color: #344767 !important;">
-                        <i class="material-icons opacity-10">person</i>
-                        <span>Notification</span>
-                    </a>
-
-                    <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
-                        <div>
-                            <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
-                                <i class="material-icons opacity-10">login</i>
-                                <span class="ms-2">Logout</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-            <!-- <div style="position: fixed !important; display: flex !important; justify-items: end !important;">
-                                        <mat-icon class="bg-danger">clear</mat-icon>
-                                    </div> -->
-        </div>
-        <!-- End Navbar -->
-
-        <div class="container-fluid py-4 mt-5" style="margin-top: 9% !important;">
-            <div class="card card-body mx-3 mx-md-4 mt-n6">
-                <div class="row gx-4 mb-2">
-                    <!-- <div class="col-auto my-auto text-center"> -->
-                    <h4 class="text-center mt-2">Self Assessement</h4>
-                    <!-- </div> -->
-
-                    <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                        <div class="nav-wrapper position-relative end-0">
-                            <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                                    <select class="form-select w-100 px-3" name="" id="" [(ngModel)]="selectedCondition" (change)="changeCondition()">
-                                        <option value="choose your condition">Choose your condition</option>
-                                        <option value={{condition}} *ngFor="let condition of conditions">{{condition}}</option>
-                                    </select>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form -->   
-                <div class="row">
+                    <!-- Form -->   
                     <div class="row">
-                        <div class="col-12" *ngIf="selectedCondition !== 'Pregnant' && selectedCondition !== 'Other' ">
-                            <img src="./assets/img/choose.svg" class="w-50 h-50 d-flex mx-auto mt-4" alt="">
-                            <p class="text-center mt-4">Choose your condition to start with the self assessment</p>
-                        </div>
-                        
-                        <div class="col-12" *ngIf="selectedCondition == 'Pregnant'">
-                            <h5 class="text-center mt-2">MSS Prenatal Screening Guide</h5>
-                            <p class="text-center" style="font-size: 15px; font-weight: 400;">I am going to ask some questions to better help us support you during this pregnancy. This information will be kept confidential.</p>
-                            <div class="card card-plain h-100">
-                                <div class="card-body p-3">
-                                    <ul class="list-group">
-                                        
-                                        <div class="row mt-2 mb-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Date of Assessment</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <input type="date"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">How is your pregnancy going? How are you feeling?</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">How are you feeling about being pregnant?</label>
-                                                <input type="text"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="">
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">Is this good timing for your pregnancy? Y or N Tell me more.</label>
-                                                    <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">Have you had any changes in your appetite or sleep habits? Y or N (If yes)
-                                                    What?</label>
-                                                    <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Have you seen a medical provider for this pregnancy? Y or N</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">(If yes) When did you first see your medical provider?</label>
-                                                <input type="text"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="">
-                                            </div>
-
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">(If yes) When is your next appointment?</label>
-                                                <input type="text"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="">
-                                            </div>
-
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">(If no) Why don’t you have a medical provider?</label>
-                                                    <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">(If seen by a medical provider) is there any health or medical concerns with your current pregnancy?</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">Has your medical provider told you about any
-                                                    health or medical concerns with your current pregnancy (If yes) what are they?</label>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="Gestational Diabetes">
-                                                        <label class="form-check-label" for="Gestational Diabetes">
-                                                            Gestational Diabetes
-                                                        </label>
-                                                      </div>
-                                                      
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="Hypertension during
-                                                        pregnancy (PIH/Gestational
-                                                        Hypertension)">
-                                                        <label class="form-check-label" for="Hypertension during
-                                                        pregnancy (PIH/Gestational
-                                                        Hypertension)">
-                                                        Hypertension during
-                                                        pregnancy (PIH/Gestational
-                                                        Hypertension)
-                                                        </label>
-                                                    </div>
-                                                      
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="Preterm labor(Premature labor)">
-                                                        <label class="form-check-label" for="Preterm labor(Premature labor)">
-                                                        Preterm labor(Premature labor)
-                                                        </label>
-                                                    </div>
-                                                      
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="Prescribed bed rest due to conditions that could lead topreterm birth, i.e. placenta previa or placenta abruption">
-                                                        <label class="form-check-label" for="Prescribed bed rest due to conditions that could lead topreterm birth, i.e. placenta previa or placenta abruption">
-                                                        Prescribed bed rest due to conditions that could lead topreterm birth, i.e. placenta previa or placenta abruption
-                                                        </label>
-                                                    </div>
-                                                      
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="Multiple Gestation(More than one child)">
-                                                        <label class="form-check-label" for="Multiple Gestation(More than one child)">
-                                                        Multiple Gestation(More than one child)
-                                                        </label>
-                                                    </div>
-                                            </div>
-
-                                        </div>
-                                              
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Weight</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">How much did you weigh before this pregnancy?</label>
-                                                <input type="text"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="lb">
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">Have you had your weight checked recently?</label>
-                                                <input type="text"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder="">
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">lb Date :</label>
-                                                <input type="text"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder="">
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">Height :</label>
-                                                <input type="text"
-                                                class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder="(feet and inches)">
-
-                                            </div>
-                                        </div>
-                                              
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Health problem</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">Do you have any health problems or medical conditions not related to
-                                                    pregnancy? (If yes) Tell me more. Examples- Hypertension, diabetes, treatment
-                                                    of mental health issues, etc.?</label>
-                                                    <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                              
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Taking any prescribed medications?</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">(If yes) What are they and how much/often do you take them?</label>
-                                                <input type="text"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="">
-                                            </div>
-
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">(If yes and has prenatal care provider) Have you discussed taking these during pregnancy with your prenatal care provider? Y or N </label>
-                                                <input type="text"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="">
-                                            </div>
+                        <div class="row">
+                            <div class="col-12" *ngIf="selectedCondition !== 'Pregnant' && selectedCondition !== 'Other' ">
+                                <img src="./assets/img/choose.svg" class="w-50 h-50 d-flex mx-auto mt-4" alt="">
+                                <p class="text-center mt-4">Choose your condition to start with the self assessment</p>
+                            </div>
+                            
+                            <div class="col-12" *ngIf="selectedCondition == 'Pregnant'">
+                                <h5 class="text-center mt-2">MSS Prenatal Screening Guide</h5>
+                                <p class="text-center" style="font-size: 15px; font-weight: 400;">I am going to ask some questions to better help us support you during this pregnancy. This information will be kept confidential.</p>
+                                <div class="card card-plain h-100">
+                                    <div class="card-body p-3">
+                                        <ul class="list-group">
                                             
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for=""> (If no) Why not?</label>
-                                                <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
+                                            <div class="row mt-2 mb-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Date of Assessment</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <input type="date"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
                                             </div>
-                                        </div>
-                                              
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Have you felt down, depressed, or hopeless?</label>
+
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">How is your pregnancy going? How are you feeling?</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">How are you feeling about being pregnant?</label>
+                                                    <input type="text"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">Is this good timing for your pregnancy? Y or N Tell me more.</label>
+                                                        <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">Have you had any changes in your appetite or sleep habits? Y or N (If yes)
+                                                        What?</label>
+                                                        <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
+                                                </div>
                                             </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">In the last month, have you felt down, depressed, or hopeless? Y or N</label>
-                                                <input type="text"
+
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Have you seen a medical provider for this pregnancy? Y or N</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">(If yes) When did you first see your medical provider?</label>
+                                                    <input type="text"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
+
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">(If yes) When is your next appointment?</label>
+                                                    <input type="text"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
+
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">(If no) Why don’t you have a medical provider?</label>
+                                                        <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">(If seen by a medical provider) is there any health or medical concerns with your current pregnancy?</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">Has your medical provider told you about any
+                                                        health or medical concerns with your current pregnancy (If yes) what are they?</label>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Gestational Diabetes">
+                                                            <label class="form-check-label" for="Gestational Diabetes">
+                                                                Gestational Diabetes
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Hypertension during
+                                                            pregnancy (PIH/Gestational
+                                                            Hypertension)">
+                                                            <label class="form-check-label" for="Hypertension during
+                                                            pregnancy (PIH/Gestational
+                                                            Hypertension)">
+                                                            Hypertension during
+                                                            pregnancy (PIH/Gestational
+                                                            Hypertension)
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Preterm labor(Premature labor)">
+                                                            <label class="form-check-label" for="Preterm labor(Premature labor)">
+                                                            Preterm labor(Premature labor)
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Prescribed bed rest due to conditions that could lead topreterm birth, i.e. placenta previa or placenta abruption">
+                                                            <label class="form-check-label" for="Prescribed bed rest due to conditions that could lead topreterm birth, i.e. placenta previa or placenta abruption">
+                                                            Prescribed bed rest due to conditions that could lead topreterm birth, i.e. placenta previa or placenta abruption
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Multiple Gestation(More than one child)">
+                                                            <label class="form-check-label" for="Multiple Gestation(More than one child)">
+                                                            Multiple Gestation(More than one child)
+                                                            </label>
+                                                        </div>
+                                                </div>
+
+                                            </div>
+                                                
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Weight</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">How much did you weigh before this pregnancy?</label>
+                                                    <input type="text"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="lb">
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">Have you had your weight checked recently?</label>
+                                                    <input type="text"
                                                     class="form-control px-3 py-1 input-outline2" id=""
                                                     placeholder="">
-                                            </div>
-                                        </div>
-                                              
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Have you felt down, depressed, or hopeless?</label>
-                                            </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <label for="">Is there any information you would like us to help you with during this
-                                                    pregnancy? Y or N (If yes) Tell me more</label>
-                                                <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
-                                            </div>
-                                        </div>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">lb Date :</label>
+                                                    <input type="text"
+                                                    class="form-control px-3 py-1 input-outline2" id=""
+                                                    placeholder="">
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">Height :</label>
+                                                    <input type="text"
+                                                    class="form-control px-3 py-1 input-outline2" id=""
+                                                    placeholder="(feet and inches)">
 
-                                    </ul>
-                                    <div class="save_btn mt-2">
-                                        <button class="btn btn-primary mt-3">Submit</button>
-                                        <!-- <button *ngIf="loading" disabled class="btn btn-primary mt-3" (click)="updateProfile()">
-                                            <span>Saving</span>
-                                            <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px"
-                                                height="26px"></button> -->
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Health problem</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">Do you have any health problems or medical conditions not related to
+                                                        pregnancy? (If yes) Tell me more. Examples- Hypertension, diabetes, treatment
+                                                        of mental health issues, etc.?</label>
+                                                        <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Taking any prescribed medications?</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">(If yes) What are they and how much/often do you take them?</label>
+                                                    <input type="text"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
+
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">(If yes and has prenatal care provider) Have you discussed taking these during pregnancy with your prenatal care provider? Y or N </label>
+                                                    <input type="text"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
+                                                
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for=""> (If no) Why not?</label>
+                                                    <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Have you felt down, depressed, or hopeless?</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">In the last month, have you felt down, depressed, or hopeless? Y or N</label>
+                                                    <input type="text"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Have you felt down, depressed, or hopeless?</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <label for="">Is there any information you would like us to help you with during this
+                                                        pregnancy? Y or N (If yes) Tell me more</label>
+                                                    <textarea class="form-control px-3 py-1 input-outline2" name="" id="" rows="3"></textarea>
+                                                </div>
+                                            </div>
+
+                                        </ul>
+                                        <div class="save_btn mt-2">
+                                            <button class="btn btn-primary mt-3">Submit</button>
+                                            <!-- <button *ngIf="loading" disabled class="btn btn-primary mt-3" (click)="updateProfile()">
+                                                <span>Saving</span>
+                                                <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px"
+                                                    height="26px"></button> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-12 mt-2" *ngIf="selectedCondition == 'Other'">
-                            <p class="text-center" style="font-size: 13px; font-weight: 400;">I am going to ask some questions to better help us support you. This information will be kept confidential.</p>
-                            <div class="card card-plain h-100">
-                                <div class="card-body p-3">
-                                    <ul class="list-group">
-                                        
-                                        <div class="row mt-2 mb-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Date of Assessment</label>
+                            <div class="col-12 mt-2" *ngIf="selectedCondition == 'Other'">
+                                <p class="text-center" style="font-size: 13px; font-weight: 400;">I am going to ask some questions to better help us support you. This information will be kept confidential.</p>
+                                <div class="card card-plain h-100">
+                                    <div class="card-body p-3">
+                                        <ul class="list-group">
+                                            
+                                            <div class="row mt-2 mb-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Date of Assessment</label>
+                                                </div>
+                                                <div class="col-12 col-lg-12 px-3 mt-3">
+                                                    <input type="date"
+                                                        class="form-control px-3 py-1 input-outline2" id=""
+                                                        placeholder="">
+                                                </div>
                                             </div>
-                                            <div class="col-12 col-lg-12 px-3 mt-3">
-                                                <input type="date"
-                                                    class="form-control px-3 py-1 input-outline2" id=""
-                                                    placeholder="">
+
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Please check the box of each symptom you are currently experiencing or have had in the last 14 days:</label>
+                                                </div>
+                                                <div class="col-12 mb-3 mt-2">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col">Yes</th>
+                                                            <th scope="col">No</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Fever, chills, sweating</th>
+                                                            <td><input class="ms-4" type="radio" name="fever"></td>
+                                                            <td><input class="ms-4" type="radio" name="fever"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">New or worsening cough</th>
+                                                            <td><input class="ms-4" type="radio" name="cough"></td>
+                                                            <td><input class="ms-4" type="radio" name="cough"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Sore throat</th>
+                                                            <td><input class="ms-4" type="radio" name="soreThroat"></td>
+                                                            <td><input class="ms-4" type="radio" name="soreThroat"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Body aches</th>
+                                                            <td><input class="ms-4" type="radio" name="aches"></td>
+                                                            <td><input class="ms-4" type="radio" name="aches"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Vomiting or diarrhea</th>
+                                                            <td><input class="ms-4" type="radio" name="vomitting"></td>
+                                                            <td><input class="ms-4" type="radio" name="vomitting"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">None of the above</th>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
+
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
+                                                        for="flexSwitchCheckDefault">Please select all conditions that apply to you:</label>
+                                                </div>
+                                                <div class="col-12 mb-3 mt-2">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col">Yes</th>
+                                                            <th scope="col">No</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Asthma or lung disease</th>
+                                                            <td><input class="ms-4" type="radio" name="fever"></td>
+                                                            <td><input class="ms-4" type="radio" name="fever"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Pregnant</th>
+                                                            <td><input class="ms-4" type="radio" name="cough"></td>
+                                                            <td><input class="ms-4" type="radio" name="cough"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Weakened immune system</th>
+                                                            <td><input class="ms-4" type="radio" name="soreThroat"></td>
+                                                            <td><input class="ms-4" type="radio" name="soreThroat"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Cirrhosis of the liver</th>
+                                                            <td><input class="ms-4" type="radio" name="aches"></td>
+                                                            <td><input class="ms-4" type="radio" name="aches"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Kidney failure</th>
+                                                            <td><input class="ms-4" type="radio" name="vomitting"></td>
+                                                            <td><input class="ms-4" type="radio" name="vomitting"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Congestive heart failure</th>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Obesity</th>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">Diabetes</th>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row" class="ms-3">None of the above</th>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                            <td><input class="ms-4" type="radio" name="none"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </ul>
+                                        <div class="save_btn mt-2">
+                                            <button class="btn btn-primary mt-3">Submit</button>
+                                            <!-- <button *ngIf="loading" disabled class="btn btn-primary mt-3" (click)="updateProfile()">
+                                                <span>Saving</span>
+                                                <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px"
+                                                    height="26px"></button> -->
                                         </div>
-
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Please check the box of each symptom you are currently experiencing or have had in the last 14 days:</label>
-                                            </div>
-                                            <div class="col-12 mb-3 mt-2">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                      <tr>
-                                                        <th scope="col"></th>
-                                                        <th scope="col">Yes</th>
-                                                        <th scope="col">No</th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Fever, chills, sweating</th>
-                                                        <td><input class="ms-4" type="radio" name="fever"></td>
-                                                        <td><input class="ms-4" type="radio" name="fever"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">New or worsening cough</th>
-                                                        <td><input class="ms-4" type="radio" name="cough"></td>
-                                                        <td><input class="ms-4" type="radio" name="cough"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Sore throat</th>
-                                                        <td><input class="ms-4" type="radio" name="soreThroat"></td>
-                                                        <td><input class="ms-4" type="radio" name="soreThroat"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Body aches</th>
-                                                        <td><input class="ms-4" type="radio" name="aches"></td>
-                                                        <td><input class="ms-4" type="radio" name="aches"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Vomiting or diarrhea</th>
-                                                        <td><input class="ms-4" type="radio" name="vomitting"></td>
-                                                        <td><input class="ms-4" type="radio" name="vomitting"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">None of the above</th>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                      </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold" style="color: #000000D9 !important;"
-                                                    for="flexSwitchCheckDefault">Please select all conditions that apply to you:</label>
-                                            </div>
-                                            <div class="col-12 mb-3 mt-2">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                      <tr>
-                                                        <th scope="col"></th>
-                                                        <th scope="col">Yes</th>
-                                                        <th scope="col">No</th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Asthma or lung disease</th>
-                                                        <td><input class="ms-4" type="radio" name="fever"></td>
-                                                        <td><input class="ms-4" type="radio" name="fever"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Pregnant</th>
-                                                        <td><input class="ms-4" type="radio" name="cough"></td>
-                                                        <td><input class="ms-4" type="radio" name="cough"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Weakened immune system</th>
-                                                        <td><input class="ms-4" type="radio" name="soreThroat"></td>
-                                                        <td><input class="ms-4" type="radio" name="soreThroat"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Cirrhosis of the liver</th>
-                                                        <td><input class="ms-4" type="radio" name="aches"></td>
-                                                        <td><input class="ms-4" type="radio" name="aches"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Kidney failure</th>
-                                                        <td><input class="ms-4" type="radio" name="vomitting"></td>
-                                                        <td><input class="ms-4" type="radio" name="vomitting"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Congestive heart failure</th>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Obesity</th>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">Diabetes</th>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <th scope="row" class="ms-3">None of the above</th>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                        <td><input class="ms-4" type="radio" name="none"></td>
-                                                      </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                    </ul>
-                                    <div class="save_btn mt-2">
-                                        <button class="btn btn-primary mt-3">Submit</button>
-                                        <!-- <button *ngIf="loading" disabled class="btn btn-primary mt-3" (click)="updateProfile()">
-                                            <span>Saving</span>
-                                            <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px"
-                                                height="26px"></button> -->
                                     </div>
                                 </div>
                             </div>
@@ -807,5 +808,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>

@@ -12,6 +12,7 @@
     public responseItem: any;
     public header: any;
     userProfile: any;
+    public currentChatPicked:any
 
     constructor(private http: HttpClient) { }
 
@@ -29,7 +30,7 @@
         console.log(response);
 
       }))
-      // return this.http.post(`${URI}`, 
+      // return this.http.post(`${URI}`,
       //   inputdata
       // );
     }
@@ -82,7 +83,7 @@
       }
     })
   }
-  
+
   GetCurrentUser(currentUser:any){
     return this.http.get(`${this.uriseg}/user/currentuser/${currentUser}`);
   }

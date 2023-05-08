@@ -12,6 +12,7 @@ import { EmailVeryComponent } from './auth/email-very/email-very.component';
 import { BlogComponent } from './admin/blog/blog.component';
 import { SosComponent } from './sos/sos.component';
 import { SelfAssesementComponent } from './self-assesement/self-assesement.component';
+import { PeertopeerComponent } from './peertopeer/peertopeer.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'sign-in', pathMatch: 'full'  },
@@ -26,6 +27,7 @@ const routes: Routes = [
    {path: 'admin/blog', component: BlogComponent, canActivate: [AuthGuard] },
    {path: 'sos', component: SosComponent, canActivate: [AuthGuard] },
    {path: 'self-assessement', component: SelfAssesementComponent, canActivate: [AuthGuard] },
+   {path: 'peertopeer/:id', component:PeertopeerComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

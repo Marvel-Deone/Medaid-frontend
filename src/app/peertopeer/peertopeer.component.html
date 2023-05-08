@@ -1,1 +1,24 @@
-<p>peertopeer works!</p>
+
+
+
+
+
+<div class="video-call">
+    <div class="video-section">
+      <video id="local-video"  #user_1 autoplay playsinline></video>
+    </div>
+    <div class="video-section">
+      <video   #user_2  autoplay playsinline></video>
+    </div>
+    <div class="controls">
+      <button class="icon-button" (click)="toogleCamera()" id="camera-button" >
+        <i class="fas fa-video"></i>
+      </button>
+      <button class="icon-button" (click)="toogleMic()" id="mic-button">
+        <i class="fas fa-microphone"></i>
+      </button>
+      <button class="icon-button" id="end-call-button">
+        <i class="fas fa-phone-slash"></i>
+      </button>
+    </div>
+  </div>

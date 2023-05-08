@@ -130,6 +130,10 @@ label {
     color: #fff !important;
 }
 
+.menu_active div i {
+    color: white !important;
+}
+
 .btn-primary:active + .btn-primary:focus{
     box-shadow: 0 0 0 0.2rem rgba(92, 177, 224, 0.5) !important;
 }
@@ -141,4 +145,13 @@ label {
     height: 185px; 
     box-shadow: 0 0 0 0.2rem rgba(92, 177, 224, 0.5);
     background-image: linear-gradient(180deg, rgba(92, 177, 224, 0.15), rgba(92, 177, 224, 0));
-}   
+}
+
+::-webkit-scrollbar {
+    width: 0px !important;
+  }
+
+  /* ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 4px;
+  } */
