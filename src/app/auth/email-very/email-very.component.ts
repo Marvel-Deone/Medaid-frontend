@@ -28,12 +28,13 @@ export class EmailVeryComponent {
       verticalPosition: 'bottom',
       panelClass: ['green-snackbar', 'login-snackbar'],
      });
-  }else{
-    console.log('hello');
-    
-    this.service.VerifyEmail({userpin:this.userPin,email:this.userEmail}).subscribe(item=>{
+  }else{ 
+    this.service.VerifyEmail({userpin:this.userPin,email:this.userEmail}).subscribe((item:any)=>{
       this.response= item
-      if(this.response.status === true){
+      console.log(this.response);
+      
+      
+      if(this.response.status){
         this._snackBar.open(this.response.message, "OK", {
           duration: 3000,
           horizontalPosition: 'right',
@@ -42,7 +43,7 @@ export class EmailVeryComponent {
          });
          sessionStorage.removeItem('med-email');
 
-         this.router.navigate(['sign-in'])
+         this.router.navigate(['/sign-in'])
       }else{
         this._snackBar.open(this.response.message, "OK", {
           duration: 3000,

@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import { Socket } from 'socket.io-client';
 import {MatDialog} from '@angular/material/dialog';
 import { PeertopeerDialogueComponent } from 'src/app/dialogues/peertopeer-dialogue/peertopeer-dialogue.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-messagecontainer',
   templateUrl: './messagecontainer.component.html',
@@ -22,7 +23,7 @@ export class MessagecontainerComponent {
   public showMsgBox =false
 
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
-  constructor(private service: UserService, private ngZone: NgZone, public dialog: MatDialog) {}
+  constructor(private service: UserService, private ngZone: NgZone, public dialog: MatDialog, private router:Router) {}
   ngOnInit(): void {
   
     this.currentUserEmail = sessionStorage.getItem('med-email')
@@ -91,15 +92,17 @@ export class MessagecontainerComponent {
       from: this.currentUser._id,
       to: this.currentChatPicked._id,
       message: this.messageInp,
-    };
+    };  
     this.service.SendMessage(msgObj).subscribe((item: any) => {});
     this.socket.emit('message', msgObj);
 
     this.messageInp = '';
   }
   openDialog(){
-    const dislogueRef= this.dialog.open(PeertopeerDialogueComponent,{
-      width:"450px"
-    } );
+    // const dislogueRef= this.dialog.open(PeertopeerDialogueComponent,{
+    //   width:"450px"
+    // } );
+    this.router.navigate(["/peertopeer"])
+    
   }
 }

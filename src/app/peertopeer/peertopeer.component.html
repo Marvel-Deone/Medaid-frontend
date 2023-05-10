@@ -1,24 +1,50 @@
-
-
-
-
-
-<div class="video-call">
-    <div class="video-section">
-      <video id="local-video"  #user_1 autoplay playsinline></video>
-    </div>
-    <div class="video-section">
-      <video   #user_2  autoplay playsinline></video>
-    </div>
-    <div class="controls">
-      <button class="icon-button" (click)="toogleCamera()" id="camera-button" >
-        <i class="fas fa-video"></i>
+<!-- the session button starts here  -->
+<div class="container" *ngIf="creatediv">
+  <div class="shadow-box">
+    <div class="button-container">
+      <button class="button primary session-btn" (click)="createNewRoom()">
+        Create Session
       </button>
-      <button class="icon-button" (click)="toogleMic()" id="mic-button">
-        <i class="fas fa-microphone"></i>
-      </button>
-      <button class="icon-button" id="end-call-button">
-        <i class="fas fa-phone-slash"></i>
+      <button class="button secondary session-btn" (click)="joinSession()">
+        Join Session
       </button>
     </div>
   </div>
+</div>
+<!-- the session button ends here  -->
+
+<!-- the join session button starts here  -->
+<div class="container" *ngIf="joindiv">
+  <div class="shadow-box">
+    <div class="form-container">
+      <input
+        type="text"
+        placeholder="Kindly input your session ID here"
+        class="input-field"
+        [(ngModel)]="sessionId"
+      />
+      <button class="button session-btn" (click)="answerCall()">
+        Join Session
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- the session button ends here  -->
+<div class="video-call" *ngIf="videoRoom">
+  <div class="video-section">
+    <video id="local-video" #user_1 autoplay playsinline></video>
+    <video #user_2 autoplay playsinline></video>
+  </div>
+  <div class="controls">
+    <button class="icon-button" (click)="toogleCamera()" id="camera-button">
+      <i class="fas fa-video"></i>
+    </button>
+    <button class="icon-button" (click)="toogleMic()" id="mic-button">
+      <i class="fas fa-microphone"></i>
+    </button>
+    <button class="icon-button" id="end-call-button">
+      <i class="fas fa-phone-slash"></i>
+    </button>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { TellmeComponent } from './tellme/tellme.component';
 import { ChatContainerComponent } from './chat/chat-container/chat-container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +12,7 @@ import { EmergencyInformationComponent } from './emergency-information/emergency
 import { EmailVeryComponent } from './auth/email-very/email-very.component';
 import { BlogComponent } from './admin/blog/blog.component';
 import { PeertopeerComponent } from './peertopeer/peertopeer.component';
+import { QuoteuploadComponent } from './quoteupload/quoteupload.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'sign-in', pathMatch: 'full'  },
@@ -23,8 +25,12 @@ const routes: Routes = [
    {path: 'emergency-information', component: EmergencyInformationComponent, canActivate: [AuthGuard]  },
    {path: 'chat', component: ChatContainerComponent, canActivate: [AuthGuard] },
    {path: 'admin/blog', component: BlogComponent, canActivate: [AuthGuard] },
-   {path: 'peertopeer/:id', component:PeertopeerComponent, canActivate: [AuthGuard] },
-];
+   {path: 'peertopeer', component:PeertopeerComponent, canActivate: [AuthGuard] },
+   {path: 'tellme', component:TellmeComponent, canActivate: [AuthGuard] },
+    {path: 'uploadquote', component:QuoteuploadComponent,  },
+
+
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

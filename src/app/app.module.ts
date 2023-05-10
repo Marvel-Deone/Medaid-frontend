@@ -35,6 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { PeertopeerDialogueComponent } from './dialogues/peertopeer-dialogue/peertopeer-dialogue.component';
 import { PeertopeerComponent } from './peertopeer/peertopeer.component';
+import { TellmeComponent } from './tellme/tellme.component';
+import { QuoteuploadComponent } from './quoteupload/quoteupload.component';
 
 registerLocaleData(en);
 
@@ -58,6 +60,8 @@ registerLocaleData(en);
     SosComponent,
     PeertopeerDialogueComponent,
     PeertopeerComponent,
+    TellmeComponent,
+    QuoteuploadComponent,
   ],
   imports: [
     BrowserModule,
