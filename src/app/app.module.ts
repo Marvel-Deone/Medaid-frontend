@@ -37,6 +37,7 @@ import { PeertopeerDialogueComponent } from './dialogues/peertopeer-dialogue/pee
 import { PeertopeerComponent } from './peertopeer/peertopeer.component';
 import { SelfAssesementComponent } from './self-assesement/self-assesement.component';
 import {MatSelectModule} from '@angular/material/select';
+import { MedicationReminderComponent } from './medication-reminder/medication-reminder.component';
 
 registerLocaleData(en);
 
@@ -61,6 +62,7 @@ registerLocaleData(en);
     PeertopeerDialogueComponent,
     PeertopeerComponent,
     SelfAssesementComponent,
+    MedicationReminderComponent,
   ],
   imports: [
     BrowserModule,

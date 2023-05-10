@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -12,23 +12,24 @@ export class BlogComponent {
   public userProfile: any;
   public role_id: any;
   public showmenu: boolean = false;
+  myArticle: any;
 
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService) {}
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private el: ElementRef) { }
   ngOnInit(): void {
 
     this.service.GetProfile().subscribe(
-      data=> {
+      data => {
         const response = data;
         this.userProfile = response.profile;
         this.role_id = this.userProfile.role_id;
         console.log('role_id: ' + this.role_id);
-        
-      }, 
-      error=> {
+
+      },
+      error => {
         const errorResponse = error;
         console.log('errorResponse', errorResponse);
-        
+
       }
     )
 
@@ -47,7 +48,23 @@ export class BlogComponent {
 
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
-    // alert(this.showmenu);
-  }   
+  }
+
+  changeText(event: any) {
+    this.myArticle = event;
+
+  }
+
+  addBold() {
+    console.log('myArticle', this.myArticle);
+
+    if (!this.myArticle.srcElement.classList.contains("bold")) {
+      this.myArticle.srcElement.classList.add("bold");
+    } else {
+      this.myArticle.srcElement.classList.remove("bold");
+    }
+
+
+  }
 
 }
