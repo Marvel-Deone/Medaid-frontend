@@ -20,7 +20,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { EmergencyInformationComponent } from './emergency-information/emergency-information.component';
-
+import {MatStepperModule} from '@angular/material/stepper';
 import { SidebarsideComponent } from './chat/sidebarside/sidebarside.component';
 import { MessagecontainerComponent } from './chat/messagecontainer/messagecontainer.component';
 import { ChatContainerComponent } from './chat/chat-container/chat-container.component';
@@ -37,7 +37,8 @@ import { PeertopeerDialogueComponent } from './dialogues/peertopeer-dialogue/pee
 import { PeertopeerComponent } from './peertopeer/peertopeer.component';
 import { TellmeComponent } from './tellme/tellme.component';
 import { QuoteuploadComponent } from './quoteupload/quoteupload.component';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 registerLocaleData(en);
 
 @NgModule({
@@ -76,7 +77,10 @@ registerLocaleData(en);
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

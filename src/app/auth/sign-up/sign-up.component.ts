@@ -19,7 +19,13 @@ export class SignUpComponent {
   status ?: boolean;
 
   constructor(private fb: FormBuilder, public router: Router, public service: UserService, private _snackBar: MatSnackBar) {}
-
+  firstFormGroup = this.fb.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this.fb.group({
+    secondCtrl: '',
+  });
+  isOptional = false;
 
   ngOnInit(): void {
     console.log('error message', this.errorMessage);
@@ -36,6 +42,8 @@ export class SignUpComponent {
     // }
     );
   }
+  
+  
 
   get signup() { return this.signupForm.controls };
 

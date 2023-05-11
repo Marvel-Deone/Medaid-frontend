@@ -27,7 +27,7 @@ const routes: Routes = [
    {path: 'admin/blog', component: BlogComponent, canActivate: [AuthGuard] },
    {path: 'peertopeer', component:PeertopeerComponent, canActivate: [AuthGuard] },
    {path: 'tellme', component:TellmeComponent, canActivate: [AuthGuard] },
-    {path: 'uploadquote', component:QuoteuploadComponent,  },
+    {path: 'uploadquote', component:QuoteuploadComponent, canActivate: [AuthGuard]},
 
 
   ];
