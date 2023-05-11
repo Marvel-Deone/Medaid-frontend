@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import io from 'socket.io-client';
 import { Socket } from 'socket.io-client';
 import { UserService } from 'src/app/services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-peertopeer',
   templateUrl: './peertopeer.component.html',
@@ -24,12 +25,12 @@ export class PeertopeerComponent {
   public currentChatPicked: any;
   public currentUser: any;
   public socket!: Socket;
-  public sessionId: any;
-  public checkUser = sessionStorage.getItem('med-aid-code');
-  public checkRoomCreated = sessionStorage.getItem('checkroom')
-  ? JSON.parse(sessionStorage.getItem('checkroom')!)
-  : null;
+  public sessionId = "";
 
+  public creatediv: boolean = true
+  public joindiv: boolean = false
+  public videoRoom: boolean = false
+  public joinMeetingBtn = true
 
   public servers = {
     iceServers: [
@@ -45,34 +46,18 @@ export class PeertopeerComponent {
 
   public roomId: any;
 
-  constructor(private route: ActivatedRoute, private service: UserService) {
+  constructor(private route: ActivatedRoute, private service: UserService, private _snackBar: MatSnackBar,) {
     this.app = firebase.initializeApp(environment.firebaseConfig);
     this.peerConnection = new RTCPeerConnection(this.servers);
 
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.sessionId = params['id'];
-    });
-
-    if (!this.checkRoomCreated && !this.checkUser ) {
-      this.checkRoomCreated = this.roomId;
-      sessionStorage.setItem('checkroom', JSON.stringify("1"));
-      this.createNewRoom();
-    }
-
-
-
-
-    if (this.checkUser) {
-      this.answerCall();
-    }
 
     this.currentUserEmail = sessionStorage.getItem('med-email');
     // Create a socket connection
     this.socket = io('http://localhost:5000').connect();
-    console.log('Socket connected:', this.socket.connected);
+  
 
     this.service.GetAllUser(this.currentUserEmail).subscribe((item: any) => {
       this.allUsers = item.users;
@@ -112,7 +97,15 @@ export class PeertopeerComponent {
     }
   }
 
+  joinSession() {
+    this.creatediv = false
+    this.joindiv = true
+  }
+
   async createNewRoom() {
+    this.creatediv = false
+    this.joindiv = false
+    this.videoRoom = true
     await this.allowWebCam();
     const db = firebase.firestore();
 
@@ -145,8 +138,11 @@ export class PeertopeerComponent {
       from: this.currentUser?._id,
       to: this.currentChatPicked?._id,
       message: `Hello, ${this.currentUser?.username} is inviting you to join a session. The session ID is ${this.roomId} `,
+
     };
-    this.service.SendMessage(msgObj).subscribe((item: any) => {});
+
+
+    this.service.SendMessage(msgObj).subscribe((item: any) => { });
 
     this.socket.emit('message', msgObj);
 
@@ -173,45 +169,62 @@ export class PeertopeerComponent {
   }
 
   async answerCall() {
-    await this.allowWebCam();
-
-    const db = firebase.firestore();
-    const callDoc = db.collection('calls').doc(this.sessionId);
-    const answerCandidates = callDoc.collection('answerCandidates');
-    const offerCandidates = callDoc.collection('offerCandidates');
-    this.peerConnection.onicecandidate = (event: any) => {
-      event.candidate && answerCandidates.add(event.candidate.toJSON());
-    };
-    const callData: any = (await callDoc.get()).data();
-
-    const offerDescription = callData.offer;
-    console.log(offerDescription);
-
-    await this.peerConnection.setRemoteDescription(
-      new RTCSessionDescription(offerDescription)
-    );
-
-    const answerDescription = await this.peerConnection.createAnswer();
-    await this.peerConnection.setLocalDescription(answerDescription);
-
-    const answer = {
-      type: answerDescription.type,
-      sdp: answerDescription.sdp,
-      sessionId: this.sessionId,
-    };
-    await callDoc.update({ answer });
-    console.log(answer);
-
-    offerCandidates.onSnapshot((snapshot: any) => {
-      snapshot.docChanges().forEach((change: any) => {
-        console.log();
-        if (change.type === 'added') {
-          let data = change.doc.data();
-
-          this.peerConnection.addIceCandidate(new RTCIceCandidate(data));
-        }
+    if (this.sessionId == "") {
+      this._snackBar.open("Kindly input your session ID ", "OK", {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['green-snackbar', 'login-snackbar'],
       });
-    });
+
+    } else {
+      
+
+
+      this.creatediv = false;
+      this.joindiv = false
+      this.videoRoom = true
+
+      await this.allowWebCam();
+
+      const db = firebase.firestore();
+      const callDoc = db.collection('calls').doc(this.sessionId);
+      const answerCandidates = callDoc.collection('answerCandidates');
+      const offerCandidates = callDoc.collection('offerCandidates');
+      this.peerConnection.onicecandidate = (event: any) => {
+        event.candidate && answerCandidates.add(event.candidate.toJSON());
+      };
+      const callData: any = (await callDoc.get()).data();
+
+      const offerDescription = callData.offer;
+      console.log(offerDescription);
+
+      await this.peerConnection.setRemoteDescription(
+        new RTCSessionDescription(offerDescription)
+      );
+
+      const answerDescription = await this.peerConnection.createAnswer();
+      await this.peerConnection.setLocalDescription(answerDescription);
+
+      const answer = {
+        type: answerDescription.type,
+        sdp: answerDescription.sdp,
+        sessionId: this.sessionId,
+      };
+      await callDoc.update({ answer });
+
+
+      offerCandidates.onSnapshot((snapshot: any) => {
+        snapshot.docChanges().forEach((change: any) => {
+          console.log();
+          if (change.type === 'added') {
+            let data = change.doc.data();
+
+            this.peerConnection.addIceCandidate(new RTCIceCandidate(data));
+          }
+        });
+      });
+    }
   }
   toogleCamera() {
     let videoTrack = this.localStream
@@ -224,12 +237,12 @@ export class PeertopeerComponent {
       videoTrack.enabled = true;
     }
   }
-  toogleMic(){
-    let audioTrack  =this.localStream.getTracks().find((track:any)=> track.kind ==='audio')
+  toogleMic() {
+    let audioTrack = this.localStream.getTracks().find((track: any) => track.kind === 'audio')
 
-    if(audioTrack.enabled){
+    if (audioTrack.enabled) {
       audioTrack.enabled = false
-    }else{
+    } else {
       audioTrack.enabled = true
     }
   }

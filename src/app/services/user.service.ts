@@ -20,15 +20,14 @@
       const URI = this.uriseg + '/auth/register';
 
       return this.http.post(URI, inputdata).pipe(map(response => {
-        console.log(response);
+      
       }));
     }
 
     VerifyEmail(inputdata: any) {
       const URI = this.uriseg + '/auth/verifyemail';
       return this.http.post(URI, inputdata).pipe(map(response => {
-        console.log(response);
-
+        
       }))
       // return this.http.post(`${URI}`,
       //   inputdata
@@ -39,7 +38,7 @@
       const URI = this.uriseg + '/auth/login';
 
       return this.http.post(URI, inputdata).pipe(map(response => {
-        console.log(response);
+       
         this.responseItem = response;
         localStorage.setItem('token', JSON.stringify(this.responseItem.token));
       }));
@@ -54,9 +53,9 @@
       const token = JSON.parse(localStorage['token']);
       this.header = { headers: {  Authorization: `${token}` } };
 
-      console.log('token', token, this.header);
+  
       return this.http.get(URI, this.header).pipe(map(response => {
-        console.log("Profile", response);
+        
         this.userProfile = response;
         return this.userProfile;
       }));
@@ -67,7 +66,6 @@
       const token = JSON.parse(localStorage['token']);
       this.header = { headers: {  Authorization: `${token}` } };
 
-      console.log('token', token, this.header);
       return this.http.post(URI, inputdata, {headers: {  Authorization: `${token}` }} ).pipe(map(response => {
         return response;
       }));
@@ -97,6 +95,10 @@
   GetAllMessages(messageDetails:any){
     return this.http.post(`${this.uriseg}/messages/getallmessages`,messageDetails)
   }
-
-
+  GetPostQuote(quote:any){
+    return this.http.post(`${this.uriseg}/quote/postquote`,quote)
+  }
+  Getquote(){
+    return this.http.get(`${this.uriseg}/quote/getpost`,)
+  }
 }

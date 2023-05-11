@@ -39,6 +39,8 @@ import { PeertopeerComponent } from './peertopeer/peertopeer.component';
 import { SelfAssesementComponent } from './self-assesement/self-assesement.component';
 import { SosComponent } from './sos/sos.component';
 // import { AngularEditorModule } from '@kolkov/angular-editor';
+import { QuoteuploadComponent } from './quoteupload/quoteupload.component';
+import { TellmeComponent } from './tellme/tellme.component';
 
 registerLocaleData(en);
 
@@ -64,6 +66,8 @@ registerLocaleData(en);
     PeertopeerComponent,
     SelfAssesementComponent,
     MedicationReminderComponent,
+    TellmeComponent,
+    QuoteuploadComponent,
   ],
   imports: [
     BrowserModule,
