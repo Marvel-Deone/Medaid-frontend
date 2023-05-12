@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'peertopeer/:id', component: PeertopeerComponent, canActivate: [AuthGuard] },
   { path: 'medication-reminder', component: MedicationReminderComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatContainerComponent, canActivate: [AuthGuard] },
-  { path: 'tellme', component: TellmeComponent, canActivate: [AuthGuard] },
+  { path: 'tell-me', component: TellmeComponent, canActivate: [AuthGuard] },
   { path: 'uploadquote', component: QuoteuploadComponent, },
 ];
 
