@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -40,7 +40,7 @@ export class ProfileComponent {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response: ' + response);
+        console.log('response: ', response);
 
         this.userProfile.firstName = response.profile.firstName;
         this.userProfile.lastName = response.profile.lastName;
@@ -57,8 +57,9 @@ export class ProfileComponent {
         this.userProfile.past_medical_condition = response.profile.past_medical_condition;
         this.userProfile.sosContact = response.profile.sosContact;
         this.role_id = response.profile.role_id;
+        // this.role_id = 1;
 
-        this.user_fullname = response.profile.firstName + ' ' + response.profile.lastName;
+        // this.user_fullname = response.profile.firstName + ' ' + response.profile.lastName;
       },
       error => {
         const errorResponse = error;
@@ -99,7 +100,7 @@ export class ProfileComponent {
         this.loading = false;
         this.errorMessage = errorResponse.error.message;
         console.log('errorMessage', this.errorMessage);
-        
+
         this._snackBar.open("Something went wrong, pls try again", "OK", {
           duration: 3000,
           horizontalPosition: 'right',

@@ -1,8 +1,9 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ExpertService } from 'src/app/services/expert.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
+  @ViewChild('videoElement') videoElement!: ElementRef;
   public hide: boolean = true;
   respdata: any;
   public signupForm?: any;
@@ -17,18 +19,78 @@ export class SignUpComponent {
   errorResp?: any;
   errorMessage?: any;
   status ?: boolean;
+  healthJobs = ['Doctor', 'Nurse', 'Surgeon', 'Pharmacist', 'Dentist', 'Therapist', 'Radiologist', 'Physician assistant',
+  'Pharmacist',
+  'Medical laboratory technician',
+  'Radiologic technologist',
+  'Occupational therapist',
+  'Physical therapist',
+  'Speech therapist',
+  'Respiratory therapist',
+  'Medical coder',
+  'Medical transcriptionist',
+  'Medical billing specialist',
+  'Medical receptionist/administrative assistant',
+  'Clinical research coordinator',
+  'Health educator',
+  'Pastor'];
+  isRecording = false;
+  mediaStream: MediaStream | null = null;
+  mediaRecorder: MediaRecorder | null = null;
+  recordedChunks: Blob[] = [];
+  recordingTime = 0;
+  timerInterval: any;
+public recordedData!:any
+public showPreview:boolean= false
 
-  constructor(private fb: FormBuilder, public router: Router, public service: UserService, private _snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, public router: Router, public service: UserService, private _snackBar: MatSnackBar,  public expertService: ExpertService) {}
+  
   firstFormGroup = this.fb.group({
-    firstCtrl: ['', Validators.required],
+    username: ['', 
+    // [Validators.required, 
+    //   Validators.minLength(2)
+    // ]
+  ],
+    email: ['', 
+    // [Validators.required,
+    //   // Validators.email
+    //   ]
+    ],
+      phone: ['', 
+
+      // [Validators.required, Validators.minLength(10)]
+    ],
+      password: ['', 
+   //   [Validators.required, Validators.minLength(8), //Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+  //  ]
+  ],
+      
+      
+       
   });
   secondFormGroup = this.fb.group({
-    secondCtrl: '',
+   
+    selectedJob:['', 
+    //[Validators.required,]
+  ],
+    placeofwork:['', 
+    // [Validators.required, Validators.minLength(10)]
+  ],
+    yearofprac:['', 
+    // [Validators.required, Validators.minLength(2)]
+  ]
   });
+  thirdFormGroup = this.fb.group({
+    recordedvideo:[this.recordedData, Validators.required]
+  })
+  fourthFormGroup = this.fb.group({
+    confirmPin: ['', Validators.required]
+  })
+
   isOptional = false;
 
   ngOnInit(): void {
-    console.log('error message', this.errorMessage);
+   
     
     this.signupForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(2)]],
@@ -84,5 +146,136 @@ export class SignUpComponent {
       })
       
   }
+  async toggleRecording() {
+    if (this.isRecording) {
+      this.stopRecording();
+    } else {
+      this.startRecording();
+    }
+  }
 
+  async startRecording() {
+    try {
+      this.mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+      const video: HTMLVideoElement = this.videoElement.nativeElement;
+      video.srcObject = this.mediaStream;
+      this.mediaRecorder = new MediaRecorder(this.mediaStream);
+      this.mediaRecorder.addEventListener('dataavailable', (event) => {
+        this.recordedChunks.push(event.data);
+      });
+      this.mediaRecorder.addEventListener('stop', () => {
+        const blob = new Blob(this.recordedChunks, { type: 'video/webm' });
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64data = reader.result?.toString();
+          this.recordedData=base64data
+          
+        };
+        reader.readAsDataURL(blob);
+        this.recordedChunks = [];
+        this.stopTimer();
+      });
+      this.mediaRecorder.start();
+      this.startTimer();
+      this.isRecording = true;
+      setTimeout(() => {
+        this.stopRecording();
+      }, 180000);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+
+  stopRecording() {
+
+    
+    if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
+      this.mediaRecorder.stop();
+      this.mediaRecorder = null;
+      const video: HTMLVideoElement = this.videoElement.nativeElement;
+      video.srcObject = null;
+      this.isRecording = false;
+      this.showPreview = true
+    }
+    this.stopTimer();
+  }
+
+  startTimer() {
+    this.timerInterval = setInterval(() => {
+      this.recordingTime += 1000;
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timerInterval);
+    this.recordingTime = 0;
+  } 
+  
+  sendMail(){
+    let confirm_pin= Math.floor(100000 + Math.random() * 900000)
+    sessionStorage.setItem("med_aid", confirm_pin.toString())
+      this.expertService.sendPin({pin:confirm_pin, email:this.firstFormGroup.value.email, username: this.firstFormGroup.value.username}).subscribe((res:any)=>{
+
+      })
+    
+  }
+  done(){
+   
+    if(sessionStorage.getItem("med_aid") != this.fourthFormGroup.value.confirmPin){
+      this._snackBar.open("Wrong Pin", "OK", {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['green-snackbar', 'login-snackbar'],
+       });
+
+
+      }else{
+      this.loading = true;
+      let details=
+      {...this.firstFormGroup.value, ...this.secondFormGroup.value,  ...this.fourthFormGroup.value,  recordedvideo:this.recordedData}
+      this.expertService.signup(details).subscribe((res:any)=>{
+        
+          this._snackBar.open("Registeration Successful!", "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+           });
+    
+           this.loading = false;
+           sessionStorage.removeItem("med_aid")
+          this.router.navigate(['/expert/signin']);
+
+          
+        },
+          errorResponse => {
+            this.loading = false;
+            this.errorMessage = errorResponse.error.message;
+            this.status = errorResponse.error.status;
+            console.log('Registration Failed', errorResponse.error.message);
+            this.errorMessage ? this._snackBar.open(this.errorMessage, "OK", {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+             }) : this._snackBar.open("Pls check your internet connection","OK", {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+             });
+            // this._snackbar.open(errorResponse.error.message, "X");
+          
+         })
+        }
+        
+    }
+    
+
+  
+    
+
+  
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-emergency-information',
@@ -10,10 +10,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EmergencyInformationComponent {
   public profileTitle: string = 'medical_info';
-  public loading = false; 
+  public loading = false;
   public errorMessage: any;
-  contact_owner:any;
-  contact_no:any;
+  contact_owner: any;
+  contact_no: any;
+  public role_id: any;
 
   public userProfile: any = {
     firstName: '',
@@ -22,7 +23,7 @@ export class EmergencyInformationComponent {
     email: '',
     phone: '',
     address: '',
-    gender: '',       
+    gender: '',
     middleName: '',
     dob: '',
     blood_group: '',
@@ -36,17 +37,21 @@ export class EmergencyInformationComponent {
   };
 
   sosContactInfo: Object[] = [];
-  
-  public showmenu: boolean = false;
 
-  constructor(private router: Router,  private service: UserService,  private _snackBar: MatSnackBar) {}
+  public showmenu: boolean = false;
+  showModal: boolean = false;
+
+  public userSosContacts: any;
+
+  constructor(private router: Router, private service: UserService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.service.GetProfile().subscribe(
-      data=> {
+      data => {
         const response = data;
-        console.log('response: ' + response);
-        
+        console.log('response ', response);
+        this.role_id = response.profile.role_id;
+
         this.userProfile.firstName = response.profile.firstName;
         this.userProfile.lastName = response.profile.lastName;
         this.userProfile.middleName = response.profile.middleName;
@@ -64,8 +69,11 @@ export class EmergencyInformationComponent {
         this.userProfile.medication = response.profile.medication;
         this.userProfile.medication = response.profile.medication;
         this.userProfile.sosContact = response.profile.sosContact;
-      }, 
-      error=> {
+
+        this.userSosContacts = response.profile.sosContact;
+
+      },
+      error => {
         const errorResponse = error;
         console.log('errorResponse', errorResponse);
         if (errorResponse.error.message == 'jwt expired') {
@@ -92,68 +100,91 @@ export class EmergencyInformationComponent {
       data => {
         const response = data;
         console.log('response', response);
-        
+
         this.loading = false;
-             this._snackBar.open("Emergency Info updated successfully", "OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-          });
+        this._snackBar.open("Emergency Info updated successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
       },
       error => {
         this.loading = false;
         this.errorMessage = error.message;
-             this._snackBar.open(this.errorMessage, "OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-          });
+        this._snackBar.open(this.errorMessage, "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
       }
     )
   }
 
+  editModalStatus() {
+    this.showModal = true;
+  }
+
   updateSosContact() {
     this.loading = true;
-    console.log('userProfileContact', this.userProfile.sosContact);
+    if (this.contact_owner == null || this.contact_no == null) {
+      this.loading = false;
+      this._snackBar.open("All the fields must be filled", "OK", {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['green-snackbar', 'login-snackbar'],
+      });
+    } else {
+      console.log('userProfileContact', this.userProfile.sosContact);
 
-    this.sosContactInfo.push({
-      contactName:  this.contact_owner,
-      contactNumber: this.contact_no
-    });
-    this.userProfile.sosContact = this.sosContactInfo;
-    
-    this.service.UpdateProfile(this.userProfile).subscribe(
-      data => {
-        const response = data;
-        console.log('response', response);
-        
-        this.loading = false;
-             this._snackBar.open("Emergency Info updated successfully", "OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-          });
-      },
-      error => {
-        this.loading = false;
-        this.errorMessage = error.message;
-             this._snackBar.open(this.errorMessage, "OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-          });
-      }
-    )
+      this.sosContactInfo.push(...this.userProfile.sosContact, {
+        contactName: this.contact_owner,
+        contactNumber: this.contact_no
+      });
+      this.userProfile.sosContact = this.sosContactInfo;
 
-    console.log('userProfile', this.userProfile);
+
+
+      this.service.UpdateProfile(this.userProfile).subscribe(
+        data => {
+          this.showModal = false;
+          const response = data;
+          console.log('response', response);
+
+          this.loading = false;
+          this._snackBar.open("Emergency Info updated successfully", "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+
+          this.ngOnInit();
+          this.contact_owner = '';
+          this.contact_no = '';
+        },
+        error => {
+          this.loading = false;
+          this.errorMessage = error.message;
+          this._snackBar.open(this.errorMessage, "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+        }
+      )
+
+      console.log('userProfile', this.userProfile);
+
+    }
+
   }
 
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
   }
-  
+
 }

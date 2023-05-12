@@ -1,0 +1,53 @@
+.mat-stepper-horizontal {
+    margin-top: 5px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 10px;
+  }
+ .inpp{
+    width: 100% !important ;
+ }
+ .video-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.timer-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.timer {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.buttons-container {
+  position: relative;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-20%);
+  z-index: 10 !important;
+}
+
+.recordBtn{
+  
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 10px;
+
+}
+
+
+
+

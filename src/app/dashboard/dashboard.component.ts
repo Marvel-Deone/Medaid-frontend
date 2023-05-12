@@ -16,7 +16,7 @@ export class DashboardComponent {
   public allUsers: any;
   public buttonState: boolean = true;
   buttonStates: boolean[] = [];
-  public userProfile:any;
+  public userProfile: any;
   public role_id: any;
   public showmenu: boolean = false;
 
@@ -26,33 +26,38 @@ export class DashboardComponent {
     this.userToken = JSON.parse(localStorage['token']);
 
     this.service.GetProfile().subscribe(
-      data=> {
+      data => {
         const response = data;
+        console.log('response', response);
+
         this.userProfile = response.profile;
+
+        console.log('userProfile', this.userProfile.sosContact);
+
         this.role_id = this.userProfile.role_id;
-      }, 
-      error=> {
+      },
+      error => {
         const errorResponse = error;
         console.log('errorResponse', errorResponse);
-        
+
       }
-    )
+    );
 
     this.service.GetDashboard(this.userToken).subscribe(
-      item=> {
+      item => {
         console.log('item', item);
       },
       error => {
         this._snackBar.open("Internal Server Error", "OK", {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'bottom',
-        panelClass: ['green-snackbar', 'login-snackbar'],
-       });
-       console.log('error', error);
-       
-       this.router.navigate(['sign-in']);
-    })
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+        console.log('error', error);
+
+        this.router.navigate(['sign-in']);
+      })
     this.currentUserEmail = sessionStorage.getItem('med-email')
 
 
@@ -62,10 +67,9 @@ export class DashboardComponent {
 
   }
 
-  
+
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
-    // alert(this.showmenu);
   }
 
   logout() {

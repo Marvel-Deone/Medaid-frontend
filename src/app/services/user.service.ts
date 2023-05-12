@@ -101,4 +101,7 @@
   Getquote(){
     return this.http.get(`${this.uriseg}/quote/getpost`,)
   }
+
+
+  
 }

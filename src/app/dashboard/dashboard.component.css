@@ -98,3 +98,7 @@ suggested professional side */
   position: fixed;
   display: flex !important;
 }
+
+.card-body {
+  border: none !important;
+}

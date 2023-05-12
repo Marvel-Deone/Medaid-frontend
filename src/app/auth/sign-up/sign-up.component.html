@@ -75,47 +75,148 @@
     <!-- expert signup -->
 
     <section>
-      
-      <h1>Sign Up</h1>
-      
-      <mat-stepper linear #stepper>
-        <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field appearance="fill">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperNext>Next</button>
+      <div class="min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div class="col-5 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('../assets/img/illustrations/illustration-signup.jpg'); background-size: cover;">
+              </div>
             </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
-          <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
-            <mat-form-field appearance="fill">
-              <mat-label>Address</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                     required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+            <div class="col-xl-5 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="font-weight-bolder">Sign Up</h4>
+                  <p>Lore</p>
+                
+                </div>
+                <div class="card-body ">
+                  <mat-stepper linear #stepper >
+                    <mat-step [stepControl]="firstFormGroup">
+                      <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel></ng-template>
+                        <h4 class="text-center">Fill out your basic information</h4>
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Username</mat-label>
+                          <input matInput placeholder="Apiano" formControlName="username" required  class=" w-100" >
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Email</mat-label>
+                          <input matInput placeholder="folaayo@gmail.com" formControlName="email" required  class=" w-100" >
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Phone Number</mat-label>
+                          <input matInput placeholder="09021029291" formControlName="phone" required  class=" w-100" >
+                        </mat-form-field>
+                      
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Password</mat-label>
+                          <input matInput placeholder="***********" formControlName="password" required type="password" class=" w-100" >
+                        </mat-form-field>
+                     
+                        <div>
+                          <button mat-button matStepperNext (click)="sendMail()">Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+                      <form [formGroup]="secondFormGroup">
+                     
+                        <h4 class="text-center">Fill out your Professional Information information</h4>
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Job Tititle</mat-label>
+                          <mat-select formControlName="selectedJob" name="job">
+                            <mat-option *ngFor="let job of healthJobs" [value]="job">
+                              {{ job }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Current Place of work</mat-label>
+                          <input matInput placeholder="Lautech Teaching Hospital, Ogbomoso" formControlName="placeofwork" required  class=" w-100" >
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>How many years have you been  practising?</mat-label>
+                          <input matInput placeholder="10 years" formControlName="yearofprac" required  class=" w-100" >
+                        </mat-form-field>
+                        <div>
+                          <button mat-button matStepperPrevious>Previous</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+                      <form [formGroup]="thirdFormGroup">
+                      
+                        <h4 class="text-center">Do a video of yourself answering this question.</h4>
+
+                        <h6>Question?</h6>
+                         <div class="video-container" *ngIf="!showPreview">
+  <video #videoElement autoplay></video>
+  <div class="timer-container" *ngIf="isRecording">
+    <span class="timer">{{ recordingTime | date: 'mm:ss' }}</span>
+  </div>
+  <div class="buttons-container">
+    <button mat-raised-button (click)="toggleRecording()" class="recordBtn">{{ isRecording ? 'Stop Recording' : 'Start Recording' }}</button>
+  </div>
+</div>
+
+
+<div *ngIf="showPreview" class="video-container" >
+    <video  [src]=" recordedData" controls></video>
+</div>
+
+                        
+                        <div>
+                          <button mat-button matStepperPrevious class="mt-4">Previous</button>
+                          
+                          <button mat-button matStepperNext *ngIf="recordedData" class="mt-4" >Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step>
+                      <ng-template matStepLabel></ng-template>
+                       <h4 class="text-center">Verify your Email </h4>
+                       <p>A pin has been sent to your mail, kindly check and input </p>
+                       <form [formGroup]="fourthFormGroup">
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Pin</mat-label>
+                          <input matInput placeholder="Confirm your email" formControlName="confirmPin" required  class=" w-100" >
+                        </mat-form-field>
+                        </form>
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+  
+                        <div class="text-center">
+                          <button (click)="done()" *ngIf="!loading" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                          <button *ngIf="loading" disabled  class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">
+                            <span>Loading</span>
+                            <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px" height="26px">
+                          </button>
+                        </div>
+
+                        <!-- <button mat-button   >Done</button> -->
+                      </div>
+                    </mat-step>
+                  </mat-stepper>
+                  
+                 
+                 
+                </div>
+                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                  <p class="mb-2 text-sm mx-auto">
+                    Already have an account?
+                    <a routerLink="/expert/signin" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                  </p>
+                </div>
+              </div>
             </div>
-          </form>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
           </div>
-        </mat-step>
-      </mat-stepper>
+        </div>
+      </div>
       
+     
       
+       
 
     </section>
 
