@@ -412,7 +412,7 @@
                 </div>
             </div>
 
-            <!-- Info -->
+            <!-- Medication -->
             <div class="row" *ngIf="profileTitle == 'medication'">
                 <div class="row">
                     <div class="col-12">
@@ -439,7 +439,7 @@
                             <span class="card-text mt-3">Dose: {{medication.medication.dose}}</span>
 
                             <!-- <span class="card-text mt-3">Time: {{medication.medication.time}}</span> -->
-                            <span class="card-text mb-3 mt-3 text-capitalize">Per Day:
+                            <span class="card-text mb-3 mt-3 text-capitalize">When:
                                 {{medication.medication.daily}}</span>
                             <div class="row px-2 gap-2">
                                 <a href="" class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2">Edit</a>
@@ -467,15 +467,16 @@
                                 <input type="text" placeholder="Dose"
                                     class="form-control input-outline2 col-3 px-3 mt-3"
                                     [(ngModel)]="medicationPayload.medication.dose">
-                                <input type="time" placeholder="Time"
-                                    class="form-control input-outline2 col-3 px-3 mt-3"
-                                    [(ngModel)]="medicationPayload.medication.time">
                                 <label for="" class="mt-3">Select how many times in a day</label>
                                 <select class="form-select input-outline2 px-2" name="" id=""
                                     [(ngModel)]="medicationPayload.medication.daily">
                                     <option value="" selected>Choose</option>
-                                    <option value="once">Once in day(Morning, Afternoon or Night)</option>
-                                    <option value="twice">Twice in day</option>
+                                    <option value="morning">Once in day(Morning)</option>
+                                    <option value="afternoon">Once in day(Afternoon)</option>
+                                    <option value="night">Once in day(Night)</option>
+                                    <option value="morning & afternoon">Twice in day(Morning and aftenoon)</option>
+                                    <option value="morning & night">Twice in day(Morning and night)</option>
+                                    <option value="afternoon & night">Twice in day(Afternoon and night)</option>
                                     <option value="three">Three times in a day(Morning, Afternoon and Night)
                                     </option>
                                 </select>
