@@ -32,6 +32,7 @@ export class MedicationReminderComponent {
 
   public reminderPayload: any = {
     username: '',
+    email: '',
     reminder: {
       title: '',
       time: ''
@@ -204,7 +205,7 @@ export class MedicationReminderComponent {
   saveReminder() {
     console.log('MedicationPayload', this.medicationPayload);
 
-    if (this.reminderPayload.reminder.title == null || this.reminderPayload.reminder.interval == null) {
+    if (this.reminderPayload.reminder.title == null || this.reminderPayload.reminder.time == null) {
       this.loading = false;
       this._snackBar.open("All the fields must be filled", "OK", {
         duration: 3000,
@@ -214,6 +215,11 @@ export class MedicationReminderComponent {
       });
     } else {
       this.reminderPayload.username = this.userProfile.username;
+      this.reminderPayload.email = this.userProfile.email;
+      console.log('reminderPayload', this.reminderPayload);
+
+      // console.log('myTime', this.reminderPayload.reminder.time.toLocaleTimeString());
+
 
       this.medicationReminderService.createReminder(this.reminderPayload).subscribe(
         data => {

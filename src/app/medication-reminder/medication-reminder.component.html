@@ -512,13 +512,13 @@
                     </div>
                 </div>
                 <!-- Reminder List -->
-                <!-- <div class="container row gap-3">
+                <div class="container row gap-3">
                     <div class="card col-12 col-md-6 col-lg-3 mt-4 px-0 pt-3 ms-3" style="width: 18rem;"
-                        *ngFor="let reminder of medicationReminderPayload.reminders">
+                        *ngFor="let reminder of reminders">
                         <div class="card-body d-flex flex-column mb-2 px-3 py-0">
-                            <span class="card-text mt-3">Title : {{reminder.title}}</span>
+                            <span class="card-text mt-3">Title : {{reminder.reminder.title}}</span>
 
-                            <span class="card-text mt-3">Time: {{reminder.time}}</span>
+                            <span class="card-text mt-3 mb-3">Time: {{reminder.reminder.time}}</span>
 
                             <div class="row px-2 gap-2">
                                 <a href="" class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2">Edit</a>
@@ -526,7 +526,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
 
             <!-- Reminder Modal -->
@@ -542,7 +542,8 @@
                             <div class="row px-3">
                                 <input type="text" placeholder="Title" class="form-control input-outline2 col-3 px-3"
                                     [(ngModel)]="reminderPayload.reminder.title">
-                                <input type="time" placeholder="" class="form-control input-outline2 col-3 px-3 mt-3"
+                                <input type="datetime-local" placeholder="" max="12:00"
+                                    class="form-control input-outline2 col-3 px-3 mt-3"
                                     [(ngModel)]="reminderPayload.reminder.time">
                             </div>
                         </div>

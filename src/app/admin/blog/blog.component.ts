@@ -14,7 +14,7 @@ export class BlogComponent {
   public userProfile: any;
   public role_id: any;
   public showmenu: boolean = false;
-  htmlContent: any;
+  htmlContent: any; 
   loading: boolean = false;
 
   public blogPayload = {
