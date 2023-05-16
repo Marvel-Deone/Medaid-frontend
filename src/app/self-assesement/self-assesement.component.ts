@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { SelfAssessmentService } from '../services/self-assessment/self-assessment.service';
 
 @Component({
   selector: 'app-self-assesement',
@@ -12,20 +13,22 @@ export class SelfAssesementComponent {
   public role_id: any;
   public showmenu: boolean = false;
   public userProfile: any;
-  selectedCondition: any = "choose your condition";
+  selectedCategory: any = "choose your condition";
   public conditions: String[] = [
-    'Asthma or lung disease',
+    'Depression',
     'Pregnant',
-    'Weakened immune system',
-    'Cirrhosis of the liver',
-    'Kidney failure',
-    'Congestive heart failure',
-    'Obesity',
-    'Diabetes',
-    'Other'
+    'Substance Abuse',
+    'Eating Disorders',
+    'Stress',
+    'Obsessive-Compulsive Disorder',
+    'Post-Traumatic Stress Disorder (PTSD)',
+    'Anxiety',
   ]
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService) { }
+  public selfAssessments: any;
+  displayQuestions: any;
+
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService) { }
   ngOnInit(): void {
 
     this.service.GetProfile().subscribe(
@@ -40,6 +43,24 @@ export class SelfAssesementComponent {
         console.log('errorResponse', errorResponse);
       }
     )
+    
+    this.selfAssessmentService.getSelfAssessment().subscribe(
+      data => {
+        const response = data;
+        console.log('myRes', response);
+
+        if (response.reminder !== null) {
+          this.selfAssessments = response.selfAssessment;
+          console.log('self', this.selfAssessments);
+        }
+      },
+      error => {
+        const errorResponse = error;
+        console.log('errorResponse', errorResponse);
+
+      }
+    )
+
   }
 
   changeMenuStatus() {
@@ -59,7 +80,17 @@ export class SelfAssesementComponent {
   }
 
   changeCondition() {
-    console.log('selected', this.selectedCondition);
+    console.log('selected', this.selectedCategory);
+    const selfAssessment = [];
+    for (let i = 0; i < this.selfAssessments.length; i++) {
+      const element = this.selfAssessments[i];
+      if (this.selfAssessments[i].Category == this.selectedCategory) {
+        selfAssessment.push(this.selfAssessments[i]);
+        // console.log();
+      }
+    }
+    this.displayQuestions = selfAssessment;
+    console.log('displayQuestions', this.displayQuestions);
     
   }
 }

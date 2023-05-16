@@ -542,7 +542,10 @@
                             <div class="row px-3">
                                 <input type="text" placeholder="Title" class="form-control input-outline2 col-3 px-3"
                                     [(ngModel)]="reminderPayload.reminder.title">
-                                <input type="datetime-local" placeholder="" max="12:00"
+                                <input type="date" placeholder="" max="12:00"
+                                    class="form-control input-outline2 col-3 px-3 mt-3"
+                                    [(ngModel)]="reminderPayload.reminder.date">
+                                <input type="time" placeholder="" max="12:00"
                                     class="form-control input-outline2 col-3 px-3 mt-3"
                                     [(ngModel)]="reminderPayload.reminder.time">
                             </div>

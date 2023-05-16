@@ -35,6 +35,7 @@ export class MedicationReminderComponent {
     email: '',
     reminder: {
       title: '',
+      date: '',
       time: ''
     }
   }
@@ -216,6 +217,7 @@ export class MedicationReminderComponent {
     } else {
       this.reminderPayload.username = this.userProfile.username;
       this.reminderPayload.email = this.userProfile.email;
+
       console.log('reminderPayload', this.reminderPayload);
 
       // console.log('myTime', this.reminderPayload.reminder.time.toLocaleTimeString());
