@@ -10,10 +10,13 @@ import { UserService } from '../services/user.service';
 export class NotificationComponent {
   public showmenu: boolean = false;
   public role_id: any;
+  public allNotification:any
+  public currentUserId:any
 
   constructor(private router: Router, private service: UserService) {}
 
   public userProfile = {
+    _id:'',
     firstName: '',
     lastName: '',
     username: '',
@@ -34,12 +37,14 @@ export class NotificationComponent {
 
   ngOnInit(): void {
     this.service.GetProfile().subscribe(
-      data=> {
+      (data:any)=> {
         const response = data;
-        console.log('response: ' + response);
+      
+      
         
         this.userProfile.username = response.profile.username;
         this.role_id = response.profile.role_id;
+        this.currentUserId= response.profile._id
       }, 
       error=> {
         const errorResponse = error;
@@ -50,6 +55,16 @@ export class NotificationComponent {
         }
       }
     )
+    this.service.GetNotification().subscribe((data:any)=>{
+     const notifications= data.notifications
+      
+      this.allNotification = notifications.filter((val:any)=>val.
+      receiverId== this.currentUserId
+      )
+   })
+
+    
+    
   }
 
   logout() {

@@ -149,7 +149,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class=""><a class=" text-dark">Hi, {{ userProfile.username}}</a>
+                    <li class=""><a class=" text-dark">Hi, {{ userProfile?.username}}</a>
                     </li>
                     <li class=" text-sm text-dark active" aria-current="page"></li>
                 </ol>
@@ -367,7 +367,7 @@
 
                 <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
                     <div>
-                        <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
+                        <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" >
                             <i class="material-icons opacity-10">login</i>
                             <span class="ms-2">Logout</span>
                         </a>
@@ -380,87 +380,77 @@
                                     </div> -->
     </div>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="card mt-4">
-                    <div class="card-header p-3">
-                        <h5 class="mb-0">Notifications</h5>
+
+    <div class="container-fluid py-4 mt-5" style="margin-top: 9% !important;">
+        <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="row gx-4 mb-2">
+               
+                <h4 class="text-center mt-2">Consultation</h4>
+                <div class="container">
+                    <div class="row" *ngIf="role_id==1">
+                      <div class="col-12">
+                        <h2 class="mb-4">Suggested Experts</h2>
+                      </div>
+                      <div class="col-12">
+                        <div class="expert-card" *ngFor="let expert  of allExperts, let i =index">
+                          <div class="expert-avatar">
+                            <img src="../assets/img/bruce-mars.jpg" alt="Expert Avatar">
+                          </div>
+                          <div class="expert-details">
+                            <div class="expert-info">
+                              <h5 class="expert-username mb-1">{{expert.username}}</h5>
+                              <h6 class="expert-fullname mb-2">{{expert.firstname}} {{expert.lastname}} </h6>
+                              <p class="expert-bio mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor libero nec felis tincidunt, non mattis orci bibendum.</p>
+                            </div>
+                            <div class="expert-actions">
+                              <button class="btn btn-primary btn-sm" (click)="consult(i)">Consult</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="card-body p-3 pb-0">
-                        <!-- <div class="alert alert-primary alert-dismissible text-white" role="alert">
-                                                                <span class="text-sm">A simple primary alert with <a href="javascript:;"
-                                                                        class="alert-link text-white">an example link</a>. Give it a click if you
-                                                                    like.</span>
-                                                                <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div> -->
-                        <div class="alert alert-info alert-dismissible text-white" role="alert" *ngFor="let notification of allNotification ; let i =index ">
-                            <span class="text-sm">{{notification.message}}</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+
+
+                    <div class="row" *ngIf="role_id==2">
+                        <div class="col-12">
+                          <h2 class="mb-4">Consultation Request</h2>
                         </div>
-                        <!-- <div class="alert alert-secondary alert-dismissible text-white" role="alert">
-                            <span class="text-sm">A simple secondary alert with <a href="javascript:;"
-                                    class="alert-link text-white">an example link</a>. Give it a click if you
-                                like.</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        <div class="col-12">
+                          <div class="expert-card" *ngFor="let request of allConsultReq , let i =index">
+                            <div class="expert-avatar">
+                              <img src="../assets/img/bruce-mars.jpg" alt="Expert Avatar">
+                            </div>
+                            <div class="expert-details">
+                              <div class="expert-info">
+                                <h5 class="expert-username mb-1">{{request.senderUserName
+                                }}</h5>
+                               
+                               
+                              </div>
+                              <div class="expert-actions">
+                                <button class="btn btn-primary btn-sm m-1" (click)="accept(i)">Accept</button>
+                                <button class="btn btn-primary btn-sm m-1" (click)="decline(i)">Decline</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div class="alert alert-success alert-dismissible text-white" role="alert">
-                            <span class="text-sm">A simple success alert with <a href="javascript:;"
-                                    class="alert-link text-white">an example link</a>. Give it a click if you
-                                like.</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                            <span class="text-sm">A simple danger alert with <a href="javascript:;"
-                                    class="alert-link text-white">an example link</a>. Give it a click if you
-                                like.</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="alert alert-warning alert-dismissible text-white" role="alert">
-                            <span class="text-sm">A simple warning alert with <a href="javascript:;"
-                                    class="alert-link text-white">an example link</a>. Give it a click if you
-                                like.</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="alert alert-light alert-dismissible text-white" role="alert">
-                            <span class="text-sm">A simple light alert with <a href="javascript:;"
-                                    class="alert-link text-white">an example link</a>. Give it a click if you
-                                like.</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="alert alert-dark alert-dismissible text-white" role="alert">
-                            <span class="text-sm">A simple dark alert with <a href="javascript:;"
-                                    class="alert-link text-white">an example link</a>. Give it a click if you
-                                like.</span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> -->
-                    </div>
-                </div>
+                      </div>
+
+                  </div>
+                  
+
+              
+
+             
             </div>
+
+           
+          
+            </div>
+
+           
+            
+
+               
         </div>
-    </div>
 </main>

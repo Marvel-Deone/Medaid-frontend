@@ -102,6 +102,12 @@
     return this.http.get(`${this.uriseg}/quote/getpost`,)
   }
 
+  GetNotification(){
+    return this.http.get(`${this.uriseg}/user/getNotification`,)
+  }
+
+  
+
 
   
 }

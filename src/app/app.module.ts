@@ -45,6 +45,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TellmeComponent } from './tellme/tellme.component';
 import { ExpertSigninComponent } from './auth/expert-signin/expert-signin.component';
+import { ConsultationComponent } from './consultation/consultation.component';
 
 registerLocaleData(en);
 
@@ -73,6 +74,7 @@ registerLocaleData(en);
     TellmeComponent,
     QuoteuploadComponent,
     ExpertSigninComponent,
+    ConsultationComponent,
   ],
   imports: [
     BrowserModule,

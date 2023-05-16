@@ -18,6 +18,7 @@ import { SelfAssesementComponent } from './self-assesement/self-assesement.compo
 import { SosComponent } from './sos/sos.component';
 import { TellmeComponent } from './tellme/tellme.component';
 import { ExpertSigninComponent } from './auth/expert-signin/expert-signin.component';
+import { ConsultationComponent } from './consultation/consultation.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'tellme', component: TellmeComponent, canActivate: [AuthGuard] },
   { path: 'uploadquote', component: QuoteuploadComponent, },
   { path: 'expert/signin', component: ExpertSigninComponent, },
+  { path: 'consultation', component:ConsultationComponent, },
 ];
 
 @NgModule({

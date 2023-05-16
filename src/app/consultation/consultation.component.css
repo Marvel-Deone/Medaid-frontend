@@ -1,0 +1,71 @@
+.expert-card {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .expert-card:hover {
+    transform: translateY(-8px);
+  }
+  
+  .expert-avatar {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+  }
+  
+  .expert-avatar img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .expert-details {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    width: 100%;
+  }
+  
+  .expert-info {
+    flex-grow: 1;
+  }
+  
+  .expert-username {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .expert-fullname {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+  
+  .expert-bio {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+  
+  .expert-actions {
+    text-align: right;
+  }
+  
+
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+  }
+  /* Hide the bio on screens smaller than 768px */
+  @media (max-width: 768px) {
+    .expert-bio {
+      display: none;
+    }
+  }

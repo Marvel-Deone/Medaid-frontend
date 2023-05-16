@@ -29,4 +29,14 @@ export class ExpertService {
     }));
   }
 
+  GetExpertUser(currentUser:any){
+    return this.http.get(`${this.uriseg}/expert/allExpert/${currentUser}`);
+  }
+  getConsultRequest(data:any){
+    return this.http.post(`${this.uriseg}/expert/getconsultrequest`,data)   
+  }
+  getPostAcceptedorRejected(data:any){
+    return this.http.post(`${this.uriseg}/expert/getPostAccept`,data)   
+  }
+
 }
