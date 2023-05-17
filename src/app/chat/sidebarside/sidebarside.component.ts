@@ -10,12 +10,37 @@ import { UserService } from 'src/app/services/user.service';
 export class SidebarsideComponent {
   public currentUserEmail:any;
   public allUsers:any;
+  public userProfile: any = {
+    _id:'',
+    firstName: '',
+    username: '',
+    selectedJob:'',
+    email:'',
+    role_id: ''
+
+  }
+
   @Output () indexEmitter = new EventEmitter<number>();
   constructor(private router: Router, private _snackBar: MatSnackBar,  private service: UserService) {}
-  ngOnInit(): void {
-    this.currentUserEmail= sessionStorage.getItem('med-email')
-    this.service.GetAllUser(this.currentUserEmail).subscribe((item:any)=>{
+  async ngOnInit(){
+    this.service.GetProfile().subscribe(
+      data => {
+        const response = data;
+        console.log('response ', response);
+ 
+        this.userProfile.username = response.profile.username;
+        this.userProfile._id=response.profile._id
+        this.userProfile.role_id=response.profile.role_id
+        this.userProfile.selectedJob= response.profile.selectedJob
+        this.userProfile.email =response.profile.email
+      }
       
+      )
+     this.userProfile.email= sessionStorage.getItem('med-email')
+   await this.service.GetAllUser( this.userProfile.email).subscribe((item:any)=>{
+     
+      
+
       this.allUsers= item.users
   
       
@@ -23,8 +48,13 @@ export class SidebarsideComponent {
      })
   }
 
+
   onClickChat(i:any){
    this.indexEmitter.emit(i,)
+  }
+
+  getLastMsgAndTime(){
+    
   }
 
 }

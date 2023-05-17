@@ -17,18 +17,25 @@ export class MedicationReminderComponent {
 
   public medicationPayload: any = {
     username: '',
+    email: '',
     medication: {
       drug_name: '',
       dose: '',
-      time: '',
       daily: '',
+      interval: {
+        is_morning: false,
+        is_afternoon: false,
+        is_night: false
+      }
     }
   }
 
   public reminderPayload: any = {
     username: '',
+    email: '',
     reminder: {
       title: '',
+      date: '',
       time: ''
     }
   }
@@ -119,7 +126,7 @@ export class MedicationReminderComponent {
   saveMedication() {
     console.log('MedicationPayload', this.medicationPayload);
 
-    if (this.medicationPayload.medication.drug_name == null || this.medicationPayload.medication.dose == null || this.medicationPayload.medication.time == null || this.medicationPayload.medication.daily == null) {
+    if (this.medicationPayload.medication.drug_name == null || this.medicationPayload.medication.dose == null || this.medicationPayload.medication.daily == null) {
       this.loading = false;
       this._snackBar.open("All the fields must be filled", "OK", {
         duration: 3000,
@@ -129,6 +136,38 @@ export class MedicationReminderComponent {
       });
     } else {
       this.medicationPayload.username = this.userProfile.username;
+      this.medicationPayload.email = this.userProfile.email;
+      if (this.medicationPayload.medication.daily == 'morning') {
+        this.medicationPayload.medication.interval.is_morning = true;
+        this.medicationPayload.medication.interval.is_afternoon = false;
+        this.medicationPayload.medication.interval.is_night = false;
+      } else if (this.medicationPayload.medication.daily == 'afternoon') {
+        this.medicationPayload.medication.interval.is_morning = false;
+        this.medicationPayload.medication.interval.is_afternoon = true;
+        this.medicationPayload.medication.interval.is_night = false;
+      } else if (this.medicationPayload.medication.daily == 'night') {
+        this.medicationPayload.medication.interval.is_morning = false;
+        this.medicationPayload.medication.interval.is_afternoon = false;
+        this.medicationPayload.medication.interval.is_night = true;
+      } else if (this.medicationPayload.medication.daily == 'morning & afternoon') {
+        this.medicationPayload.medication.interval.is_morning = true;
+        this.medicationPayload.medication.interval.is_afternoon = true;
+        this.medicationPayload.medication.interval.is_night = false;
+      } else if (this.medicationPayload.medication.daily == 'morning & night') {
+        this.medicationPayload.medication.interval.is_morning = true;
+        this.medicationPayload.medication.interval.is_afternoon = false;
+        this.medicationPayload.medication.interval.is_night = true;
+      } else if (this.medicationPayload.medication.daily == 'afternoon & night') {
+        this.medicationPayload.medication.interval.is_morning = false;
+        this.medicationPayload.medication.interval.is_afternoon = true;
+        this.medicationPayload.medication.interval.is_night = true;
+      } else if (this.medicationPayload.medication.daily == 'three') {
+        this.medicationPayload.medication.interval.is_morning = false;
+        this.medicationPayload.medication.interval.is_afternoon = true;
+        this.medicationPayload.medication.interval.is_night = true;
+      }
+      console.log('medication:', this.medicationPayload);
+
 
       this.medicationReminderService.createMedication(this.medicationPayload).subscribe(
         data => {
@@ -140,12 +179,12 @@ export class MedicationReminderComponent {
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-
+          console.log('MedicationPayload', this.medicationPayload);
           this.ngOnInit();
 
           this.medicationPayload.drug_name = '';
           this.medicationPayload.dose = '',
-            this.medicationPayload.time = '';
+            this.medicationPayload.interval = '';
           this.medicationPayload.daily = '';
         },
         errorResponse => {
@@ -159,7 +198,8 @@ export class MedicationReminderComponent {
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-        })
+        });
+
     }
   }
 
@@ -176,6 +216,12 @@ export class MedicationReminderComponent {
       });
     } else {
       this.reminderPayload.username = this.userProfile.username;
+      this.reminderPayload.email = this.userProfile.email;
+
+      console.log('reminderPayload', this.reminderPayload);
+
+      // console.log('myTime', this.reminderPayload.reminder.time.toLocaleTimeString());
+
 
       this.medicationReminderService.createReminder(this.reminderPayload).subscribe(
         data => {
@@ -192,7 +238,7 @@ export class MedicationReminderComponent {
 
           this.medicationPayload.drug_name = '';
           this.medicationPayload.dose = '',
-            this.medicationPayload.time = '';
+            this.medicationPayload.interval = '';
           this.medicationPayload.daily = '';
         },
         errorResponse => {

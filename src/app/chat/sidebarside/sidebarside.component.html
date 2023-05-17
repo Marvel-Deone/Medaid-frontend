@@ -30,16 +30,10 @@
             </div>
             <div class="chat-info" style="cursor: pointer;">
                 <h4>{{user.username}}</h4>
-                <p>Last message</p>
+                <!-- <p>Last message</p> -->
             </div>
             <div class="time">
-                <p>2:44pm</p>
-    
-            
-
-
-        
-  
-    
+                <div *ngIf="userProfile.role_id == 1" class="bg-primary" style="width: 10px; height: 10px; border-radius: 50%;"></div>
+                <div *ngIf="userProfile.role_id == 2" style="width: 10px; height: 10px; border-radius: 50%; background-color: green;"></div>
     </div>
 </div>

@@ -18,7 +18,7 @@
       </div>
       <div class="message-header-content">
         <h6>{{ currentChatPicked?.username }}</h6>
-        <p>Active</p>
+
       </div>
     </div>
     <div class="chat-header-right">
@@ -39,10 +39,7 @@
           <span>Peer to Peer video</span>
         </button>
   
-        <button mat-menu-item>
-          <mat-icon> diversity_3</mat-icon>
-          <span>Group video</span>
-        </button>
+     
       </mat-menu>
   
       <span class="material-symbols-sharp"> more_vert </span>
@@ -58,9 +55,10 @@
       *ngFor="let chat of chats; let i = index"
       [class.chat-sent]="chat.fromSelf"
     >
-      {{ chat.message }} <span class="chat-timestamp">11:30pm</span>
+      {{ chat.message }} <span class="chat-timestamp mt-1">{{currentTime| date :'short'||chat.time | date :'short' }}</span>
     </p>
   </div>
+ 
   
   <div class="message-footer">
     <span class="material-symbols-sharp"> face </span>
@@ -76,3 +74,5 @@
   
 
 </div>  
+
+

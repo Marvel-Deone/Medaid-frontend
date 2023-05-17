@@ -5,6 +5,7 @@ import { Socket } from 'socket.io-client';
 import {MatDialog} from '@angular/material/dialog';
 import { PeertopeerDialogueComponent } from 'src/app/dialogues/peertopeer-dialogue/peertopeer-dialogue.component';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 @Component({
   selector: 'app-messagecontainer',
   templateUrl: './messagecontainer.component.html',
@@ -21,21 +22,46 @@ export class MessagecontainerComponent {
   public chats: any;
   private socket!: Socket;
   public showMsgBox =false
+  private uriseg = environment.socket;
+  public userProfile: any = {
+    _id:'',
+    email:'',
+    firstName: '',
+    username: '',
+    selectedJob:''
+
+  }
+  public currentTime= new Date();
 
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
   constructor(private service: UserService, private ngZone: NgZone, public dialog: MatDialog, private router:Router) {}
   ngOnInit(): void {
-  
-    this.currentUserEmail = sessionStorage.getItem('med-email')
+    this.service.GetProfile().subscribe(
+      data => {
+        const response = data;
+        console.log('response ', response);
+ 
+        this.userProfile.username = response.profile.username;
+        this.userProfile._id=response.profile._id
+        this.userProfile.selectedJob= response.profile.selectedJob
+        this.userProfile.email =response.profile.email
+      }
+      
+      )
+
+     this.userProfile.email = sessionStorage.getItem('med-email')
     // Create a socket connection
     this.socket = io('http://localhost:5000').connect();
-    console.log('Socket connected:', this.socket.connected);
+    console.log('Socket connected:', this.socket);
 
     // Listen for incoming messages
     this.socket.on('new-message', (message: any) => {
       console.log('messsage received', message);
       this.ngZone.run(() => {
         this.chats.push(message);
+        console.log(this.chats, "Incoming ");
+        
+
       });
     });
 
@@ -43,15 +69,21 @@ export class MessagecontainerComponent {
       console.log('Outgoing message:', message);
       this.ngZone.run(() => {
         this.chats.push({ ...message, fromSelf: true });
+        console.log(this.chats, "Out ");
+        
+   
+        
       });
     });
 
-    this.service.GetAllUser(this.currentUserEmail).subscribe((item: any) => {
+    this.service.GetAllUser( this.userProfile.email).subscribe((item: any) => {
 
       this.allUsers = item.users;
       console.log(this.allUsers);
+      
+ 
       this.service
-        .GetCurrentUser(this.currentUserEmail)
+        .GetCurrentUser( this.userProfile.email)
         .subscribe((item: any) => {
           this.currentUser = item.currentUser;
         });
@@ -89,7 +121,7 @@ export class MessagecontainerComponent {
 
   sendMsg() {
     let msgObj = {
-      from: this.currentUser._id,
+      from: this.userProfile._id,
       to: this.currentChatPicked._id,
       message: this.messageInp,
     };  
