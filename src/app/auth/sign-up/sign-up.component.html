@@ -1,7 +1,7 @@
 <main class="main-content  mt-0">
 
       <!-- user signup -->
-    <section class="">
+    <section  *ngIf="role_id == 1" class="">
       <div class="page-header min-vh-100">
         <div class="container">
           <div class="row">
@@ -62,6 +62,10 @@
                     Already have an account?
                     <a routerLink="/sign-in" class="text-primary text-gradient font-weight-bold">Sign in</a>
                   </p>
+                  <p class="mb-2 text-sm mx-auto">
+                    Want to register as an expert?
+                    <a (click)="register(2)" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -74,7 +78,7 @@
 
     <!-- expert signup -->
 
-    <section>
+    <section *ngIf="role_id == 2" >
       <div class="min-vh-100">
         <div class="container">
           <div class="row">
@@ -86,7 +90,7 @@
               <div class="card card-plain">
                 <div class="card-header">
                   <h4 class="font-weight-bolder">Sign Up</h4>
-                  <p>Lore</p>
+                  <!-- <p>Lore</p> -->
                 
                 </div>
                 <div class="card-body ">
@@ -206,6 +210,10 @@
                   <p class="mb-2 text-sm mx-auto">
                     Already have an account?
                     <a routerLink="/expert/signin" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                  </p>
+                  <p class="mb-2 text-sm mx-auto">
+                    Want to register as an user?
+                    <a (click)="register(1)" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
                 </div>
               </div>

@@ -1,5 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,7 +15,7 @@ import { ExpertService } from 'src/app/services/expert.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent {
   @ViewChild('videoElement') videoElement!: ElementRef;
@@ -18,133 +25,165 @@ export class SignUpComponent {
   loading = false;
   errorResp?: any;
   errorMessage?: any;
-  status ?: boolean;
-  healthJobs = ['Doctor', 'Nurse', 'Surgeon', 'Pharmacist', 'Dentist', 'Therapist', 'Radiologist', 'Physician assistant',
-  'Pharmacist',
-  'Medical laboratory technician',
-  'Radiologic technologist',
-  'Occupational therapist',
-  'Physical therapist',
-  'Speech therapist',
-  'Respiratory therapist',
-  'Medical coder',
-  'Medical transcriptionist',
-  'Medical billing specialist',
-  'Medical receptionist/administrative assistant',
-  'Clinical research coordinator',
-  'Health educator',
-  'Pastor'];
+  status?: boolean;
+  healthJobs = [
+    'Doctor',
+    'Nurse',
+    'Surgeon',
+    'Pharmacist',
+    'Dentist',
+    'Therapist',
+    'Radiologist',
+    'Physician assistant',
+    'Pharmacist',
+    'Medical laboratory technician',
+    'Radiologic technologist',
+    'Occupational therapist',
+    'Physical therapist',
+    'Speech therapist',
+    'Respiratory therapist',
+    'Medical coder',
+    'Medical transcriptionist',
+    'Medical billing specialist',
+    'Medical receptionist/administrative assistant',
+    'Clinical research coordinator',
+    'Health educator',
+    'Pastor',
+  ];
   isRecording = false;
   mediaStream: MediaStream | null = null;
   mediaRecorder: MediaRecorder | null = null;
   recordedChunks: Blob[] = [];
   recordingTime = 0;
   timerInterval: any;
-public recordedData!:any
-public showPreview:boolean= false
+  public recordedData!: any;
+  public showPreview: boolean = false;
+  public role_id: any;
 
-  constructor(private fb: FormBuilder, public router: Router, public service: UserService, private _snackBar: MatSnackBar,  public expertService: ExpertService) {}
-  
+  constructor(
+    private fb: FormBuilder,
+    public router: Router,
+    public service: UserService,
+    private _snackBar: MatSnackBar,
+    public expertService: ExpertService
+  ) {}
+
   firstFormGroup = this.fb.group({
-    username: ['', 
-    // [Validators.required, 
-    //   Validators.minLength(2)
-    // ]
-  ],
-    email: ['', 
-    // [Validators.required,
-    //   // Validators.email
-    //   ]
+    username: [
+      '',
+      // [Validators.required,
+      //   Validators.minLength(2)
+      // ]
     ],
-      phone: ['', 
+    email: [
+      '',
+      // [Validators.required,
+      //   // Validators.email
+      //   ]
+    ],
+    phone: [
+      '',
 
       // [Validators.required, Validators.minLength(10)]
     ],
-      password: ['', 
-   //   [Validators.required, Validators.minLength(8), //Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
-  //  ]
-  ],
-      
-      
-       
+    password: [
+      '',
+      //   [Validators.required, Validators.minLength(8), //Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+      //  ]
+    ],
   });
   secondFormGroup = this.fb.group({
-   
-    selectedJob:['', 
-    //[Validators.required,]
-  ],
-    placeofwork:['', 
-    // [Validators.required, Validators.minLength(10)]
-  ],
-    yearofprac:['', 
-    // [Validators.required, Validators.minLength(2)]
-  ]
+    selectedJob: [
+      '',
+      //[Validators.required,]
+    ],
+    placeofwork: [
+      '',
+      // [Validators.required, Validators.minLength(10)]
+    ],
+    yearofprac: [
+      '',
+      // [Validators.required, Validators.minLength(2)]
+    ],
   });
   thirdFormGroup = this.fb.group({
-    recordedvideo:[this.recordedData, Validators.required]
-  })
+    recordedvideo: [this.recordedData, Validators.required],
+  });
   fourthFormGroup = this.fb.group({
-    confirmPin: ['', Validators.required]
-  })
+    confirmPin: ['', Validators.required],
+  });
 
   isOptional = false;
 
   ngOnInit(): void {
-   
-    
-    this.signupForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)]],
-      confirm_password: ['', Validators.required,],
-    }
-    // {
-    //   validators: this.pwrdMatch('password', 'confirmpassword')
-    // }
+    this.role_id = 1;
+
+    this.signupForm = this.fb.group(
+      {
+        username: ['', [Validators.required, Validators.minLength(2)]],
+        email: ['', [Validators.required, Validators.email]],
+        phone: ['', [Validators.required, Validators.minLength(10)]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(
+              /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
+            ),
+          ],
+        ],
+        confirm_password: ['', Validators.required],
+      }
+      // {
+      //   validators: this.pwrdMatch('password', 'confirmpassword')
+      // }
     );
   }
-  
-  
 
-  get signup() { return this.signupForm.controls };
+  get signup() {
+    return this.signupForm.controls;
+  }
 
   onSubmit(form: FormGroup) {
     this.loading = true;
     sessionStorage.setItem('med-email', form.value.email);
-    this.service.Register(form.value).subscribe(item => {
-      this.respdata = item;
-      this.loading = false;
-      // this._snackbar.open("Registration Successful", "X");
-      this._snackBar.open("Registeration Successful!", "OK", {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'bottom',
-        panelClass: ['green-snackbar', 'login-snackbar'],
-       });
+    this.service.Register(form.value).subscribe(
+      (item) => {
+        this.respdata = item;
+        this.loading = false;
+        // this._snackbar.open("Registration Successful", "X");
+        this._snackBar.open('Registeration Successful!', 'OK', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
 
-      this.router.navigate(['email-verification']);
-      this.loading = false;
-    },
-      errorResponse => {
+        this.router.navigate(['email-verification']);
+        this.loading = false;
+      },
+      (errorResponse) => {
         this.loading = false;
         this.errorMessage = errorResponse.error.message;
         this.status = errorResponse.error.status;
         console.log('Registration Failed', errorResponse.error.message);
-        this.errorMessage ? this._snackBar.open(this.errorMessage, "OK", {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'bottom',
-          panelClass: ['green-snackbar', 'login-snackbar'],
-         }) : this._snackBar.open("Pls check your internet connection","OK", {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'bottom',
-          panelClass: ['green-snackbar', 'login-snackbar'],
-         });
+        this.errorMessage
+          ? this._snackBar.open(this.errorMessage, 'OK', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+            })
+          : this._snackBar.open('Pls check your internet connection', 'OK', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              panelClass: ['green-snackbar', 'login-snackbar'],
+            });
         // this._snackbar.open(errorResponse.error.message, "X");
-      })
-      
+      }
+    );
   }
   async toggleRecording() {
     if (this.isRecording) {
@@ -156,7 +195,10 @@ public showPreview:boolean= false
 
   async startRecording() {
     try {
-      this.mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+      this.mediaStream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true,
+      });
       const video: HTMLVideoElement = this.videoElement.nativeElement;
       video.srcObject = this.mediaStream;
       this.mediaRecorder = new MediaRecorder(this.mediaStream);
@@ -168,8 +210,7 @@ public showPreview:boolean= false
         const reader = new FileReader();
         reader.onload = () => {
           const base64data = reader.result?.toString();
-          this.recordedData=base64data
-          
+          this.recordedData = base64data;
         };
         reader.readAsDataURL(blob);
         this.recordedChunks = [];
@@ -185,18 +226,15 @@ public showPreview:boolean= false
       console.error(error);
     }
   }
-  
 
   stopRecording() {
-
-    
     if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
       this.mediaRecorder.stop();
       this.mediaRecorder = null;
       const video: HTMLVideoElement = this.videoElement.nativeElement;
       video.srcObject = null;
       this.isRecording = false;
-      this.showPreview = true
+      this.showPreview = true;
     }
     this.stopTimer();
   }
@@ -210,72 +248,75 @@ public showPreview:boolean= false
   stopTimer() {
     clearInterval(this.timerInterval);
     this.recordingTime = 0;
-  } 
-  
-  sendMail(){
-    let confirm_pin= Math.floor(100000 + Math.random() * 900000)
-    sessionStorage.setItem("med_aid", confirm_pin.toString())
-      this.expertService.sendPin({pin:confirm_pin, email:this.firstFormGroup.value.email, username: this.firstFormGroup.value.username}).subscribe((res:any)=>{
-
-      })
-    
   }
-  done(){
-   
-    if(sessionStorage.getItem("med_aid") != this.fourthFormGroup.value.confirmPin){
-      this._snackBar.open("Wrong Pin", "OK", {
+
+  sendMail() {
+    let confirm_pin = Math.floor(100000 + Math.random() * 900000);
+    sessionStorage.setItem('med_aid', confirm_pin.toString());
+    this.expertService
+      .sendPin({
+        pin: confirm_pin,
+        email: this.firstFormGroup.value.email,
+        username: this.firstFormGroup.value.username,
+      })
+      .subscribe((res: any) => {});
+  }
+  done() {
+    if (
+      sessionStorage.getItem('med_aid') != this.fourthFormGroup.value.confirmPin
+    ) {
+      this._snackBar.open('Wrong Pin', 'OK', {
         duration: 3000,
         horizontalPosition: 'right',
         verticalPosition: 'bottom',
         panelClass: ['green-snackbar', 'login-snackbar'],
-       });
-
-
-      }else{
+      });
+    } else {
       this.loading = true;
-      let details=
-      {...this.firstFormGroup.value, ...this.secondFormGroup.value,  ...this.fourthFormGroup.value,  recordedvideo:this.recordedData}
-      this.expertService.signup(details).subscribe((res:any)=>{
-        
-          this._snackBar.open("Registeration Successful!", "OK", {
+      let details = {
+        ...this.firstFormGroup.value,
+        ...this.secondFormGroup.value,
+        ...this.fourthFormGroup.value,
+        recordedvideo: this.recordedData,
+      };
+      this.expertService.signup(details).subscribe(
+        (res: any) => {
+          this._snackBar.open('Registeration Successful!', 'OK', {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
-           });
-    
-           this.loading = false;
-           sessionStorage.removeItem("med_aid")
+          });
+
+          this.loading = false;
+          sessionStorage.removeItem('med_aid');
           this.router.navigate(['/expert/signin']);
-
-          
         },
-          errorResponse => {
-            this.loading = false;
-            this.errorMessage = errorResponse.error.message;
-            this.status = errorResponse.error.status;
-            console.log('Registration Failed', errorResponse.error.message);
-            this.errorMessage ? this._snackBar.open(this.errorMessage, "OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-             }) : this._snackBar.open("Pls check your internet connection","OK", {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-             });
-            // this._snackbar.open(errorResponse.error.message, "X");
-          
-         })
+        (errorResponse) => {
+          this.loading = false;
+          this.errorMessage = errorResponse.error.message;
+          this.status = errorResponse.error.status;
+          console.log('Registration Failed', errorResponse.error.message);
+          this.errorMessage
+            ? this._snackBar.open(this.errorMessage, 'OK', {
+                duration: 3000,
+                horizontalPosition: 'right',
+                verticalPosition: 'bottom',
+                panelClass: ['green-snackbar', 'login-snackbar'],
+              })
+            : this._snackBar.open('Pls check your internet connection', 'OK', {
+                duration: 3000,
+                horizontalPosition: 'right',
+                verticalPosition: 'bottom',
+                panelClass: ['green-snackbar', 'login-snackbar'],
+              });
+          // this._snackbar.open(errorResponse.error.message, "X");
         }
-        
+      );
     }
-    
+  }
 
-  
-    
-
-  
+  register(roleId: number) {
+    this.role_id = roleId;
+  }
 }
