@@ -34,6 +34,33 @@ export class MedicationReminderService {
     }));
   }
 
+  getSingleMedication(id:any) {
+    const URI = this.uriseg + '/medication/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  updateMedication(inputdata: any, id:any) {
+    const URI = this.uriseg + '/medication/updateMedication/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.patch(URI, inputdata, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  deleteMedication(id:any) {
+    const URI = this.uriseg + '/medication/deleteMedication/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.delete(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
   createReminder(inputdata: any) {
     const URI = this.uriseg + '/reminder';
     const token = JSON.parse(localStorage['token']);
@@ -52,4 +79,32 @@ export class MedicationReminderService {
       return this.reminder;
     }));
   }
+  
+  getSingleReminder(id:any) {
+    const URI = this.uriseg + '/reminder/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  updateReminder(inputdata: any, id: any) {
+    const URI = this.uriseg + '/reminder/updateReminder/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.patch(URI, inputdata, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  deleteReminder(id:any) {
+    const URI = this.uriseg + '/reminder/deleteReminder/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.delete(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
 }
