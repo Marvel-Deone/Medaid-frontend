@@ -13,6 +13,7 @@ export class UserService {
   public header: any;
   userProfile: any;
   public currentChatPicked: any
+  sosContact: any;
 
   constructor(private http: HttpClient) { }
 
@@ -96,6 +97,52 @@ export class UserService {
 
   GetNotification(){
     return this.http.get(`${this.uriseg}/user/getNotification`,)
+  }
+
+  createSosContact(inputdata: any) {
+    const URI = this.uriseg + '/sosContact';
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.post(URI, inputdata, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  getSosContact() {
+    const URI = this.uriseg + '/sosContact';
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      this.sosContact = response;
+      return this.sosContact;
+    }));
+  }
+
+  getSingleSosContact(id:any) {
+    const URI = this.uriseg + '/sosContact/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  updateSosContact(inputdata: any, id:any) {
+    const URI = this.uriseg + '/sosContact/updatesosContact/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.patch(URI, inputdata, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  deleteSosContact(id:any) {
+    const URI = this.uriseg + '/sosContact/deletesosContact/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.delete(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
   }
 
   

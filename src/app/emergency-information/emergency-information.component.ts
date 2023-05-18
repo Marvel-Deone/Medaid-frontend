@@ -12,9 +12,8 @@ export class EmergencyInformationComponent {
   public profileTitle: string = 'medical_info';
   public loading = false;
   public errorMessage: any;
-  contact_owner: any;
-  contact_no: any;
   public role_id: any;
+  public showModal: boolean = false;
 
   public userProfile: any = {
     firstName: '',
@@ -37,11 +36,19 @@ export class EmergencyInformationComponent {
   };
 
   sosContactInfo: Object[] = [];
+  sosContactPayload: any = {
+    username: '',
+    email: '',
+    sosContact: {
+      contact_name: '',
+      contact_number: ''
+    }
+  };
 
   public showmenu: boolean = false;
-  showModal: boolean = false;
 
   public userSosContacts: any;
+  singleSosContact: any;
 
   constructor(private router: Router, private service: UserService, private _snackBar: MatSnackBar) { }
 
@@ -67,10 +74,10 @@ export class EmergencyInformationComponent {
         this.userProfile.past_medical_condition = response.profile.past_medical_condition;
         this.userProfile.allergies = response.profile.allergies;
         this.userProfile.medication = response.profile.medication;
-        this.userProfile.medication = response.profile.medication;
-        this.userProfile.sosContact = response.profile.sosContact;
+        this.userProfile.medical_note = response.profile.medical_note;  
+        // this.userProfile.sosContact = response.profile.sosContact;
 
-        this.userSosContacts = response.profile.sosContact;
+        // this.userSosContacts = response.profile.sosContact;
 
       },
       error => {
@@ -80,6 +87,23 @@ export class EmergencyInformationComponent {
           localStorage.removeItem('token');
           this.router.navigate(['/sign-in']);
         }
+      }
+    )
+    
+    this.service.getSosContact().subscribe(
+      data => {
+        const response = data;
+        console.log('myRes', response);
+
+        if (response.sosContacts !== null) {
+          this.userSosContacts = response.sosContacts;
+          console.log('sosContacts', this.userSosContacts);
+        }
+      },
+      error => {
+        const errorResponse = error;
+        console.log('errorResponse', errorResponse);
+
       }
     )
   }
@@ -123,12 +147,13 @@ export class EmergencyInformationComponent {
   }
 
   editModalStatus() {
-    this.showModal = true;
+    this.showModal = !this.showModal;
   }
 
-  updateSosContact() {
+  addSosContact() {
+    console.log('sosContactPayload', this.sosContactPayload);
     this.loading = true;
-    if (this.contact_owner == null || this.contact_no == null) {
+    if (this.sosContactPayload.sosContact.contact_name == null || this.sosContactPayload.sosContact.contact_number == null) {
       this.loading = false;
       this._snackBar.open("All the fields must be filled", "OK", {
         duration: 3000,
@@ -137,50 +162,121 @@ export class EmergencyInformationComponent {
         panelClass: ['green-snackbar', 'login-snackbar'],
       });
     } else {
-      console.log('userProfileContact', this.userProfile.sosContact);
-
-      this.sosContactInfo.push(...this.userProfile.sosContact, {
-        contactName: this.contact_owner,
-        contactNumber: this.contact_no
-      });
-      this.userProfile.sosContact = this.sosContactInfo;
+      this.sosContactPayload.username = this.userProfile.username;
+      this.sosContactPayload.email = this.userProfile.email;
+      console.log('sosContact:', this.sosContactPayload);
 
 
-
-      this.service.UpdateProfile(this.userProfile).subscribe(
+      this.service.createSosContact(this.sosContactPayload).subscribe(
         data => {
-          this.showModal = false;
           const response = data;
-          console.log('response', response);
-
           this.loading = false;
-          this._snackBar.open("Emergency Info updated successfully", "OK", {
+          this.showModal = false;
+          this._snackBar.open("Sos contact added successfully", "OK", {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-
+          console.log('sosContactPayload', this.sosContactPayload);
           this.ngOnInit();
-          this.contact_owner = '';
-          this.contact_no = '';
+
+          this.sosContactPayload.sosContact.contact_name = "";
+          this.sosContactPayload.sosContact.contact_number = "";
         },
-        error => {
+        errorResponse => {
           this.loading = false;
-          this.errorMessage = error.message;
-          this._snackBar.open(this.errorMessage, "OK", {
+          this.errorMessage = errorResponse.error.message;
+          console.log('errorMessage', this.errorMessage);
+
+          this._snackBar.open("Something went wrong, pls try again", "OK", {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-        }
-      )
-
-      console.log('userProfile', this.userProfile);
+        });
 
     }
+  }
 
+  getSingleSosContact(id: any) {
+    this.service.getSingleSosContact(id).subscribe(
+      data => {
+        const response = data;
+        console.log('singleSosContact', response);
+        this.singleSosContact = response;
+        
+        this.sosContactPayload.sosContact.contact_name = this.singleSosContact.sosContact.contact_name;
+        this.sosContactPayload.sosContact.contact_number = this.singleSosContact.sosContact.contact_number;
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error;
+        console.log('errorMessage', this.errorMessage);
+      })
+  }
+
+  updateSosContact() {
+    this.service.updateSosContact(this.sosContactPayload, this.singleSosContact.sosContact._id).subscribe(
+      data => {
+        const response = data;
+        this.loading = false;
+        this._snackBar.open("Updated successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+
+        this.ngOnInit();
+
+          this.sosContactPayload.sosContact.contact_name = "";
+          this.sosContactPayload.sosContact.contact_number = "";
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error.message;
+        console.log('errorMessage', this.errorMessage);
+
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      })
+  }
+
+  deleteSosContact(id: any) {
+    this.service.deleteSosContact(id).subscribe(
+      data => {
+        const response = data;
+        this.loading = false;
+        this._snackBar.open("Sos contact deleted successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+
+        this.ngOnInit();
+
+        this.sosContactPayload.sosContact.contact_name = '';
+        this.sosContactPayload.sosContact.contact_number = '';
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error.message;
+        console.log('errorMessage', this.errorMessage);
+
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      })
   }
 
   changeMenuStatus() {

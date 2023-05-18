@@ -484,7 +484,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row mt-2">
+                                    <!-- <div class="row mt-2">
                                         <div class="col-12">
                                             <label class="form-check-label text-body text-truncate w-80 mb-0"
                                                 for="flexSwitchCheckDefault">Medication</label>
@@ -493,7 +493,7 @@
                                             <input type="text" [(ngModel)]="userProfile.medication"
                                                 class="form-control px-3 py-1 input-outline2" id="" placeholder="">
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row mt-2">
                                         <div class="col-12">
                                             <label class="form-check-label text-body text-truncate w-80 mb-0"
@@ -502,7 +502,7 @@
                                         <div class="col-12 col-lg-6 px-3">
                                             <textarea type="text" [(ngModel)]="userProfile.medical_note"
                                                 class="form-control px-3 py-1 input-outline2" id=""
-                                                placeholder=""></textarea>
+                                                placeholder="">{{userProfile.medical_note}}</textarea>
                                         </div>
                                     </div>
 
@@ -518,7 +518,7 @@
                             </div>
                         </div>
                     </div>
-                    <<<<<<< HEAD </div>
+                    </div>
                 </div>
             </div>
 
@@ -529,67 +529,47 @@
                         <div class="card card-plain h-100">
                             <div class="card-body p-3">
                                 <div class="save_btn">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop" (click)="editModalStatus()">Add Contact
+                                    <button type="button" class="btn btn-primary" (click)="editModalStatus()">Add Contact
                                         +</button>
 
                                     <!-- Emergency Contact -->
-                                    <div class="row" *ngIf="profileTitle == 'emergency_contact'">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card card-plain h-100">
-                                                    <div class="card-body p-3">
-                                                        <div class="save_btn">
-                                                            <button type="button" class="btn btn-primary"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#staticBackdrop">Add
-                                                                Contact</button>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!-- Contact Display -->
                                 <div class="container row gap-3">
                                     <div class="card col-12 col-md-6 col-lg-3 mt-4 px-0 pt-3 ms-3" style="width: 18rem;"
-                                        *ngFor="let userSosContact of userSosContacts">
+                                        *ngFor="let userSosContact of userSosContacts;">
                                         <div class="card-body mb-2 px-3 py-0">
                                             <span class="card-text mt-4">Contact Name:
-                                                {{userSosContact.contactName}}</span><br><br>
+                                                {{userSosContact.sosContact.contact_name}}</span><br><br>
                                             <span class="card-text mb-4 mt-4">Contact Number:
-                                                {{userSosContact.contactNumber}}</span>
+                                                {{userSosContact.sosContact.contact_number}}</span>
                                             <div class="row mt-4 px-2 gap-2">
-                                                <a href=""
-                                                    class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2">Edit</a>
-                                                <a href=""
-                                                    class="btn btn-danger col-12 col-md-6 col-lg-4 px-0 py-2">Delete</a>
+                                                <a class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2" data-bs-toggle="modal"
+                                                data-bs-target="#sosContactUpdatestaticBackdrop" (click)="getSingleSosContact(userSosContact._id)">Edit</a>
+                                                <a class="btn btn-danger col-12 col-md-6 col-lg-4 px-0 py-2" (click)="deleteSosContact(userSosContact._id)">Delete</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                <!-- SosContact update Modal -->
+                                <div class="modal fade" id="sosContactUpdatestaticBackdrop" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">New Contact</h5>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Update Contact</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row px-3">
                                                 <input type="text" placeholder="Contact Owner"
-                                                    [(ngModel)]="contact_owner"
+                                                    [(ngModel)]="sosContactPayload.sosContact.contact_name"
                                                     class="form-control input-outline2 col-3 px-3">
-                                                <input type="text" placeholder="Contact No" [(ngModel)]="contact_no"
+                                                <input type="text" placeholder="Contact No" [(ngModel)]="sosContactPayload.sosContact.contact_number"
                                                     class="form-control input-outline2 col-3 px-3 mt-3">
                                             </div>
                                         </div>
@@ -608,36 +588,40 @@
                                 </div>
                             </div>
 
+                            <!-- SosContact Modal -->
+                            <div *ngIf="showModal" class="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">New Contact</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row px-3">
+                                                <input type="text" placeholder="Contact Owner"
+                                                    [(ngModel)]="sosContactPayload.sosContact.contact_name"
+                                                    class="form-control input-outline2 col-3 px-3">
+                                                <input type="text" placeholder="Contact No" [(ngModel)]="sosContactPayload.sosContact.contact_number"
+                                                    class="form-control input-outline2 col-3 px-3 mt-3">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" (click)="editModalStatus()">Close</button>
+                                            <button *ngIf="!loading" type="button" class="btn btn-primary" (click)="addSosContact()">Save</button>
+                                            <button *ngIf="loading" disabled class="btn btn-primary mt-3 text-white">
+                                                <span>Saving</span>
+                                                <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px"
+                                                    height="26px">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">New Contact</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row px-3">
-                                        <input type="text" placeholder="Contact Owner" [(ngModel)]="contact_owner"
-                                            class="form-control input-outline2 col-3 px-3">
-                                        <input type="text" placeholder="Contact No" [(ngModel)]="contact_no"
-                                            class="form-control input-outline2 col-3 px-3 mt-3">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                        (click)="updateSosContact()">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

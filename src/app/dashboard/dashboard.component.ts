@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { MedicationReminderService } from '../services/medicationReminder/medication-reminder.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +20,11 @@ export class DashboardComponent {
   public userProfile: any;
   public role_id: any;
   public showmenu: boolean = false;
+  totalMedication: any;
+  totalReminder: any;
 
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private medicationReminderService: MedicationReminderService) { }
   ngOnInit(): void {
     this.userToken = JSON.parse(localStorage['token']);
 
@@ -64,6 +67,41 @@ export class DashboardComponent {
     this.service.GetAllUser(this.currentUserEmail).subscribe((item: any) => {
       this.allUsers = item.users
     })
+
+    
+    this.medicationReminderService.getMedication().subscribe(
+      data => {
+        const response = data;
+        console.log('myRes', response);
+
+        if (response.medications !== null) {
+          this.totalMedication = response.medications.length;
+          console.log('medications', this.totalMedication);
+        }
+      },
+      error => {
+        const errorResponse = error;
+        console.log('errorResponse', errorResponse);
+
+      }
+    )
+
+    this.medicationReminderService.getReminder().subscribe(
+      data => {
+        const response = data;
+        console.log('myRes', response);
+
+        if (response.reminder !== null) {
+          this.totalReminder = response.reminders.length;
+          console.log('reminder', this.totalReminder);
+        }
+      },
+      error => {
+        const errorResponse = error;
+        console.log('errorResponse', errorResponse);
+
+      }
+    )
 
   }
 
