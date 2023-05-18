@@ -71,39 +71,39 @@ export class SignUpComponent {
   firstFormGroup = this.fb.group({
     username: [
       '',
-      // [Validators.required,
-      //   Validators.minLength(2)
-      // ]
+      [Validators.required,
+        Validators.minLength(2)
+      ]
     ],
     email: [
       '',
-      // [Validators.required,
-      //   // Validators.email
-      //   ]
+      [Validators.required,
+         Validators.email
+        ]
     ],
     phone: [
       '',
 
-      // [Validators.required, Validators.minLength(10)]
+       [Validators.required, Validators.minLength(10)]
     ],
     password: [
       '',
-      //   [Validators.required, Validators.minLength(8), //Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
-      //  ]
+        [Validators.required, Validators.minLength(8), //Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+        ]
     ],
   });
   secondFormGroup = this.fb.group({
     selectedJob: [
       '',
-      //[Validators.required,]
+      [Validators.required,]
     ],
     placeofwork: [
       '',
-      // [Validators.required, Validators.minLength(10)]
+       [Validators.required, Validators.minLength(10)]
     ],
     yearofprac: [
       '',
-      // [Validators.required, Validators.minLength(2)]
+      [Validators.required, Validators.minLength(2)]
     ],
   });
   thirdFormGroup = this.fb.group({

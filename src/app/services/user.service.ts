@@ -26,12 +26,8 @@ export class UserService {
 
   VerifyEmail(inputdata: any) {
     const URI = this.uriseg + '/auth/verifyemail';
-    return this.http.post(URI, inputdata).pipe(map(response => {
-
-    }))
-    // return this.http.post(`${URI}`,
-    //   inputdata
-    // );
+    return this.http.post(URI, inputdata)
+ 
   }
 
   Login(inputdata: any) {

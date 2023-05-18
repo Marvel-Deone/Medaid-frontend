@@ -1,12 +1,14 @@
 export const environment = {
   production: true,
 
-  Url: 'http://localhost:5000/api',
-  baseUrl: 'http://localhost:5000/api',
-
+    Url: 'http://localhost:5000/api',
+    baseUrl: 'http://localhost:5000/api',
   // Url: 'https://medaid-api.vercel.app/api',
   // baseUrl: 'https://medaid-api.vercel.app/api',
   socket: 'https://medaid-api.vercel.app',
+    usernameOfBulkSms: "oyeayodejioyebanji2003@gmail.com",
+    apiKeyOfBulkSms :'7079475cd901b7d758058b919de35e4b61819f9c',
+   senderOfBulkSms: "MedAid Ltd",
 
   firebaseConfig: {
     apiKey: "AIzaSyBGsjXveCqh_3tAsjIp0WBzHZ6uYMu4FBQ",
