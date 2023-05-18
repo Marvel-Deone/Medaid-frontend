@@ -44,6 +44,8 @@ export class MedicationReminderComponent {
   errorMessage: any;
   medications: any;
   reminders: any;
+  singleMedication: any;
+  singleReminder: any;
 
   constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private medicationReminderService: MedicationReminderService) { };
 
@@ -182,10 +184,9 @@ export class MedicationReminderComponent {
           console.log('MedicationPayload', this.medicationPayload);
           this.ngOnInit();
 
-          this.medicationPayload.drug_name = '';
-          this.medicationPayload.dose = '',
-            this.medicationPayload.interval = '';
-          this.medicationPayload.daily = '';
+          this.medicationPayload.medication.drug_name = "";
+          this.medicationPayload.medication.dose = "";
+          this.medicationPayload.medication.daily = "";
         },
         errorResponse => {
           this.loading = false;
@@ -218,11 +219,6 @@ export class MedicationReminderComponent {
       this.reminderPayload.username = this.userProfile.username;
       this.reminderPayload.email = this.userProfile.email;
 
-      console.log('reminderPayload', this.reminderPayload);
-
-      // console.log('myTime', this.reminderPayload.reminder.time.toLocaleTimeString());
-
-
       this.medicationReminderService.createReminder(this.reminderPayload).subscribe(
         data => {
           const response = data;
@@ -236,10 +232,9 @@ export class MedicationReminderComponent {
 
           this.ngOnInit();
 
-          this.medicationPayload.drug_name = '';
-          this.medicationPayload.dose = '',
-            this.medicationPayload.interval = '';
-          this.medicationPayload.daily = '';
+          this.reminderPayload.reminder.title = "";
+          this.reminderPayload.reminder.date = "",
+          this.reminderPayload.reminder.time = "";
         },
         errorResponse => {
           this.loading = false;
@@ -254,6 +249,172 @@ export class MedicationReminderComponent {
           });
         })
     }
+  }
+
+  getSingleMedication(id: any) {
+    this.medicationReminderService.getSingleMedication(id).subscribe(
+      data => {
+        const response = data;
+        console.log('singleMedication', response);
+        this.singleMedication = response;
+        
+        this.medicationPayload.medication.drug_name = this.singleMedication.medication.medication.drug_name;
+        this.medicationPayload.medication.dose = this.singleMedication.medication.medication.dose;
+        this.medicationPayload.medication.daily = this.singleMedication.medication.medication.daily;
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error;
+        console.log('errorMessage', this.errorMessage);
+      })
+  }
+
+  updateMedication() {
+    this.medicationReminderService.updateMedication(this.medicationPayload, this.singleMedication.medication._id).subscribe(
+      data => {
+        const response = data;
+        this.loading = false;
+        this._snackBar.open("Updated successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+
+        this.ngOnInit();
+
+          this.medicationPayload.medication.drug_name = "";
+          this.medicationPayload.medication.dose = "";
+          this.medicationPayload.medication.daily = "";
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error.message;
+        console.log('errorMessage', this.errorMessage);
+
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      })
+  }
+
+  deleteMedication(id: any) {
+    this.medicationReminderService.deleteMedication(id).subscribe(
+      data => {
+        const response = data;
+        this.loading = false;
+        this._snackBar.open("Medication deleted successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+
+        this.ngOnInit();
+
+        this.medicationPayload.drug_name = '';
+        this.medicationPayload.dose = '',
+          this.medicationPayload.interval = '';
+        this.medicationPayload.daily = '';
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error.message;
+        console.log('errorMessage', this.errorMessage);
+
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      })
+  }
+
+  getSingleReminder(id: any) {
+    this.medicationReminderService.getSingleReminder(id).subscribe(
+      data => {
+        const response = data;
+        this.singleReminder = response;
+
+        this.reminderPayload.reminder.title = this.singleReminder.reminder.reminder.title;
+        this.reminderPayload.reminder.date = this.singleReminder.reminder.reminder.date,
+        this.reminderPayload.reminder.time = this.singleReminder.reminder.reminder.time;
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error;
+        console.log('errorMessage', this.errorMessage);
+      })
+  }
+
+  updateReminder() {
+    this.medicationReminderService.updateReminder(this.reminderPayload,  this.singleReminder.reminder._id).subscribe(
+      data => {
+        const response = data;
+        this.loading = false;
+        this._snackBar.open("Updated successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+
+        this.ngOnInit();
+
+        this.reminderPayload.reminder.title = "";
+        this.reminderPayload.reminder.date = "",
+        this.reminderPayload.reminder.time = "";
+
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error.message;
+        console.log('errorMessage', this.errorMessage);
+
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      })
+  }
+
+  deleteReminder(id: any) {
+    this.medicationReminderService.deleteReminder(id).subscribe(
+      data => {
+        const response = data;
+        this.loading = false;
+        this._snackBar.open("Reminder deleted successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+
+        this.ngOnInit();
+
+        this.medicationPayload.drug_name = '';
+        this.medicationPayload.dose = '',
+          this.medicationPayload.interval = '';
+        this.medicationPayload.daily = '';
+      },
+      errorResponse => {
+        this.loading = false;
+        this.errorMessage = errorResponse.error.message;
+        console.log('errorMessage', this.errorMessage);
+
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      })
   }
 
 

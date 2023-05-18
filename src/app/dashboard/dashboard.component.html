@@ -382,8 +382,8 @@
     <!-- End Navbar -->
 
     <div class="container-fluid py-4 mt-2">
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="row mb-5">
+            <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
                         <div
@@ -391,19 +391,19 @@
                             <i class="material-icons opacity-10">weekend</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Today's Session</p>
-                            <h4 class="mb-0">5</h4>
+                            <p class="text-sm mb-0 text-capitalize">Today's Medication</p>
+                            <h4 class="mb-0">{{totalMedication}}</h4>
                         </div>
                     </div>
-                    <hr class="dark horizontal my-0">
+                    <!-- <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
                         <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last
                             week
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
                         <div
@@ -411,19 +411,19 @@
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Active Inspirers</p>
-                            <h4 class="mb-0">500</h4>
+                            <p class="text-sm mb-0 text-capitalize">Total Reminder</p>
+                            <h4 class="mb-0">{{totalReminder}}</h4>
                         </div>
                     </div>
-                    <hr class="dark horizontal my-0">
+                    <!-- <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
                         <p class="mb-0"><span class="text-success text-sm font-weight-bolder">30% </span>of your total
                             Inspirers
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
                         <div
@@ -431,19 +431,19 @@
                             <i class="material-icons opacity-10">rss_feed</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Total Post</p>
-                            <h4 class="mb-0">34</h4>
+                            <p class="text-sm mb-0 text-capitalize">Total Assessment</p>
+                            <h4 class="mb-0">0</h4>
                         </div>
                     </div>
-                    <hr class="dark horizontal my-0">
+                    <!-- <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
                         <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than
                             yesterday
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
+            <!-- <div class="col-xl-3 col-sm-6">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
                         <div
@@ -462,9 +462,9 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="row mt-4">
+        <!-- <div class="row mt-4">
             <div class="col-lg-4 col-md-6 mt-4 mb-4">
                 <div class="card z-index-2 ">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -475,7 +475,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="mb-0 text-muted">Upcoming Session</p>
+                        <p class="mb-0 text-muted">Upcoming Reminder</p>
                         <div class="d-flex mb-1">
                             <img src="https://images.unsplash.com/photo-1545912452-8aea7e25a3d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGxhZHl8ZW58MHx8MHx8&w=1000&q=80"
                                 class="upSecPics" alt="Patient Picture">
@@ -502,7 +502,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="mb-0 text-muted">Upcoming Event</p>
+                        <p class="mb-0 text-muted">Medication</p>
                         <div class="d-flex mb-1">
                             <div class="avatar-group mt-2">
                                 <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip"
@@ -545,7 +545,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h6 class="mb-0 ">Completed Tasks</h6>
+                        <h6 class="mb-0 ">Consultation Accepted</h6>
                         <p class="text-sm ">Last Campaign Performance</p>
                         <hr class="dark horizontal">
                         <div class="d-flex ">
@@ -555,7 +555,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row mb-4">
             <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
                 <div class="card">
@@ -563,7 +563,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-7">
                                 <h6>Self Assessment</h6>
-                                <p class="text-sm mb-0">
+                                <p class="text-sm mb-0 mt-2 mb-1">
                                     <i class="fa fa-check text-info" aria-hidden="true"></i>
                                     <span class="font-weight-bold ms-1">30 done</span> this month
                                 </p>

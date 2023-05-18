@@ -11,10 +11,12 @@ import { SelfAssessmentService } from '../services/self-assessment/self-assessme
 })
 export class SelfAssesementComponent {
   public role_id: any;
+  public loading: boolean = false;
   public showmenu: boolean = false;
   public userProfile: any;
   selectedCategory: any = "choose your condition";
-  public conditions: String[] = [
+  public currentSelfAssementId: any;
+  public conditions: string[] = [
     'Depression',
     'Pregnant',
     'Substance Abuse',
@@ -27,6 +29,21 @@ export class SelfAssesementComponent {
 
   public selfAssessments: any;
   displayQuestions: any;
+
+  answers: string[] = [];
+  public selfAssessmentPayload: any = {
+    username: '',
+    email: '',
+    category: '',
+    questions: [],
+    answers: []
+  }
+  selfAssessment: any;
+  showAlertModal: boolean = false;
+  public getResultStatus: boolean = false;
+  selfAssessmentLists: any;
+
+  // answer: [] = []
 
   constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService) { }
   ngOnInit(): void {
@@ -90,7 +107,78 @@ export class SelfAssesementComponent {
       }
     }
     this.displayQuestions = selfAssessment;
+    // this.count = this.displayQuestions.length
     console.log('displayQuestions', this.displayQuestions);
     
+  }
+
+  submit() {
+    const answerLength = this.selfAssessmentPayload.answers.length;
+    
+    // for (let i = 0; i < this.selfAssessmentPayload.answers.length; i++) {
+    //   const element = this.selfAssessmentPayload.answers[i];
+    //   if (element == null) {
+        
+    //   }
+    // }
+
+    // if (this.selfAssessmentPayload.answers.some(element => !element)) {
+    //   console.log("Empty answer");
+    // }else {
+    //   console.log('No empty answer');
+      
+    // }
+
+    this.selfAssessmentPayload.username = this.userProfile.username;
+    this.selfAssessmentPayload.email = this.userProfile.email;
+    this.selfAssessmentPayload.category = this.selectedCategory;
+    this.selfAssessmentPayload.questions = this.displayQuestions;
+
+    console.log('answers', this.selfAssessmentPayload);
+
+    this.selfAssessmentService.saveSelfAssessmentAnswers(this.selfAssessmentPayload).subscribe(
+      data => {
+        const response = data;
+        console.log('myRes', response);
+        this.selfAssessment = response;
+        this.currentSelfAssementId = this.selfAssessment.data._id;
+        console.log('id', this.currentSelfAssementId);
+        
+        this._snackBar.open("Answer submitted successfully", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+        this.selfAssessmentPayload.answers = [];
+        this.showAlertModal = true;
+      },
+      error => {
+        const errorResponse = error;
+        console.log('errorResponse', errorResponse);
+        this._snackBar.open("Something went wrong, pls try again", "OK", {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      }
+    )
+  }
+
+  updateAlertModal() {
+    this.showAlertModal = false;
+  }
+
+  getResult() {
+    this.showAlertModal = false;
+    this.getResultStatus = true;
+    this.selfAssessmentService.getSingleSelfAssessment(this.currentSelfAssementId).subscribe(
+      data => {
+        const response = data;
+        this.selfAssessment = response;
+        this.selfAssessmentLists = this.selfAssessment.selfAssessment;
+        console.log('response', this.selfAssessment.selfAssessment);
+      })
   }
 }

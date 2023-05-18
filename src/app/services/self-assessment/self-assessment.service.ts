@@ -32,5 +32,23 @@ export class SelfAssessmentService {
       return this.selfAssessment;
     }));
   }
+  
+  saveSelfAssessmentAnswers(inputdata: any) {
+    const URI = this.uriseg + '/selfAssessment/answer';
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.post(URI, inputdata, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  getSingleSelfAssessment(id: any) {
+    const URI = this.uriseg + '/selfAssessment/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
 
 }

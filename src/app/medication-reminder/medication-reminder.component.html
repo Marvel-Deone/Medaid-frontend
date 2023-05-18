@@ -442,9 +442,55 @@
                             <span class="card-text mb-3 mt-3 text-capitalize">When:
                                 {{medication.medication.daily}}</span>
                             <div class="row px-2 gap-2">
-                                <a href="" class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2">Edit</a>
-                                <a href="" class="btn btn-danger col-12 col-md-6 col-lg-4 px-0 py-2">Delete</a>
+                                <a class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2" data-bs-toggle="modal"
+                                data-bs-target="#medicationUpdateBackdrop" (click)="getSingleMedication(medication._id)">Edit</a>
+                                <a class="btn btn-danger col-12 col-md-6 col-lg-4 px-0 py-2"(click)="deleteMedication(medication._id)">Delete</a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Medication Update Modal -->
+            <div class="modal fade" id="medicationUpdateBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Update Medication</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row px-3">
+                                <input type="text" placeholder="Drug Name"
+                                    class="form-control input-outline2 col-3 px-3"
+                                    [(ngModel)]="medicationPayload.medication.drug_name">
+                                <input type="text" placeholder="Dose"
+                                    class="form-control input-outline2 col-3 px-3 mt-3"
+                                    [(ngModel)]="medicationPayload.medication.dose">
+                                <label for="" class="mt-3">Select how many times in a day</label>
+                                <select class="form-select input-outline2 px-2" name="" id=""
+                                    [(ngModel)]="medicationPayload.medication.daily">
+                                    <option value="" selected>Choose</option>
+                                    <option value="morning">Once in day(Morning)</option>
+                                    <option value="afternoon">Once in day(Afternoon)</option>
+                                    <option value="night">Once in day(Night)</option>
+                                    <option value="morning & afternoon">Twice in day(Morning and aftenoon)</option>
+                                    <option value="morning & night">Twice in day(Morning and night)</option>
+                                    <option value="afternoon & night">Twice in day(Afternoon and night)</option>
+                                    <option value="three">Three times in a day(Morning, Afternoon and Night)
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button *ngIf="!loading" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="updateMedication()">Save</button>
+                            <button *ngIf="loading" disabled class="btn btn-primary mt-3">
+                                <span>Saving</span>
+                                <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px" height="26px">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -518,16 +564,53 @@
                         <div class="card-body d-flex flex-column mb-2 px-3 py-0">
                             <span class="card-text mt-3">Title : {{reminder.reminder.title}}</span>
 
+                            <span class="card-text mt-3">Date : {{reminder.reminder.date}}</span>
+
                             <span class="card-text mt-3 mb-3">Time: {{reminder.reminder.time}}</span>
 
                             <div class="row px-2 gap-2">
-                                <a href="" class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2">Edit</a>
-                                <a href="" class="btn btn-danger col-12 col-md-6 col-lg-4 px-0 py-2">Delete</a>
+                                <a class="btn btn-primary col-12 col-md-6 col-lg-4 px-0 py-2"  data-bs-toggle="modal"
+                                data-bs-target="#sreminderUpdateBackdrop" (click)="getSingleReminder(reminder._id)">Edit</a>
+                                <a class="btn btn-danger col-12 col-md-6 col-lg-4 px-0 py-2" (click)="deleteReminder(reminder._id)">Delete</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+                  <!-- Reminder Update Modal -->
+                  <div class="modal fade" id="sreminderUpdateBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="staticBackdropLabel">Update Reminder</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row px-3">
+                                  <input type="text" placeholder="Title" class="form-control input-outline2 col-3 px-3"
+                                      [(ngModel)]="reminderPayload.reminder.title">
+                                  <input type="date" placeholder="" max="12:00"
+                                      class="form-control input-outline2 col-3 px-3 mt-3"
+                                      [(ngModel)]="reminderPayload.reminder.date">
+                                  <input type="time" placeholder="" max="12:00"
+                                      class="form-control input-outline2 col-3 px-3 mt-3"
+                                      [(ngModel)]="reminderPayload.reminder.time">
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button *ngIf="!loading" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                  (click)="updateReminder()">Save</button>
+                              <button *ngIf="loading" disabled class="btn btn-primary mt-3">
+                                  <span>Saving</span>
+                                  <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px" height="26px">
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
             <!-- Reminder Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
