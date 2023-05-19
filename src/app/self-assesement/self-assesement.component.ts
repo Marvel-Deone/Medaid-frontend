@@ -43,6 +43,7 @@ export class SelfAssesementComponent {
   public getResultStatus: boolean = false;
   selfAssessmentLists: any;
   questionsAnswer: object[] = [];
+  sorted: object[] = [];
 
   // answer: [] = []
 
@@ -113,6 +114,20 @@ export class SelfAssesementComponent {
     
   }
 
+  // removeDuplicate() {
+  //   return this.questionsAnswer.reduce((unique: any, current: any) => {
+  //     const existing = unique.find(
+  //       (person: any) => person.question === current.question && person.answer === current.answer
+  //     );
+  //     const sortedQuestionsAnswers = [];
+  //     if (!existing) {
+  //       sortedQuestionsAnswers.push(current);
+  //     }
+  //     console.log('sortedQuestionsAnswers', sortedQuestionsAnswers);
+  //     ;
+  //   }, []);
+  // }
+
   submit() {
     const answerLength = this.selfAssessmentPayload.answers.length;
     
@@ -149,6 +164,18 @@ export class SelfAssesementComponent {
       }
     }
     console.log('questionsAnswer', this.questionsAnswer);
+    // this.questionsAnswer.reduce((acc: any, obj: any) => {
+    //   const existingObj = acc.find((item : any)=> item.question === obj.question); 
+      
+    //   if (!existingObj) {
+    //     acc.push(obj);
+    //   }
+    
+    //   // console.log('acc', acc);
+      
+    // }, []);
+    
+    // this.removeDuplicate();
 
     // const sortedQuestionsAnswers = this.questionsAnswer.filter((value: any, index, self)=> index === self.findIndex((p: any)=> p.question === value.question && p.answer === value.answer))
     // console.log('sortedQuestionsAnswers', sortedQuestionsAnswers);
@@ -181,20 +208,20 @@ export class SelfAssesementComponent {
         });
       }
     )
-    // this.removeDuplicate()
-  }
 
-  removeDuplicate() {
-    return this.questionsAnswer.reduce((unique: any, current: any) => {
-      const existing = unique.find(
-        (person: any) => person.question === current.question && person.answer === current.answer
-      );
-      const sortedQuestionsAnswers = [];
-      if (!existing) {
-        sortedQuestionsAnswers.push(current);
-      }
-      return sortedQuestionsAnswers;
-    }, []);
+    // this.questionsAnswer.reduce((unique: any, current: any) => {
+    //   const existing = unique.find(
+    //     (person: any) => person.question === current.question && person.answer === current.answer
+    //   );
+    //   const sortedQuestionsAnswers = [];
+    //   if (!existing) {
+    //     sortedQuestionsAnswers.push(current);
+    //   }
+    //   console.log('sortedQuestion', sortedQuestionsAnswers);
+      
+    //   // return sortedQuestionsAnswers;
+    // }, []);
+    // this.removeDuplicate()
   }
 
   updateAlertModal() {

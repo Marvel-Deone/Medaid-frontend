@@ -14,6 +14,7 @@ export class ProfileComponent {
   public errorMessage: any;
 
   public userProfile = {
+    role_id: '',
     firstName: '',
     lastName: '',
     username: '',
@@ -56,6 +57,7 @@ export class ProfileComponent {
         this.userProfile.current_medical_condition = response.profile.current_medical_condition;
         this.userProfile.past_medical_condition = response.profile.past_medical_condition;
         this.userProfile.sosContact = response.profile.sosContact;
+        this.userProfile.role_id = response.profile.role_id;
         this.role_id = response.profile.role_id;
         // this.role_id = 1;
 

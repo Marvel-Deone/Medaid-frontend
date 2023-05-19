@@ -41,14 +41,25 @@ export class SelfAssessmentService {
       return response;
     }));
   }
+  
 
   getSingleSelfAssessment(id: any) {
-    const URI = this.uriseg + '/selfAssessment/' + id;
+    const URI = this.uriseg + '/selfAssessmentAnswer/' + id;
     const token = JSON.parse(localStorage['token']);
 
     return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
       return response;
     }));
   }
+
+  getSelfAssessmentAnswer() {
+    const URI = this.uriseg + '/selfAssessmentAnswer/';
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      return response;
+    }));
+  }
+
 
 }
