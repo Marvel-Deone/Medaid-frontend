@@ -42,6 +42,7 @@ export class SelfAssesementComponent {
   showAlertModal: boolean = false;
   public getResultStatus: boolean = false;
   selfAssessmentLists: any;
+  questionsAnswer: object[] = [];
 
   // answer: [] = []
 
@@ -135,7 +136,23 @@ export class SelfAssesementComponent {
     this.selfAssessmentPayload.questions = this.displayQuestions;
 
     console.log('answers', this.selfAssessmentPayload);
+    const allQuestionSANswer = []
+    let getanswer;
+    for (let i = 0; i < this.displayQuestions.length; i++) {
+      const element = this.displayQuestions[i].Question;
+      for (let i = 0; i < this.selfAssessmentPayload.answers.length; i++) {
+        const answer = this.selfAssessmentPayload.answers[i];
+        this.questionsAnswer.push({
+          question: element,
+          answer: answer
+        });
+      }
+    }
+    console.log('questionsAnswer', this.questionsAnswer);
 
+    // const sortedQuestionsAnswers = this.questionsAnswer.filter((value: any, index, self)=> index === self.findIndex((p: any)=> p.question === value.question && p.answer === value.answer))
+    // console.log('sortedQuestionsAnswers', sortedQuestionsAnswers);
+    
     this.selfAssessmentService.saveSelfAssessmentAnswers(this.selfAssessmentPayload).subscribe(
       data => {
         const response = data;
@@ -144,12 +161,12 @@ export class SelfAssesementComponent {
         this.currentSelfAssementId = this.selfAssessment.data._id;
         console.log('id', this.currentSelfAssementId);
         
-        this._snackBar.open("Answer submitted successfully", "OK", {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'bottom',
-          panelClass: ['green-snackbar', 'login-snackbar'],
-        });
+        // this._snackBar.open("Answer submitted successfully", "OK", {
+        //   duration: 3000,
+        //   horizontalPosition: 'right',
+        //   verticalPosition: 'bottom',
+        //   panelClass: ['green-snackbar', 'login-snackbar'],
+        // });
         this.selfAssessmentPayload.answers = [];
         this.showAlertModal = true;
       },
@@ -164,6 +181,20 @@ export class SelfAssesementComponent {
         });
       }
     )
+    // this.removeDuplicate()
+  }
+
+  removeDuplicate() {
+    return this.questionsAnswer.reduce((unique: any, current: any) => {
+      const existing = unique.find(
+        (person: any) => person.question === current.question && person.answer === current.answer
+      );
+      const sortedQuestionsAnswers = [];
+      if (!existing) {
+        sortedQuestionsAnswers.push(current);
+      }
+      return sortedQuestionsAnswers;
+    }, []);
   }
 
   updateAlertModal() {
