@@ -92,18 +92,8 @@
                 <span class="nav-link-text ms-1">Consultation</span>
             </a>
         </li>
-        <li class="nav-item ms-2" *ngIf="role_id == 1 || role_id == 2">
-            <a class="nav-link text-dark  ms-2" href="https://medaid-delta.vercel.app/blog" target="_blank">
-                <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                    <!-- <i class="material-icons opacity-10">view_in_ar</i> -->
-                    <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
-                        aria-hidden="true"></i>
-                </div>
-                <span class="nav-link-text ms-1">Blog</span>
-            </a>
-        </li>
 
-        <li class="nav-item ms-2" *ngIf="role_id == 3">
+        <li class="nav-item ms-2">
             <a class="nav-link text-dark" routerLink="/admin/blog" routerLinkActive="menu_active">
                 <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
@@ -339,14 +329,7 @@
                     <span>Consultation</span>
                 </a>
 
-                <a *ngIf="role_id == 1 || role_id == 2" href="https://medaid-delta.vercel.app/blog" target="_blank"
-                    class="px-2 py-2 d-flex gap-2 align-items-center ms-2" style="color: #344767 !important;">
-                    <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
-                        aria-hidden="true"></i>
-                    <span>Blog</span>
-                </a>
-
-                <a *ngIf="role_id == 3" routerLink="/admin/blog" routerLinkActive="menu_active"
+                <a routerLink="/admin/blog" routerLinkActive="menu_active"
                     class="px-1 py-3 d-flex gap-2 align-items-center ms-2" style="color: #344767 !important;">
                     <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
                         aria-hidden="true"></i>
@@ -905,10 +888,10 @@
                         <div class="row mt-2">
                             <div class="col-12 col-lg-12 px-3 mt-3">
                                 <div class="d-flex">
-                                    <label for="" *ngFor="let question of selfAssessmentLists.questions; let i = index;"
+                                    <!-- <label for="" *ngFor="let question of selfAssessmentLists.questions; let i = index;"
                                     class="form-check-label text-body text-truncate w-80 mb-0 fw-bold"
                                     style="color: #000000D9 !important;">{{question.Question}}</label>
-                                    <p *ngFor="let answer of selfAssessmentLists.answers">{{answer}}</p>
+                                    <p *ngFor="let answer of selfAssessmentLists.answers">{{answer}}</p> -->
                                 </div>
                                     <!-- <p>{{answer}}</p> -->
                                 <!-- <input type="text" class="form-control px-3 py-1 input-outline2" id=""

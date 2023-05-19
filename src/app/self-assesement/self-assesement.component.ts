@@ -42,6 +42,7 @@ export class SelfAssesementComponent {
   showAlertModal: boolean = false;
   public getResultStatus: boolean = false;
   selfAssessmentLists: any;
+  obj:any
 
   // answer: [] = []
 
@@ -179,6 +180,51 @@ export class SelfAssesementComponent {
         this.selfAssessment = response;
         this.selfAssessmentLists = this.selfAssessment.selfAssessment;
         console.log('response', this.selfAssessment.selfAssessment);
+        const questionAnswer = [
+          {
+            question: 'How is your pregnancy going? How are you feeling?',
+            answer: 'Good thanks'
+          }
+        ]
+        const myAnswer = [];
+        this.obj = {
+          question: '',
+          answer: ''
+        }
+        for (let i = 0; i < this.selfAssessmentLists.questions.length; i++) {
+          const element = this.selfAssessmentLists.questions[i];
+          // console.log('element', element);
+          
+          // obj.question = this.selfAssessmentLists.questions[i].Question;
+
+          
+          questionAnswer.push(this.selfAssessmentLists.questions[i].Question);
+          // console.log('QuestionAnswer', questionAnswer);
+        }
+
+        for (let i = 0; i < this.selfAssessmentLists.answers.length; i++) {
+          const element = this.selfAssessmentLists.answers[i];
+          // console.log('element', element);
+          
+          // obj.question = this.selfAssessmentLists.questions[i].Question;
+
+          
+          myAnswer.push(this.selfAssessmentLists.answers[i]);
+          // console.log('QuestionAnswer', myAnswer);
+        }
+        
+        console.log('QuestionAnswer', questionAnswer, 'QuestionAnswer', myAnswer);
+
+        const questionsAnswersArr = [
+          ...questionAnswer.map(value => ({ label: 'questions', value })),
+          ...myAnswer.map(value => ({ label: 'answers', value }))
+        ];
+
+        // const questionsAnswersArr = questionAnswer.concat(myAnswer);
+        console.log('questionsAnswersArr', questionsAnswersArr);
+        
+        
+        
       })
   }
 }
