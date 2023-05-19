@@ -37,7 +37,10 @@ export class EmergencyInformationComponent {
 
   sosContactInfo: Object[] = [];
   sosContactPayload: any = {
+    firstName:"",
+    lastName :'',
     username: '',
+    phone:'',
     email: '',
     sosContact: {
       contact_name: '',
@@ -151,6 +154,8 @@ export class EmergencyInformationComponent {
   }
 
   addSosContact() {
+    console.log(this.userProfile);
+    
     console.log('sosContactPayload', this.sosContactPayload);
     this.loading = true;
     if (this.sosContactPayload.sosContact.contact_name == null || this.sosContactPayload.sosContact.contact_number == null) {
@@ -164,6 +169,11 @@ export class EmergencyInformationComponent {
     } else {
       this.sosContactPayload.username = this.userProfile.username;
       this.sosContactPayload.email = this.userProfile.email;
+      this.sosContactPayload.firstName=this.userProfile.firstName
+      this.sosContactPayload.lastName=this.userProfile.lastName
+      
+      this.sosContactPayload.phone=this.userProfile.phone
+      
       console.log('sosContact:', this.sosContactPayload);
 
 

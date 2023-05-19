@@ -404,16 +404,42 @@
                     <button class="btn btn-primary" style="font-size: 10px;" (click)="callNow()">Call Now</button>
                 </div>
             </a>
-            <!-- <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
+            <a  class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
                 <div class="d-flex gap-2 align-items-center">
                     <i class="material-icons opacity-10">dashboard</i>
                     <span>Chat</span>
                 </div>
                 <div style="transform: translateY(15%);">
-                    <button class="btn btn-primary" style="font-size: 10px;">Chat Now</button>
+                    <button class="btn btn-primary" style="font-size: 10px;" (click)="showChatArea()">Chat Now</button>
                 </div>
-            </a> -->
+                
+            </a> 
+          <div  *ngIf="showChatDiv" >
+              <mat-form-field class="col-12 col-md-3 d-flex justify-content-center">
+                  <mat-label>Pick your Condition</mat-label>
+                  <mat-select (selectionChange)="onConditionSelected($event.value)" [(ngModel)]="selectedCondition">
+                    <mat-option *ngFor="let condition of conditions" [value]="condition.value">
+                      {{condition.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                
+                <textarea name="" id="" cols="30" rows="10" *ngIf="showTextArea" [(ngModel)]="textAreaValue"></textarea>
+  
+              
+             
+                <div style="transform: translateY(15%);">
+                    <button class="btn btn-primary " style="font-size: 10px;" (click)="logButtonClicked()" [disabled]="selectedCondition==''">Chat Now</button>
+                </div>
+                
+
+          </div>
+        
+        
+              
+            
+
             <!-- <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
                 <div class="d-flex gap-2 align-items-center">
@@ -464,9 +490,11 @@
                     <tbody >
                       <tr *ngFor="let contact of emergencyContacts; let i= index">
                         <th scope="row">{{i+1}}</th>
-                        <td>{{contact.contactName
+                        <td>{{contact.sosContact.contact_name
+
+
                         }}</td>
-                        <td>{{contact.contactNumber
+                        <td>{{contact.sosContact.contact_number
                         }}</td>
                      
                       </tr>
