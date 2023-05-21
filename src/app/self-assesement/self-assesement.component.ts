@@ -35,14 +35,12 @@ export class SelfAssesementComponent {
     username: '',
     email: '',
     category: '',
-    questions: [],
-    answers: []
+    questionsAnswers: [],
   }
   selfAssessment: any;
   showAlertModal: boolean = false;
   public getResultStatus: boolean = false;
   selfAssessmentLists: any;
-  obj:any
 
   // answer: [] = []
 
@@ -104,38 +102,25 @@ export class SelfAssesementComponent {
       const element = this.selfAssessments[i];
       if (this.selfAssessments[i].Category == this.selectedCategory) {
         selfAssessment.push(this.selfAssessments[i]);
-        // console.log();
       }
     }
     this.displayQuestions = selfAssessment;
-    // this.count = this.displayQuestions.length
     console.log('displayQuestions', this.displayQuestions);
     
   }
 
   submit() {
-    const answerLength = this.selfAssessmentPayload.answers.length;
-    
-    // for (let i = 0; i < this.selfAssessmentPayload.answers.length; i++) {
-    //   const element = this.selfAssessmentPayload.answers[i];
-    //   if (element == null) {
-        
-    //   }
-    // }
-
-    // if (this.selfAssessmentPayload.answers.some(element => !element)) {
-    //   console.log("Empty answer");
-    // }else {
-    //   console.log('No empty answer');
-      
-    // }
-
     this.selfAssessmentPayload.username = this.userProfile.username;
     this.selfAssessmentPayload.email = this.userProfile.email;
     this.selfAssessmentPayload.category = this.selectedCategory;
-    this.selfAssessmentPayload.questions = this.displayQuestions;
-
-    console.log('answers', this.selfAssessmentPayload);
+    
+    const questionAnswerPayload = [];
+    
+    for (let i = 0; i < this.answers.length; i++) {
+      const element = this.answers[i];
+      questionAnswerPayload.push({question: this.displayQuestions[i].Question, answer: element});
+    }
+    this.selfAssessmentPayload.questionsAnswers = questionAnswerPayload;
 
     this.selfAssessmentService.saveSelfAssessmentAnswers(this.selfAssessmentPayload).subscribe(
       data => {
@@ -178,53 +163,14 @@ export class SelfAssesementComponent {
       data => {
         const response = data;
         this.selfAssessment = response;
-        this.selfAssessmentLists = this.selfAssessment.selfAssessment;
-        console.log('response', this.selfAssessment.selfAssessment);
-        const questionAnswer = [
-          {
-            question: 'How is your pregnancy going? How are you feeling?',
-            answer: 'Good thanks'
-          }
-        ]
-        const myAnswer = [];
-        this.obj = {
-          question: '',
-          answer: ''
-        }
-        for (let i = 0; i < this.selfAssessmentLists.questions.length; i++) {
-          const element = this.selfAssessmentLists.questions[i];
-          // console.log('element', element);
-          
-          // obj.question = this.selfAssessmentLists.questions[i].Question;
-
-          
-          questionAnswer.push(this.selfAssessmentLists.questions[i].Question);
-          // console.log('QuestionAnswer', questionAnswer);
-        }
-
-        for (let i = 0; i < this.selfAssessmentLists.answers.length; i++) {
-          const element = this.selfAssessmentLists.answers[i];
-          // console.log('element', element);
-          
-          // obj.question = this.selfAssessmentLists.questions[i].Question;
-
-          
-          myAnswer.push(this.selfAssessmentLists.answers[i]);
-          // console.log('QuestionAnswer', myAnswer);
-        }
+        console.log('selfAssessment', response);
         
-        console.log('QuestionAnswer', questionAnswer, 'QuestionAnswer', myAnswer);
-
-        const questionsAnswersArr = [
-          ...questionAnswer.map(value => ({ label: 'questions', value })),
-          ...myAnswer.map(value => ({ label: 'answers', value }))
-        ];
-
-        // const questionsAnswersArr = questionAnswer.concat(myAnswer);
-        console.log('questionsAnswersArr', questionsAnswersArr);
-        
-        
-        
+        this.selfAssessmentLists = this.selfAssessment.selfAssessment.questionsAnswers;
+        console.log('response', this.selfAssessmentLists);
       })
+  }
+
+  cancel() {
+    this.getResultStatus = false;
   }
 }

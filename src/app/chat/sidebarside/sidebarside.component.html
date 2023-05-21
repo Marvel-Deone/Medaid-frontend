@@ -1,14 +1,14 @@
 <div class="header">
     <div class="avater">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
+        <img src="../../assets/img/dommy.png" alt="">
     </div>
     <div class="chat-header-right">
-        <span class="material-symbols-sharp">
+        <!-- <span class="material-symbols-sharp">
             tips_and_updates
             </span>
         <span class="material-symbols-sharp">
             tips_and_updates
-            </span>
+            </span> -->
             
         
     </div>
@@ -26,14 +26,14 @@
 <div class="sidebar-chats">
     <div class="sidebar-chat"  (click)="onClickChat(i)" *ngFor="let user of allUsers; let i = index "> 
             <div class="chat-avater" style="cursor: pointer;">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSijwVvppJlNi16cZ-RJPCyARktcKProp1bwQ&usqp=CAU" alt="">
+                <img src="../../assets/img/dommy.png" alt="">
             </div>
             <div class="chat-info" style="cursor: pointer;">
                 <h4>{{user.username}}</h4>
                 <!-- <p>Last message</p> -->
             </div>
             <div class="time">
-                <div *ngIf="userProfile.role_id == 1" class="bg-primary" style="width: 10px; height: 10px; border-radius: 50%;"></div>
-                <div *ngIf="userProfile.role_id == 2" style="width: 10px; height: 10px; border-radius: 50%; background-color: green;"></div>
+                <div *ngIf="user.role_id == 1" class="bg-primary" style="width: 10px; height: 10px; border-radius: 50%;"></div>
+                <div *ngIf="user.role_id === 2" style="width: 10px; height: 10px; border-radius: 50%; background-color: green;"></div>
     </div>
 </div>

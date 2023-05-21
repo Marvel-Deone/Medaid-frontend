@@ -29,8 +29,8 @@ export class EmailVeryComponent {
       panelClass: ['green-snackbar', 'login-snackbar'],
      });
   }else{ 
-    this.service.VerifyEmail({userpin:this.userPin,email:this.userEmail}).subscribe((item:any)=>{
-      this.response= item
+    this.service.VerifyEmail({userpin:this.userPin,email:this.userEmail}).subscribe((res)=>{
+      this.response= res
       console.log(this.response);
       
       
@@ -42,7 +42,6 @@ export class EmailVeryComponent {
           panelClass: ['green-snackbar', 'login-snackbar'],
          });
          sessionStorage.removeItem('med-email');
-
          this.router.navigate(['/sign-in'])
       }else{
         this._snackBar.open(this.response.message, "OK", {

@@ -14,7 +14,7 @@ export class ExpertService {
   sendPin(cpin:any){
     return this.http.post(`${this.uriseg}/expert/sendpin`,cpin)
   }
-
+  
   signup(data:any){
     return this.http.post(`${this.uriseg}/expert/signup`,data)
   }

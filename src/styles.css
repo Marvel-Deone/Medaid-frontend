@@ -116,34 +116,44 @@ label {
 .mobileMenu-aside {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     overflow-y: auto;
     flex-shrink: 0;
-    width: 16rem;
+    width: 17rem;
     height: 100%;
     position: fixed;
 }
 
-.mobileMenu-div {
+.getResult {
+    background-color: #00000080;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    padding: 30px;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+}
+
+.getResult-div {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    display: flex !important;
+    /* display: flex !important; */
     margin: 0 auto !important;
     padding-top: 1rem;
     padding-bottom: 1rem;
     overflow-y: auto;
     flex-shrink: 0;
-    width: 80%;
+    width: 94%;
     height: 100%;
-    position: fixed;
-    top: 5%;
-    left: 10%;
-    right: 20%;
+    /* position: fixed; */
 }
 
 .menu_active {

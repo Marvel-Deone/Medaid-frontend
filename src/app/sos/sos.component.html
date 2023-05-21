@@ -53,14 +53,14 @@
                 <span class="nav-link-text ms-1">Emergency Information</span>
             </a>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
                     <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <span class="nav-link-text ms-1">SOS</span>
                     </a>
-                </li> -->
+                </li>
         <li class="nav-item">
             <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="menu_active">
                 <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -92,8 +92,18 @@
                 <span class="nav-link-text ms-1">Consultation</span>
             </a>
         </li>
+        <li class="nav-item ms-2" *ngIf="role_id == 1 || role_id == 2">
+            <a class="nav-link text-dark  ms-2" href="https://medaid-delta.vercel.app/blog" target="_blank">
+                <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                    <!-- <i class="material-icons opacity-10">view_in_ar</i> -->
+                    <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
+                        aria-hidden="true"></i>
+                </div>
+                <span class="nav-link-text ms-1">Blog</span>
+            </a>
+        </li>
 
-        <li class="nav-item ms-2">
+        <li class="nav-item ms-2" *ngIf="role_id == 3">
             <a class="nav-link text-dark" routerLink="/admin/blog" routerLinkActive="menu_active">
                 <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
@@ -329,7 +339,14 @@
                     <span>Consultation</span>
                 </a>
 
-                <a routerLink="/admin/blog" routerLinkActive="menu_active"
+                <a *ngIf="role_id == 1 || role_id == 2" href="https://medaid-delta.vercel.app/blog" target="_blank"
+                    class="px-2 py-2 d-flex gap-2 align-items-center ms-2" style="color: #344767 !important;">
+                    <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
+                        aria-hidden="true"></i>
+                    <span>Blog</span>
+                </a>
+
+                <a *ngIf="role_id == 3" routerLink="/admin/blog" routerLinkActive="menu_active"
                     class="px-1 py-3 d-flex gap-2 align-items-center ms-2" style="color: #344767 !important;">
                     <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
                         aria-hidden="true"></i>
@@ -368,13 +385,7 @@
         <!-- MiniNav -->
         <nav class="navbar navbar-expand-lg px-0 mb-3 shadow-none" id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid px-3 d-flex align-items-center">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 px-0 me-sm-6 me-5 d-flex flex-column">
-                    <li class="fw-bolder">Adegbile Isreal</li>
-                    <li> <strong style="font-size: 12px; font-weight: bolder;">.</strong><a routerLink="/profile"
-                            class=" text-dark"> Male, 40
-                            years old</a>
-                    </li>
-                </ol>
+               
                 <div>
                     <button class="btn btn-primary mt-4"><a routerLink="/profile" class="text-white">AB+</a></button>
                 </div>
@@ -383,27 +394,53 @@
 
         <!-- cards -->
         <div class="row gap-5 px-4">
-            <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
+            <a  class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
                 <div class="d-flex gap-2 align-items-center">
                     <i class="material-icons opacity-10">dashboard</i>
                     <span>Call</span>
                 </div>
                 <div style="transform: translateY(15%);">
-                    <button class="btn btn-primary" style="font-size: 10px;">Call Now</button>
+                    <button class="btn btn-primary" style="font-size: 10px;" (click)="callNow()">Call Now</button>
                 </div>
             </a>
-            <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
+            <a  class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
                 <div class="d-flex gap-2 align-items-center">
                     <i class="material-icons opacity-10">dashboard</i>
                     <span>Chat</span>
                 </div>
                 <div style="transform: translateY(15%);">
-                    <button class="btn btn-primary" style="font-size: 10px;">Chat Now</button>
+                    <button class="btn btn-primary" style="font-size: 10px;" (click)="showChatArea()">Chat Now</button>
                 </div>
-            </a>
-            <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
+                
+            </a> 
+          <div  *ngIf="showChatDiv" >
+              <mat-form-field class="col-12 col-md-3 d-flex justify-content-center">
+                  <mat-label>Pick your Condition</mat-label>
+                  <mat-select (selectionChange)="onConditionSelected($event.value)" [(ngModel)]="selectedCondition">
+                    <mat-option *ngFor="let condition of conditions" [value]="condition.value">
+                      {{condition.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                
+                <textarea name="" id="" cols="30" rows="10" *ngIf="showTextArea" [(ngModel)]="textAreaValue"></textarea>
+  
+              
+             
+                <div style="transform: translateY(15%);">
+                    <button class="btn btn-primary " style="font-size: 10px;" (click)="logButtonClicked()" [disabled]="selectedCondition==''">Chat Now</button>
+                </div>
+                
+
+          </div>
+        
+        
+              
+            
+
+            <!-- <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
                 <div class="d-flex gap-2 align-items-center">
                     <i class="material-icons opacity-10">dashboard</i>
@@ -412,7 +449,7 @@
                 <div style="transform: translateY(15%);">
                     <button class="btn btn-primary" style="font-size: 10px;">Get Now</button>
                 </div>
-            </a>
+            </a> -->
         </div>
 
         <!-- Timer -->
@@ -424,20 +461,54 @@
                 </div>
                 <div>
                     <h3 class="text-center">Sending Emergency Alert</h3>
-                    <p class="text-center fw-bold" style="font-size: 14px;">SOS Will sent when the timer off</p>
+                    <p class="text-center fw-bold" style="font-size: 14px;">SOS will be sent when the is timer off</p>
                 </div>
             </div>
             <div class="rounded-circle d-flex mx-auto mt-3"
                 style="border: 1px solid #d2d6da; width: 185px; height: 185px; box-shadow: 0 0 0 1rem rgba(221,221,221, 0.5); cursor: pointer;">
-                <div class="rounded-circle shadow bg-primary sos_timer text-center">
-                    <div class="" style="margin-top: 4rem;">
-                        <strong class="fw-bold text-white" style="font-size: 26px;">00 : 29</strong>
+                <div class="rounded-circle shadow bg-danger sos_timer text-center">
+                    <div class="" style="margin-top: 4rem;" (click)="stopCountdown()">
+                        <strong class="fw-bold text-white" style="font-size: 26px;">00:{{countdown}}</strong>
                         <p class="text-light" style="font-size: 13px;">Seconds</p>
                     </div>
                 </div>
             </div>
 
             <p class="text-center mt-4 fw-bolder" style="color: #aaa; font-size: 17px;">Tap the timer to stop</p>
+
+            <div class="">
+                <h4>List of Emergency Contacts</h4>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Contact</th>
+                     
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr *ngFor="let contact of emergencyContacts; let i= index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{contact.sosContact.contact_name
+
+
+                        }}</td>
+                        <td>{{contact.sosContact.contact_number
+                        }}</td>
+                     
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 px-0 me-sm-6 me-5 d-flex flex-column">
+                    <li class="fw-bolder">Adegbile Isreal</li>
+                    <li> <strong style="font-size: 12px; font-weight: bolder;">08082882882</strong><a routerLink="/profile"
+                            class=" text-dark"> </a>
+                    </li>
+                </ol> -->
+
+            </div>
         </div>
     </div>
 

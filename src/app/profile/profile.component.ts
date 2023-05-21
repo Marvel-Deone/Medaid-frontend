@@ -14,6 +14,7 @@ export class ProfileComponent {
   public errorMessage: any;
 
   public userProfile = {
+    role_id: '',
     firstName: '',
     lastName: '',
     username: '',
@@ -41,7 +42,7 @@ export class ProfileComponent {
       data => {
         const response = data;
         console.log('response: ', response);
-
+        this.userProfile.role_id = response.profile.role_id;
         this.userProfile.firstName = response.profile.firstName;
         this.userProfile.lastName = response.profile.lastName;
         this.userProfile.middleName = response.profile.middleName;

@@ -27,8 +27,10 @@ export class TellmeComponent {
   constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, public http: HttpClient, private changeDetectorRef: ChangeDetectorRef, private quoteService: QuoteService) { }
   ngOnInit(): void {
     this.quoteService.Getquote().subscribe((res: any) => {
-      this.quotes = res.quotes;
+      this.quotes = res.data;
       this.selectedQuote = this.quotes[Math.floor(Math.random() * this.quotes.length)];
+      console.log(this.quotes);
+      
     });
 
     this.userToken = JSON.parse(localStorage['token']);
