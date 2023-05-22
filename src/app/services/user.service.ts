@@ -17,7 +17,10 @@ export class UserService {
   expertProfile: any;
 
   constructor(private http: HttpClient) { }
-
+  checkUniqueDetailsandsendMail(inputdata:any){
+    const URI = this.uriseg + '/auth/sendVerificationPin';
+    return this.http.post(URI, inputdata)
+  }
   Register(inputdata: any) {
     const URI = this.uriseg + '/auth/register';
 

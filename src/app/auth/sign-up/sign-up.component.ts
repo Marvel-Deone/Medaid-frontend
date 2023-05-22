@@ -69,42 +69,21 @@ export class SignUpComponent {
   ) {}
 
   firstFormGroup = this.fb.group({
-    username: [
-      '',
-      [Validators.required,
-        Validators.minLength(2)
-      ]
-    ],
-    email: [
-      '',
-      [Validators.required,
-         Validators.email
-        ]
-    ],
-    phone: [
-      '',
-
-       [Validators.required, Validators.minLength(10)]
-    ],
+    username: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['', [Validators.required, Validators.minLength(10)]],
     password: [
       '',
-        [Validators.required, Validators.minLength(8), //Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
-        ]
+      [
+        Validators.required,
+        Validators.minLength(8), //Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+      ],
     ],
   });
   secondFormGroup = this.fb.group({
-    selectedJob: [
-      '',
-      [Validators.required,]
-    ],
-    placeofwork: [
-      '',
-       [Validators.required, Validators.minLength(10)]
-    ],
-    yearofprac: [
-      '',
-      [Validators.required, Validators.minLength(2)]
-    ],
+    selectedJob: ['', [Validators.required]],
+    placeofwork: ['', [Validators.required, Validators.minLength(10)]],
+    yearofprac: ['', [Validators.required, Validators.minLength(2)]],
   });
   thirdFormGroup = this.fb.group({
     recordedvideo: [this.recordedData, Validators.required],
@@ -144,47 +123,53 @@ export class SignUpComponent {
   get signup() {
     return this.signupForm.controls;
   }
-
   onSubmit(form: FormGroup) {
     this.loading = true;
-    sessionStorage.setItem('med-email', form.value.email);
-    this.service.Register(form.value).subscribe(
-      (item) => {
+    const confirm_pin = Math.floor(100000 + Math.random() * 900000);
+    const userObj = {
+      email: form.value.email,
+      phone: form.value.phone,
+      username: form.value.username,
+      pin: confirm_pin.toString(),
+      password: form.value.password,
+      confirm_password: form.value.confirm_password,
+    };
+
+    this.service.checkUniqueDetailsandsendMail(userObj).subscribe(
+      (item: any) => {
         this.respdata = item;
+        if (this.respdata.status === true) {
+          const data = { ...form.value, pin: confirm_pin.toString() };
+          sessionStorage.setItem('med_aid', JSON.stringify(data));
+          this.router.navigate(['email-verification']);
+        } else if (this.respdata.status === false) {
+          this.loading = false;
+          this._snackBar.open(this.respdata.message, 'OK', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+        }
         this.loading = false;
-        // this._snackbar.open("Registration Successful", "X");
-        this._snackBar.open('Registeration Successful!', 'OK', {
+      },
+      (errorResponse: any) => {
+        this.loading = false;
+        console.log(errorResponse);
+        const errorMessage =
+          errorResponse.error.message || 'An error occurred. Please try again.';
+        console.log('Registration Failed:', errorMessage);
+
+        this._snackBar.open(errorMessage, 'OK', {
           duration: 3000,
           horizontalPosition: 'right',
           verticalPosition: 'bottom',
           panelClass: ['green-snackbar', 'login-snackbar'],
         });
-
-        this.router.navigate(['email-verification']);
-        this.loading = false;
-      },
-      (errorResponse) => {
-        this.loading = false;
-        this.errorMessage = errorResponse.error.message;
-        this.status = errorResponse.error.status;
-        console.log('Registration Failed', errorResponse.error.message);
-        this.errorMessage
-          ? this._snackBar.open(this.errorMessage, 'OK', {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-            })
-          : this._snackBar.open('Pls check your internet connection', 'OK', {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-              panelClass: ['green-snackbar', 'login-snackbar'],
-            });
-        // this._snackbar.open(errorResponse.error.message, "X");
       }
     );
   }
+
   async toggleRecording() {
     if (this.isRecording) {
       this.stopRecording();
