@@ -1,8 +1,10 @@
+import { SelfAssessmentService } from './../services/self-assessment/self-assessment.service';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { MedicationReminderService } from '../services/medicationReminder/medication-reminder.service';
+// import { SelfAssessmentService } from '../services/self-assessment/self-assessment.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,9 +24,11 @@ export class DashboardComponent {
   public showmenu: boolean = false;
   totalMedication: any;
   totalReminder: any;
+  totalSelfAssessment: any;
+  username: any;
 
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private medicationReminderService: MedicationReminderService) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private medicationReminderService: MedicationReminderService, private selfAssessmentAnswer: SelfAssessmentService) { }
   ngOnInit(): void {
     this.userToken = JSON.parse(localStorage['token']);
 
@@ -45,6 +49,25 @@ export class DashboardComponent {
 
       }
     );
+    // this.service.GetProfileExpert().subscribe(
+    //   data => {
+    //     const response = data;
+    //     console.log('response', response);
+
+    //     this.userProfile = response.profile;
+    //     this.username = this.userProfile.username;
+        
+
+    //     console.log('userProfile', this.userProfile.sosContact);
+
+    //     this.role_id = this.userProfile.role_id;
+    //   },
+    //   error => {
+    //     const errorResponse = error;
+    //     console.log('errorResponse', errorResponse);
+
+    //   }
+    // );
 
     this.service.GetDashboard(this.userToken).subscribe(
       item => {
@@ -78,6 +101,20 @@ export class DashboardComponent {
           this.totalMedication = response.medications.length;
           console.log('medications', this.totalMedication);
         }
+      },
+      error => {
+        const errorResponse = error;
+        console.log('errorResponse', errorResponse);
+
+      }
+    )
+
+    this.selfAssessmentAnswer.getSelfAssessmentAnswer().subscribe(
+      data => {
+        const response = data;
+        console.log('selfAssessment', response);
+        // this.totalSelfAssessment = response.selfAssessments.length;
+        // console.log('medications', this.totalSelfAssessment);
       },
       error => {
         const errorResponse = error;

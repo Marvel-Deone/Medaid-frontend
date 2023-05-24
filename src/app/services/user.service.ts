@@ -14,9 +14,13 @@ export class UserService {
   userProfile: any;
   public currentChatPicked: any
   sosContact: any;
+  expertProfile: any;
 
   constructor(private http: HttpClient) { }
-
+  checkUniqueDetailsandsendMail(inputdata:any){
+    const URI = this.uriseg + '/auth/sendVerificationPin';
+    return this.http.post(URI, inputdata)
+  }
   Register(inputdata: any) {
     const URI = this.uriseg + '/auth/register';
 
@@ -55,6 +59,19 @@ export class UserService {
       return this.userProfile;
     }));
   }
+  GetProfileExpert() {
+    const URI = this.uriseg + '/user/expertprofile';
+    const token = JSON.parse(localStorage['token']);
+    this.header = { headers: { Authorization: `${token}` } };
+
+
+    return this.http.get(URI, this.header).pipe(map(response => {
+      this.expertProfile = response;
+      return this.expertProfile;
+    }));
+  }
+
+ 
 
   UpdateProfile(inputdata: any) {
     const URI = this.uriseg + '/user/updateProfile';
