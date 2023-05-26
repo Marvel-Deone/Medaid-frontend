@@ -46,6 +46,8 @@ import { MatInputModule } from '@angular/material/input';
 import { TellmeComponent } from './tellme/tellme.component';
 import { ExpertSigninComponent } from './auth/expert-signin/expert-signin.component';
 import { ConsultationComponent } from './consultation/consultation.component';
+// import { PdfmakeModule } from 'pdfmake';
+
 
 registerLocaleData(en);
 

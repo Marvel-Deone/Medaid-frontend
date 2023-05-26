@@ -21,6 +21,7 @@ export class SosComponent {
     username: '',
     selectedJob: '',
     sosContact: [],
+    is_profileComplete: false
   };
   sosContactPayload: any = {
     username: '',
@@ -67,6 +68,7 @@ export class SosComponent {
         const response = data;
         console.log('response', response);
         this.userProfile = response.profile;
+        this.userProfile.is_profileComplete = response.profile.is_profileComplete;
         this.role_id = this.userProfile.role_id;
         this.firstName = this.userProfile.firstName;
         this.lastName = this.userProfile.lastName;
@@ -99,6 +101,9 @@ export class SosComponent {
     // alert(this.showmenu);
   }
   startCountdown(): void {
+    
+    if (this.userProfile.is_profileComplete) {
+    console.log('countdown start');
     this.countdownInterval = setInterval(() => {
       this.countdown--;
 
@@ -110,6 +115,7 @@ export class SosComponent {
         this.callNow();
       }
     }, 1000);
+  }
   }
   stopCountdown(): void {
     clearInterval(this.countdownInterval);

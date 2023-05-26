@@ -16,6 +16,7 @@ export class EmergencyInformationComponent {
   public showModal: boolean = false;
 
   public userProfile: any = {
+    role_id: '',
     firstName: '',
     lastName: '',
     username: '',
@@ -78,6 +79,7 @@ export class EmergencyInformationComponent {
         this.userProfile.allergies = response.profile.allergies;
         this.userProfile.medication = response.profile.medication;
         this.userProfile.medical_note = response.profile.medical_note;  
+        this.userProfile.role_id = response.profile.role_id;  
         // this.userProfile.sosContact = response.profile.sosContact;
 
         // this.userSosContacts = response.profile.sosContact;

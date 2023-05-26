@@ -53,6 +53,7 @@
                 <span class="nav-link-text ms-1">Emergency Information</span>
             </a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
                 <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -147,9 +148,11 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group input-group-outline">
-                        <label class="form-label">Type here...</label>
-                        <input type="text" class="form-control">
+                    <div class="input-group input-group-outline bg-danger complete_profile"
+                        style="cursor: pointer !important;">
+                        <a routerLink="/profile" class="text-white">Complete your profile</a>
+                        <!-- <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control"> -->
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -279,79 +282,75 @@
                     <i class="material-icons opacity-10">dashboard</i>
                     <span>Dashboard</span>
                 </a>
-    
+
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8 mb-2">Personal
                 </h6>
-    
+
                 <a routerLink="/self-assessement" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="fa fa-comment material-icons opacity-10" aria-hidden="true"></i>
                     <span>Self Assesment</span>
                 </a>
-    
+
                 <a routerLink="/medication-reminder" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="fa fa-hospital-o material-icons opacity-10" aria-hidden="true"></i>
                     <span>Medication & Reminder</span>
                 </a>
-    
+
                 <a routerLink="/emergency-information" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10 fa fa-info-circle" aria-hidden="true"></i>
                     <span>Emergency Information</span>
                 </a>
-    
+
+                <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
+                    style="color: #344767 !important;">
+                    <i class="material-icons opacity-10">person</i>
+                    <span>SOS</span>
+                </a>
+
                 <a routerLink="/profile" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
                     <span>Profile</span>
                 </a>
-    
+
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account
                 </h6>
-    
-                <!-- <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
-                    style="color: #344767 !important;">
-                    <i class="material-icons opacity-10">person</i>
-                    <span>SOS</span>
-                </a> -->
-    
+
                 <a routerLink="/chat" class="px-2 py-2 d-flex gap-2 align-items-center"
                     style="color: #344767 !important;">
                     <i class="fa fa-comment-o material-icons opacity-10" aria-hidden="true"
                         style="font-size: 18px !important;"></i>
                     <span>Forum</span>
                 </a>
-    
+
                 <a routerLink="/consultation" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
                     <span>Consultation</span>
                 </a>
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> c5b421ef88e7167bac7fa1c3c63498a0b60f1a2e
                 <a routerLink="/admin/blog" routerLinkActive="menu_active"
                     class="px-1 py-3 d-flex gap-2 align-items-center ms-2" style="color: #344767 !important;">
                     <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
                         aria-hidden="true"></i>
                     <span>Blog</span>
                 </a>
-    
+
                 <a routerLink="/tell-me" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                     <span>Tell me</span>
                 </a>
-    
+
                 <a routerLink="/notifications" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
                     <span>Notification</span>
                 </a>
-    
+
                 <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
                     <div>
                         <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
@@ -363,8 +362,8 @@
             </div>
         </aside>
         <!-- <div style="position: fixed !important; display: flex !important; justify-items: end !important;">
-                                            <mat-icon class="bg-danger">clear</mat-icon>
-                                        </div> -->
+                                        <mat-icon class="bg-danger">clear</mat-icon>
+                                    </div> -->
     </div>
     <!-- End Navbar -->
 
@@ -667,7 +666,7 @@
                                     </div>
 
                                 </ul>
-                               <div class="save_btn mt-2">
+                                <div class="save_btn mt-2">
                                     <button *ngIf="!submitloading" class="btn btn-primary mt-3"
                                         (click)="submit()">Submit</button>
                                     <button *ngIf="submitloading" disabled class="btn btn-primary mt-3">
@@ -904,22 +903,24 @@
         </div>
 
         <div #contentToConvert class="getResult-div px-3 mb-5">
-                <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
-                    Question: {{selfAssessmentList.question}}
-                    Answer: {{selfAssessmentList.answer}}
-                </div>
+            <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
+                Question: {{selfAssessmentList.question}}
+                Answer: {{selfAssessmentList.answer}}
+            </div>
         </div>
 
         <div class="my-getResult-div px-3 mb-5">
-            <div class="getResult-div px-3 mb-5"><p>Hi</p></div>
-                <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
-                    Question: {{selfAssessmentList.question}}
-                    Answer: {{selfAssessmentList.answer}}
-                </div>
+            <div class="getResult-div px-3 mb-5">
+                <p>Hi</p>
+            </div>
+            <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
+                Question: {{selfAssessmentList.question}}
+                Answer: {{selfAssessmentList.answer}}
+            </div>
         </div>
     </div>
 
-    
+
 </main>
 <div *ngIf="getResultStatus" class="">
     <div class="myres px-3 mb-5">

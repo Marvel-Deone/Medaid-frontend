@@ -53,14 +53,15 @@
                 <span class="nav-link-text ms-1">Emergency Information</span>
             </a>
         </li>
-        <!-- <li class="nav-item">
+
+        <li class="nav-item">
                     <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <span class="nav-link-text ms-1">SOS</span>
                     </a>
-                </li> -->
+                </li>
         <li class="nav-item">
             <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="menu_active">
                 <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -147,9 +148,10 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group input-group-outline">
-                        <label class="form-label">Type here...</label>
-                        <input type="text" class="form-control">
+                    <div class="input-group input-group-outline bg-danger complete_profile" style="cursor: pointer !important;">
+                        <a routerLink="/profile" class="text-white">Complete your profile</a>
+                        <!-- <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control"> -->
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -301,6 +303,12 @@
                     <span>Emergency Information</span>
                 </a>
 
+                <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
+                style="color: #344767 !important;">
+                <i class="material-icons opacity-10">person</i>
+                <span>SOS</span>
+                </a>
+
                 <a routerLink="/profile" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
@@ -309,12 +317,6 @@
 
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account
                 </h6>
-
-                <!-- <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
-                    style="color: #344767 !important;">
-                    <i class="material-icons opacity-10">person</i>
-                    <span>SOS</span>
-                </a> -->
 
                 <a routerLink="/chat" class="px-2 py-2 d-flex gap-2 align-items-center"
                     style="color: #344767 !important;">
@@ -403,12 +405,35 @@
                                 <ul class="list-group">
                                     <div class="row mt-2">
                                         <div class="col-12">
+                                          <label class="form-check-label text-body text-truncate w-80 mb-0"
+                                            for="flexSwitchCheckDefault">Surname</label>
+                                        </div>
+                                        <div class="col-12 col-lg-6 px-3">
+                                          <input type="text" [(ngModel)]="userProfile.lastName"
+                                            class="form-control px-3 py-1 input-outline2" id="myUsername" placeholder="Enter your surname">
+                                        </div>
+                                      </div>
+
+                                      <div class="row mt-2">
+                                        <div class="col-12">
+                                          <label class="form-check-label text-body text-truncate w-80 mb-0"
+                                            for="flexSwitchCheckDefault">First Name</label>
+                                        </div>
+                                        <div class="col-12 col-lg-6 px-3">
+                                          <input type="text" [(ngModel)]="userProfile.firstName"
+                                            class="form-control px-3 py-1 input-outline2" id="myUsername"
+                                            placeholder="Enter your first name">
+                                        </div>
+                                      </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-12">
                                             <label class="form-check-label text-body text-truncate w-80 mb-0"
                                                 for="flexSwitchCheckDefault">Address</label>
                                         </div>
                                         <div class="col-12 col-lg-6 px-3">
                                             <input type="text" [(ngModel)]="userProfile.address"
-                                                class="form-control px-3 py-1 input-outline2" id=""
+                                                class="form-control px-3 py-1 input-outline2"
                                                 placeholder="Home Address">
                                         </div>
                                     </div>

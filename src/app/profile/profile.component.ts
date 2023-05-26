@@ -12,7 +12,7 @@ export class ProfileComponent {
   public profileTitle: string = 'update_profile';
   public loading: any = false;
   public errorMessage: any;
-
+  showAlertModal: boolean = false;
   public userProfile = {
     role_id: '',
     firstName: '',
@@ -28,7 +28,7 @@ export class ProfileComponent {
     genotype: '',
     current_medical_condition: '',
     past_medical_condition: '',
-    sosContact: []
+    is_profileComplete: false,
   };
   public showmenu: boolean = false;
   role_id: any;
@@ -56,9 +56,10 @@ export class ProfileComponent {
         this.userProfile.genotype = response.profile.genotype;
         this.userProfile.current_medical_condition = response.profile.current_medical_condition;
         this.userProfile.past_medical_condition = response.profile.past_medical_condition;
-        this.userProfile.sosContact = response.profile.sosContact;
+        this.userProfile.is_profileComplete = response.profile.is_profileComplete;
         this.userProfile.role_id = response.profile.role_id;
         this.role_id = response.profile.role_id;
+        // this.showAlertModal = this.userProfile.is_profileComplete;
         // this.role_id = 1;
 
         // this.user_fullname = response.profile.firstName + ' ' + response.profile.lastName;
@@ -115,6 +116,10 @@ export class ProfileComponent {
 
   changeMenuStatus() {
     this.showmenu = !this.showmenu;
+  }
+
+  updateAlertModal() {
+    this.showAlertModal = true;
   }
 
 }

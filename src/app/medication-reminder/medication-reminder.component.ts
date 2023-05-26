@@ -204,52 +204,6 @@ export class MedicationReminderComponent {
     }
   }
 
-  saveReminder() {
-    console.log('MedicationPayload', this.medicationPayload);
-
-    if (this.reminderPayload.reminder.title == null || this.reminderPayload.reminder.time == null) {
-      this.loading = false;
-      this._snackBar.open("All the fields must be filled", "OK", {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'bottom',
-        panelClass: ['green-snackbar', 'login-snackbar'],
-      });
-    } else {
-      this.reminderPayload.username = this.userProfile.username;
-      this.reminderPayload.email = this.userProfile.email;
-
-      this.medicationReminderService.createReminder(this.reminderPayload).subscribe(
-        data => {
-          const response = data;
-          this.loading = false;
-          this._snackBar.open("Reminder added successfully", "OK", {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            panelClass: ['green-snackbar', 'login-snackbar'],
-          });
-
-          this.ngOnInit();
-
-          this.reminderPayload.reminder.title = "";
-          this.reminderPayload.reminder.date = "",
-          this.reminderPayload.reminder.time = "";
-        },
-        errorResponse => {
-          this.loading = false;
-          this.errorMessage = errorResponse.error.message;
-          console.log('errorMessage', this.errorMessage);
-
-          this._snackBar.open("Something went wrong, pls try again", "OK", {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            panelClass: ['green-snackbar', 'login-snackbar'],
-          });
-        })
-    }
-  }
 
   getSingleMedication(id: any) {
     this.medicationReminderService.getSingleMedication(id).subscribe(
@@ -332,6 +286,54 @@ export class MedicationReminderComponent {
           panelClass: ['green-snackbar', 'login-snackbar'],
         });
       })
+  }
+
+  
+  saveReminder() {
+    console.log('MedicationPayload', this.medicationPayload);
+
+    if (this.reminderPayload.reminder.title == null || this.reminderPayload.reminder.time == null) {
+      this.loading = false;
+      this._snackBar.open("All the fields must be filled", "OK", {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['green-snackbar', 'login-snackbar'],
+      });
+    } else {
+      this.reminderPayload.username = this.userProfile.username;
+      this.reminderPayload.email = this.userProfile.email;
+
+      this.medicationReminderService.createReminder(this.reminderPayload).subscribe(
+        data => {
+          const response = data;
+          this.loading = false;
+          this._snackBar.open("Reminder added successfully", "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+
+          this.ngOnInit();
+
+          this.reminderPayload.reminder.title = "";
+          this.reminderPayload.reminder.date = "",
+          this.reminderPayload.reminder.time = "";
+        },
+        errorResponse => {
+          this.loading = false;
+          this.errorMessage = errorResponse.error.message;
+          console.log('errorMessage', this.errorMessage);
+
+          this._snackBar.open("Something went wrong, pls try again", "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+        })
+    }
   }
 
   getSingleReminder(id: any) {
