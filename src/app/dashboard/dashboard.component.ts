@@ -19,13 +19,23 @@ export class DashboardComponent {
   public allUsers: any;
   public buttonState: boolean = true;
   buttonStates: boolean[] = [];
-  public userProfile: any;
+  // public userProfile: any;
   public role_id: any;
   public showmenu: boolean = false;
   totalMedication: any;
   totalReminder: any;
   totalSelfAssessment: any;
   username: any;
+  public userProfile: any = {
+    _id: '',
+    firstName: '',
+    lastName: '',
+    middleName: '',
+    username: '',
+    selectedJob: '',
+    sosContact: [],
+    is_profileComplete: false
+  };
 
 
   constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private medicationReminderService: MedicationReminderService, private selfAssessmentAnswer: SelfAssessmentService) { }
@@ -37,11 +47,21 @@ export class DashboardComponent {
         const response = data;
         console.log('response', response);
 
-        this.userProfile = response.profile;
+        // this.userProfile = response.profile;
+        this.userProfile._id = response.profile._id;
+        this.userProfile.username = response.profile.username;
+        this.userProfile.firstName = response.profile.firstName;
+        this.userProfile.lastName = response.profile.lastName;
+        this.userProfile.middleName = response.profile.middleName;
+        this.userProfile.selectedJob = response.profile.selectedJob;
+        this.userProfile.sosContact = response.profile.sosContact;
+        this.userProfile.is_profileComplete = response.profile.is_profileComplete;
 
-        console.log('userProfile', this.userProfile.sosContact);
+        console.log('userProfile', this.userProfile);
+        
+        // console.log('userProfile', this.userProfile.sosContact);
 
-        this.role_id = this.userProfile.role_id;
+        this.role_id = response.profile.role_id;
       },
       error => {
         const errorResponse = error;

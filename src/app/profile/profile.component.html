@@ -56,7 +56,8 @@
     <li class="nav-item">
       <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-          <i class="material-icons opacity-10">person</i>
+          <img src="./assets/img/sos.png" alt="" width="25px">
+          <!-- <i class="material-icons opacity-10">person</i> -->
         </div>
         <span class="nav-link-text ms-1">SOS</span>
       </a>
@@ -145,7 +146,14 @@
         <h6 class="font-weight-bolder mb-0">How are you feeling today?</h6>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <div *ngIf="userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group input-group-outline bg-success complete_profile" style="cursor: pointer !important;">
+            <a routerLink="/profile" class="text-white">Updated Profile</a>
+            <!-- <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control"> -->
+          </div>
+        </div>
+        <div *ngIf="!userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
           <div class="input-group input-group-outline bg-danger complete_profile" style="cursor: pointer !important;">
             <a routerLink="/profile" class="text-white">Complete your profile</a>
             <!-- <label class="form-label">Type here...</label>
@@ -665,7 +673,7 @@
         </div>
       </div>
 
-      <div *ngIf="!showAlertModal" class="alertModal">
+      <div *ngIf="!showNoAlertModal" class="alertModal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">

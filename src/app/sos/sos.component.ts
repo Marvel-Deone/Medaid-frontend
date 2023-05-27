@@ -21,7 +21,7 @@ export class SosComponent {
     username: '',
     selectedJob: '',
     sosContact: [],
-    is_profileComplete: false
+    is_profileComplete: ''
   };
   sosContactPayload: any = {
     username: '',
@@ -31,6 +31,8 @@ export class SosComponent {
       contact_number: '',
     },
   };
+
+  profile_complete: boolean = false;
 
   singleSosContact: any;
   public emergencyContacts: any;
@@ -62,20 +64,37 @@ export class SosComponent {
     private service: UserService,
     private http: HttpClient
   ) {}
-  ngOnInit(): void {
+  async ngOnInit (): Promise<void> {
     this.service.GetProfile().subscribe(
-      (data) => {
+      data => {
         const response = data;
         console.log('response', response);
-        this.userProfile = response.profile;
+
+        // this.userProfile = response.profile;
+        this.userProfile._id = response.profile._id;
+        this.userProfile.username = response.profile.username;
+        this.userProfile.firstName = response.profile.firstName;
+        this.userProfile.lastName = response.profile.lastName;
+        this.userProfile.middleName = response.profile.middleName;
+        this.userProfile.selectedJob = response.profile.selectedJob;
+        this.userProfile.sosContact = response.profile.sosContact;
         this.userProfile.is_profileComplete = response.profile.is_profileComplete;
-        this.role_id = this.userProfile.role_id;
-        this.firstName = this.userProfile.firstName;
-        this.lastName = this.userProfile.lastName;
+
+        this.profile_complete = this.userProfile.is_profileComplete;
+
+        console.log('userProfile', this.userProfile.is_profileComplete);
+        
+        // console.log('userProfile', this.userProfile.sosContact);
+
+        this.role_id = response.profile.role_id;
+
+        this.startCountdown();
+
       },
-      (error) => {
+      error => {
         const errorResponse = error;
         console.log('errorResponse', errorResponse);
+
       }
     );
     this.service.getSosContact().subscribe(
@@ -93,7 +112,6 @@ export class SosComponent {
         console.log('errorResponse', errorResponse);
       }
     );
-    this.startCountdown();
   }
 
   changeMenuStatus() {
@@ -101,9 +119,7 @@ export class SosComponent {
     // alert(this.showmenu);
   }
   startCountdown(): void {
-    
     if (this.userProfile.is_profileComplete) {
-    console.log('countdown start');
     this.countdownInterval = setInterval(() => {
       this.countdown--;
 
