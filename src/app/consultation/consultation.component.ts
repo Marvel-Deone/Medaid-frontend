@@ -37,7 +37,6 @@ export class ConsultationComponent {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response ', response);
         this.role_id = response.profile.role_id;
         this.userProfile.username = response.profile.username;
         this.userProfile._id=response.profile._id
@@ -63,7 +62,6 @@ export class ConsultationComponent {
          this.allConsultReq = notifications.filter((val:any)=>val.
          receiverId== this.userProfile._id
          )
-         console.log(this.allConsultReq);
          
       })
       
@@ -117,7 +115,6 @@ export class ConsultationComponent {
   accept(i:any){
    
      let notificationMsg = `${this.userProfile.selectedJob} ${this.userProfile.username}  accepted your request `; 
-     console.log(notificationMsg);
      
     let notificationObj= {
       message: notificationMsg,
@@ -141,7 +138,6 @@ export class ConsultationComponent {
   }
   decline(i:any){
     let notificationMsg = `${this.userProfile.selectedJob} ${this.userProfile.username} rejected your request `; 
-     console.log(notificationMsg);
      
     let notificationObj= {
       message: notificationMsg,

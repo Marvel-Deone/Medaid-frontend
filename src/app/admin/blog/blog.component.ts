@@ -73,15 +73,10 @@ export class BlogComponent {
         this.userProfile = response.profile;
         this.role_id = this.userProfile.role_id;
         this.username = this.userProfile.username;
-        console.log('username', this.username);
-
-        console.log('role_id: ' + this.role_id);
-
       },
       error => {
         const errorResponse = error;
         console.log('errorResponse', errorResponse);
-
       }
     )
 
@@ -103,7 +98,6 @@ export class BlogComponent {
   }
 
   publish() {
-    console.log('My Article has been published:', this.htmlContent);
     this.blogPayload.username = this.username;
     this.blogPayload.article = this.htmlContent;
     this.loading = true;
@@ -117,6 +111,7 @@ export class BlogComponent {
           verticalPosition: 'bottom',
           panelClass: ['green-snackbar', 'login-snackbar'],
         });
+        this.blogPayload.article = '';
       },
       errorResponse => {
         this.loading = false;

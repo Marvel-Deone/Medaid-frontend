@@ -72,7 +72,6 @@ export class SelfAssesementComponent  {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response', response);
         this.userProfile = response.profile;
         this.role_id = this.userProfile.role_id;
       },
@@ -85,11 +84,8 @@ export class SelfAssesementComponent  {
     this.selfAssessmentService.getSelfAssessment().subscribe(
       data => {
         const response = data;
-        console.log('myRes', response);
-
         if (response.reminder !== null) {
           this.selfAssessments = response.selfAssessment;
-          console.log('self', this.selfAssessments);
         }
       },
       error => {
@@ -118,7 +114,6 @@ export class SelfAssesementComponent  {
   }
 
   changeCondition() {
-    console.log('selected', this.selectedCategory);
     const selfAssessment = [];
     for (let i = 0; i < this.selfAssessments.length; i++) {
       const element = this.selfAssessments[i];
@@ -127,23 +122,8 @@ export class SelfAssesementComponent  {
       }
     }
     this.displayQuestions = selfAssessment;
-    console.log('displayQuestions', this.displayQuestions);
     
   }
-
-  // removeDuplicate() {
-  //   return this.questionsAnswer.reduce((unique: any, current: any) => {
-  //     const existing = unique.find(
-  //       (person: any) => person.question === current.question && person.answer === current.answer
-  //     );
-  //     const sortedQuestionsAnswers = [];
-  //     if (!existing) {
-  //       sortedQuestionsAnswers.push(current);
-  //     }
-  //     console.log('sortedQuestionsAnswers', sortedQuestionsAnswers);
-  //     ;
-  //   }, []);
-  // }
 
   submit() {
     this.submitloading = true;
@@ -158,17 +138,12 @@ export class SelfAssesementComponent  {
       questionAnswerPayload.push({question: this.displayQuestions[i].Question, answer: element});
     }
     this.selfAssessmentPayload.questionsAnswers = questionAnswerPayload;
-
-    // const sortedQuestionsAnswers = this.questionsAnswer.filter((value: any, index, self)=> index === self.findIndex((p: any)=> p.question === value.question && p.answer === value.answer))
-    // console.log('sortedQuestionsAnswers', sortedQuestionsAnswers);
     
     this.selfAssessmentService.saveSelfAssessmentAnswers(this.selfAssessmentPayload).subscribe(
       data => {
         const response = data;
-        console.log('myRes', response);
         this.selfAssessment = response;
         this.currentSelfAssementId = this.selfAssessment.data._id;
-        console.log('id', this.currentSelfAssementId);
         this.selfAssessmentPayload.answers = [];
         this.showAlertModal = true;
         this.submitloading = false;
@@ -185,20 +160,6 @@ export class SelfAssesementComponent  {
         });
       }
     )
-
-    // this.questionsAnswer.reduce((unique: any, current: any) => {
-    //   const existing = unique.find(
-    //     (person: any) => person.question === current.question && person.answer === current.answer
-    //   );
-    //   const sortedQuestionsAnswers = [];
-    //   if (!existing) {
-    //     sortedQuestionsAnswers.push(current);
-    //   }
-    //   console.log('sortedQuestion', sortedQuestionsAnswers);
-      
-    //   // return sortedQuestionsAnswers;
-    // }, []);
-    // this.removeDuplicate()
   }
 
   updateAlertModal() {
@@ -212,10 +173,7 @@ export class SelfAssesementComponent  {
       data => {
         const response = data;
         this.selfAssessment = response;
-        console.log('selfAssessment', response);
-        
         this.selfAssessmentLists = this.selfAssessment.selfAssessment.questionsAnswers;
-        console.log('response', this.selfAssessmentLists);
       })
   }
 
@@ -227,8 +185,7 @@ export class SelfAssesementComponent  {
       const tempElement = document.createElement('div');
       tempElement.innerHTML = htmlCode;
       this.plainText = tempElement.innerText;
-      console.log('plainText', this.plainText);
-    }, 1000); // Adjust the delay as needed
+    }, 1000);
   }
 
   generatePDF() {
@@ -240,9 +197,6 @@ export class SelfAssesementComponent  {
     this.plainText = tempElement.innerText;
     const generatedDate = this.selfAssessment.selfAssessment.createdAt;
     const myDate = new Date(generatedDate).toLocaleString().replace(",", " Time:");
-    console.log('generatedDate', myDate);
-    console.log('contentToConvert', this.contentToConvert);
-    
     
    if (this.contentToConvert) {
     const documentDefinition = {
@@ -251,9 +205,6 @@ export class SelfAssesementComponent  {
         this.resultDescription,
         `Date of Assessement: ${myDate}`,
         this.plainText,
-        // this.documentContent,
-        // this.contentToConvert.nativeElement.innerHTML
-         // Example content, replace with your desired content
       ]
     };
     pdfMake.createPdf(documentDefinition).download('sample.pdf');

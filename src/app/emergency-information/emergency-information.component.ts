@@ -60,7 +60,6 @@ export class EmergencyInformationComponent {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response ', response);
         this.role_id = response.profile.role_id;
 
         this.userProfile.firstName = response.profile.firstName;
@@ -98,11 +97,9 @@ export class EmergencyInformationComponent {
     this.service.getSosContact().subscribe(
       data => {
         const response = data;
-        console.log('myRes', response);
 
         if (response.sosContacts !== null) {
           this.userSosContacts = response.sosContacts;
-          console.log('sosContacts', this.userSosContacts);
         }
       },
       error => {
@@ -124,12 +121,9 @@ export class EmergencyInformationComponent {
 
   updateProfile() {
     this.loading = true;
-    console.log('userProfile', this.userProfile);
     this.service.UpdateProfile(this.userProfile).subscribe(
       data => {
         const response = data;
-        console.log('response', response);
-
         this.loading = false;
         this._snackBar.open("Emergency Info updated successfully", "OK", {
           duration: 3000,
@@ -156,9 +150,6 @@ export class EmergencyInformationComponent {
   }
 
   addSosContact() {
-    console.log(this.userProfile);
-    
-    console.log('sosContactPayload', this.sosContactPayload);
     this.loading = true;
     if (this.sosContactPayload.sosContact.contact_name == null || this.sosContactPayload.sosContact.contact_number == null) {
       this.loading = false;
@@ -176,9 +167,6 @@ export class EmergencyInformationComponent {
       
       this.sosContactPayload.phone=this.userProfile.phone
       
-      console.log('sosContact:', this.sosContactPayload);
-
-
       this.service.createSosContact(this.sosContactPayload).subscribe(
         data => {
           const response = data;
@@ -190,7 +178,6 @@ export class EmergencyInformationComponent {
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-          console.log('sosContactPayload', this.sosContactPayload);
           this.ngOnInit();
 
           this.sosContactPayload.sosContact.contact_name = "";
@@ -216,7 +203,6 @@ export class EmergencyInformationComponent {
     this.service.getSingleSosContact(id).subscribe(
       data => {
         const response = data;
-        console.log('singleSosContact', response);
         this.singleSosContact = response;
         
         this.sosContactPayload.sosContact.contact_name = this.singleSosContact.sosContact.contact_name;

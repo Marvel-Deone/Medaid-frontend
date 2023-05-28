@@ -39,7 +39,6 @@ export class MessagecontainerComponent {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response ', response);
  
         this.userProfile.username = response.profile.username;
         this.userProfile._id=response.profile._id
@@ -52,24 +51,19 @@ export class MessagecontainerComponent {
      this.userProfile.email = sessionStorage.getItem('med-email')
     // Create a socket connection
     this.socket = io('http://localhost:5000').connect();
-    console.log('Socket connected:', this.socket);
 
     // Listen for incoming messages
     this.socket.on('new-message', (message: any) => {
-      console.log('messsage received', message);
       this.ngZone.run(() => {
         this.chats.push(message);
-        console.log(this.chats, "Incoming ");
         
 
       });
     });
 
     this.socket.on('out-going', (message: any) => {
-      console.log('Outgoing message:', message);
       this.ngZone.run(() => {
         this.chats.push({ ...message, fromSelf: true });
-        console.log(this.chats, "Out ");
         
    
         
@@ -79,7 +73,6 @@ export class MessagecontainerComponent {
     this.service.GetAllUser( this.userProfile.email).subscribe((item: any) => {
 
       this.allUsers = item.users;
-      console.log(this.allUsers);
       
  
       this.service
@@ -109,7 +102,6 @@ export class MessagecontainerComponent {
       })
       .subscribe((item: any) => {
         this.chats = item;
-        console.log(item);
       });
       this.scrollToBottom();
   }

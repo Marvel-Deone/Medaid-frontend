@@ -21,7 +21,6 @@ export class EmailVeryComponent {
     const userDetailString = sessionStorage.getItem('med_aid');
     if (userDetailString) {
       this.userDetail = JSON.parse(userDetailString);
-      console.log(this.userDetail);
     } else {
       console.log('User detail not found in sessionStorage');
     }
@@ -43,10 +42,8 @@ export class EmailVeryComponent {
         panelClass: ['green-snackbar', 'login-snackbar'],
       });
     } else {
-      console.log('correct ');
       this.service.Register(this.userDetail).subscribe((item: any) => {
         const userResp = item;
-        console.log();
         
         if (userResp.success == true) {
           this._snackBar.open(userResp.message, 'OK', {

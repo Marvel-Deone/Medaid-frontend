@@ -41,7 +41,6 @@ export class ProfileComponent {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response: ', response);
         this.userProfile.role_id = response.profile.role_id;
         this.userProfile.firstName = response.profile.firstName;
         this.userProfile.lastName = response.profile.lastName;
@@ -86,7 +85,6 @@ export class ProfileComponent {
 
   updateProfile() {
     this.loading = true;
-    console.log('userProfile', this.userProfile);
     this.service.UpdateProfile(this.userProfile).subscribe(
       data => {
         const response = data;

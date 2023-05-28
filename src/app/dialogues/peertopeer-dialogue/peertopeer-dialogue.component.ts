@@ -31,7 +31,6 @@ export class PeertopeerDialogueComponent {
 
     this.service.GetAllUser(this.currentUserEmail).subscribe((item: any) => {
       this.allUsers = item.users;
-      console.log(this.allUsers);
       this.service
       .GetCurrentUser(this.currentUserEmail)
       .subscribe((item: any) => {
