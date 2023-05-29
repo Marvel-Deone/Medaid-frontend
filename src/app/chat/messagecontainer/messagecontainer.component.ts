@@ -101,10 +101,11 @@ export class MessagecontainerComponent {
     // to Update the global currentUserPicked
     this.service.currentChatPicked = index
     this.showMsgBox =true
+   
 
     this.service
       .GetAllMessages({
-        from: this.currentUser?._id,
+        from: this.currentUser?._id || this.userProfile._id,
         to: this.currentChatPicked?._id,
       })
       .subscribe((item: any) => {

@@ -46,7 +46,7 @@ export class EmailVeryComponent {
       console.log('correct ');
       this.service.Register(this.userDetail).subscribe((item: any) => {
         const userResp = item;
-        console.log();
+      
         
         if (userResp.success == true) {
           this._snackBar.open(userResp.message, 'OK', {
@@ -55,7 +55,7 @@ export class EmailVeryComponent {
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-          sessionStorage.removeItem('med-email');
+          sessionStorage.removeItem('med_aid');
           this.router.navigate(['/sign-in']);
         } else if (userResp.success == false) {
           this._snackBar.open(userResp.message, 'OK', {

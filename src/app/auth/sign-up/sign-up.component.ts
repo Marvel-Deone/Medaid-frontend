@@ -218,12 +218,17 @@ export class SignUpComponent {
       this.mediaRecorder = null;
       const video: HTMLVideoElement = this.videoElement.nativeElement;
       video.srcObject = null;
+      
+      // Stop audio and video tracks
+      const tracks = this.mediaStream?.getTracks();
+      tracks?.forEach((track) => track.stop());
+      
       this.isRecording = false;
       this.showPreview = true;
     }
     this.stopTimer();
   }
-
+  
   startTimer() {
     this.timerInterval = setInterval(() => {
       this.recordingTime += 1000;

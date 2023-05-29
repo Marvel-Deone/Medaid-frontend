@@ -1,8 +1,13 @@
-<div class="header">
-    <div class="avater">
+
+
+    <div class="header">
+        <div class="avater">
         <img src="../../assets/img/dommy.png" alt="">
     </div>
     <div class="chat-header-right">
+        <span >
+          <h4>{{userProfile.username}}</h4>
+            </span>
         <!-- <span class="material-symbols-sharp">
             tips_and_updates
             </span>
@@ -35,5 +40,6 @@
             <div class="time">
                 <div *ngIf="user.role_id == 1" class="bg-primary" style="width: 10px; height: 10px; border-radius: 50%;"></div>
                 <div *ngIf="user.role_id === 2" style="width: 10px; height: 10px; border-radius: 50%; background-color: green;"></div>
+                <div>{{user.selectedJob }}</div>
     </div>
 </div>

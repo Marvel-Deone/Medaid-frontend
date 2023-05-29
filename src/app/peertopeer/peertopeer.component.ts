@@ -32,6 +32,7 @@ export class PeertopeerComponent {
   public videoRoom: boolean = false
   public joinMeetingBtn = true
 
+
   public servers = {
     iceServers: [
       {
@@ -45,6 +46,8 @@ export class PeertopeerComponent {
   };
 
   public roomId: any;
+  public audioTrack :any
+  public micEnabled = true;
 
   constructor(private route: ActivatedRoute, private service: UserService, private _snackBar: MatSnackBar,) {
     this.app = firebase.initializeApp(environment.firebaseConfig);
@@ -133,7 +136,8 @@ export class PeertopeerComponent {
 
     // send a message to the other person
     this.currentChatPicked = this.allUsers[this.currentChatPickedIndex];
-
+    console.log( this.currentUser?._id ,  this.currentChatPicked?._id);
+    
     let msgObj = {
       from: this.currentUser?._id,
       to: this.currentChatPicked?._id,
@@ -238,12 +242,14 @@ export class PeertopeerComponent {
     }
   }
   toogleMic() {
-    let audioTrack = this.localStream.getTracks().find((track: any) => track.kind === 'audio')
+    this.audioTrack = this.localStream.getTracks().find((track: any) => track.kind === 'audio')
 
-    if (audioTrack.enabled) {
-      audioTrack.enabled = false
+    if (this.audioTrack.enabled) {
+      this.audioTrack.enabled = false
+      this.micEnabled = false;
     } else {
-      audioTrack.enabled = true
+     this.audioTrack.enabled = true
+     this.micEnabled = true;
     }
   }
 }

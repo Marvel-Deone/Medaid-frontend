@@ -40,7 +40,7 @@
     <button class="icon-button" (click)="toogleCamera()" id="camera-button">
       <i class="fas fa-video"></i>
     </button>
-    <button class="icon-button" (click)="toogleMic()" id="mic-button">
+    <button class="icon-button" (click)="toogleMic()" id="mic-button" [class.mic-off]="!micEnabled">
       <i class="fas fa-microphone"></i>
     </button>
     <button class="icon-button" id="end-call-button">

@@ -1,16 +1,4 @@
-<!-- 
-<div class="body">
-    <app-sidebarside class="sideBar" (indexEmitter)="child2.handleIndex($event)"  ></app-sidebarside>
 
-    <app-messagecontainer class="message-container"  #child2  ></app-messagecontainer>
-
-   
-
-</div>
-
-  
-
-   -->
 
    <div class="body">
     <app-sidebarside class="sideBar" (indexEmitter)="child2.handleIndex($event)"
@@ -19,4 +7,17 @@
     <app-messagecontainer class="message-container" #child2
       [class.show-on-small-screen]="index !== undefined && !showSidebar"></app-messagecontainer>
   </div>
+  
+  <!-- User Message -->
+<div class="message user-message">
+  <h1>Dear Valued User</h1>
+  <p>Please switch to desktop mode for an enhanced viewing experience.</p>
+  <p>To switch to desktop mode, follow these steps:</p>
+  <ol>
+    <li>Open your browser's menu or settings.</li>
+    <li>Look for an option like "Desktop Site" or "Request Desktop Site" and select it.</li>
+    <li>The page will reload, and you will be able to enjoy the desktop view.</li>
+  </ol>
+</div>
+
   
