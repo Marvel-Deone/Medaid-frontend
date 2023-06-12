@@ -5500,7 +5500,7 @@ textarea.form-control-lg {
   content: ""; }
 
 .text-truncate {
-  overflow: hidden;
+  /* overflow: hidden; */
   text-overflow: ellipsis;
   white-space: nowrap; }
 
@@ -16143,7 +16143,7 @@ p {
   white-space: nowrap !important; }
 
 .text-truncate {
-  overflow: hidden;
+  /* overflow: hidden; */
   text-overflow: ellipsis;
   white-space: nowrap; }
 

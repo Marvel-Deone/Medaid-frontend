@@ -641,7 +641,7 @@
                     <div class="col-12"
                         *ngIf="selectedCategory !== 'choose your condition' && selectedCategory !== 'Pregnant' && selectedCategory !== 'Other'">
                         <h5 class="text-center mt-2">{{selectedCategory}}</h5>
-                        <p class="text-center" style="font-size: 15px; font-weight: 400;">I am going to ask some
+                        <p class="text-center" style="font-size: 14px !important; font-weight: 400;">I am going to ask some
                             questions to better help us support you . This information will be kept
                             confidential.</p>
                         <div class="card card-plain h-100">
@@ -663,8 +663,8 @@
                                     <div class="row mt-2" *ngFor="let question of displayQuestions; let i = index">
                                         <div class="col-12 col-lg-12 px-3 mt-3">
                                             <label for=""
-                                                class="form-check-label text-body text-truncate w-80 mb-0 fw-bold"
-                                                style="color: #000000D9 !important;">{{question.Question}}</label>
+                                                class="form-check-label text-body w-80 mb-0 fw-bold mb-2"
+                                                style="color: #000000D9 !important; word-break: keep-all !important; line-height: 1.8 !important;">{{question.Question}}</label>
                                             <input type="text" class="form-control px-3 py-1 input-outline2" id=""
                                                 placeholder="" [(ngModel)]="answers[i]">
                                         </div>
@@ -880,7 +880,7 @@
                                 <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold"
                                     style="color: #000000D9 !important;" for="flexSwitchCheckDefault">Date
                                     of Assessment:</label>
-                                <p style="color: #000000D9; font-size: 13px;">{{selfAssessment.selfAssessment.createdAt
+                                <p class="ms-1" style="color: #000000D9; font-size: 12px;">{{selfAssessment.selfAssessment.createdAt
                                     | date: 'medium' }}</p>
                             </div>
                         </div>
@@ -888,8 +888,8 @@
                         <div class="row mt-2">
                             <div class="col-12 col-lg-12 px-3 mt-3">
                                 <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
-                                    <label for="" class="form-check-label text-body text-truncate w-80 mb-0 fw-bold"
-                                        style="color: #000000D9 !important;">{{selfAssessmentList.question}}</label>
+                                    <label for="" class="form-check-label text-body w-80 mb-0 fw-bold"
+                                        style="color: #000000D9 !important; word-break: keep-all !important; line-height: 1.8 !important;">{{selfAssessmentList.question}}</label>
                                     <p>{{selfAssessmentList.answer}}</p>
                                 </div>
                             </div>
@@ -898,8 +898,9 @@
 
                     </ul>
                     <div class="save_btn mt-2">
-                        <button class="btn btn-primary mt-3" (click)="convertHtml()">Copy</button>
-                        <button class="btn btn-danger mt-3 ms-2" (click)="generatePDF()">Download</button>
+                        <button class="btn btn-primary mt-3 ms-2" (click)="copy()">Copy</button>
+                        <button class="btn btn-success mt-3 ms-2" (click)="generatePDF()">Download</button>
+                        <button class="btn btn-danger mt-3 ms-2" (click)="cancel()">Cancel</button>
                         <!-- <button *ngIf="downloadinloading" disabled class="btn btn-primary mt-3 ms-2">
                             <span>Downloading</span>
                             <img src="assets/img/spinner.gif" alt="" class="ms-2" width="26px" height="26px"></button> -->
@@ -907,47 +908,19 @@
                 </div>
             </div>
         </div>
-
-        <div #contentToConvert class="getResult-div px-3 mb-5">
-            <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
-                Question: {{selfAssessmentList.question}}
-                Answer: {{selfAssessmentList.answer}}
-            </div>
-        </div>
-
-        <div class="my-getResult-div px-3 mb-5">
-            <div class="getResult-div px-3 mb-5">
-                <p>Hi</p>
-            </div>
-            <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
-                Question: {{selfAssessmentList.question}}
-                Answer: {{selfAssessmentList.answer}}
-            </div>
-        </div>
     </div>
 
 
 </main>
-<div *ngIf="getResultStatus" class="">
-    <div class="myres px-3 mb-5">
-        <div class="card card-plain h-100">
-            <div class="card-body p-3">
-                <ul class="list-group">
-
-                    <div class="row mt-2">
-                        <div class="col-12 col-lg-12 px-3 mt-3">
-                            <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
-                                <label for="" class="form-check-label text-body text-truncate w-80 mb-0 fw-bold"
-                                    style="color: #000000D9 !important;">{{selfAssessmentList.question}}</label>
-                                <p>{{selfAssessmentList.answer}}</p> <br>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </ul>
-            </div>
+<div class="">
+    <div #contentToConvert class="getResult-div px-3 mb-5 d-none">
+        <div class="" style="color: red !important;" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
+            Question: {{selfAssessmentList.question}}
+            Answer: {{selfAssessmentList.answer}}
         </div>
+    </div>
+
+    <div class="myres px-3 mb-5">
     </div>
 
 </div>

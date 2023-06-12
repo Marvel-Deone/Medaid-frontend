@@ -44,7 +44,7 @@ export class SelfAssessmentService {
   
 
   getSingleSelfAssessment(id: any) {
-    const URI = this.uriseg + '/selfAssessmentAnswer/' + id;
+    const URI = this.uriseg + '/selfAssessment/answer/' + id;
     const token = JSON.parse(localStorage['token']);
 
     return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
@@ -53,7 +53,7 @@ export class SelfAssessmentService {
   }
 
   getSelfAssessmentAnswer() {
-    const URI = this.uriseg + '/selfAssessment/selfAssessmentAnswer/';
+    const URI = this.uriseg + '/selfAssessment/answer/';
     const token = JSON.parse(localStorage['token']);
 
     return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {

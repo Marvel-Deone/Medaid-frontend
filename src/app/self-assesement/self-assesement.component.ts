@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Renderer2  } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { SelfAssessmentService } from '../services/self-assessment/self-assessment.service';
@@ -53,10 +54,14 @@ export class SelfAssesementComponent  {
   documentContent: string = '';
   resultDescription: string = 'This result is based on the answers you provider earlier from the self assessment';
   plainText: string = '';
+  getDownloadStatus: boolean = false;
+  copyText: string = '';
+  selfAssessmentLength: number = 0;
+  myQuest: string[] = [];
   // contentToConvert:any;
 
   
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService, private elementRef: ElementRef, private renderer2: Renderer2) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService, private elementRef: ElementRef, private renderer2: Renderer2, private clipboard: Clipboard,) { }
   
     @ViewChild('contentToConvert', { static: false }) contentToConvert!: ElementRef;
     
@@ -132,34 +137,46 @@ export class SelfAssesementComponent  {
     this.selfAssessmentPayload.category = this.selectedCategory;
     
     const questionAnswerPayload = [];
-    
-    for (let i = 0; i < this.answers.length; i++) {
-      const element = this.answers[i];
-      questionAnswerPayload.push({question: this.displayQuestions[i].Question, answer: element});
-    }
-    this.selfAssessmentPayload.questionsAnswers = questionAnswerPayload;
-    
-    this.selfAssessmentService.saveSelfAssessmentAnswers(this.selfAssessmentPayload).subscribe(
-      data => {
-        const response = data;
-        this.selfAssessment = response;
-        this.currentSelfAssementId = this.selfAssessment.data._id;
-        this.selfAssessmentPayload.answers = [];
-        this.showAlertModal = true;
-        this.submitloading = false;
-      },
-      error => {
-        this.submitloading = false;
-        const errorResponse = error;
-        console.log('errorResponse', errorResponse);
-        this._snackBar.open("Something went wrong, pls try again", "OK", {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'bottom',
-          panelClass: ['green-snackbar', 'login-snackbar'],
-        });
+    if (this.answers.length == 0 || null) {
+      this.submitloading = false;
+      this._snackBar.open("Please, provide all answer", "OK", {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['green-snackbar', 'login-snackbar'],
+      })
+    } else {
+      for (let i = 0; i < this.answers.length; i++) {
+        const element = this.answers[i];
+        questionAnswerPayload.push({question: this.displayQuestions[i].Question, answer: element});
       }
-    )
+
+      this.selfAssessmentPayload.questionsAnswers = questionAnswerPayload;
+      this.selfAssessmentLength = this.selfAssessmentPayload.questionsAnswers.length;
+      
+      this.selfAssessmentService.saveSelfAssessmentAnswers(this.selfAssessmentPayload).subscribe(
+        data => {
+          const response = data;
+          this.selfAssessment = response;
+          this.currentSelfAssementId = this.selfAssessment.data._id;
+          this.selfAssessmentPayload.answers = [];
+          this.showAlertModal = true;
+          this.submitloading = false;
+        },
+        error => {
+          this.submitloading = false;
+          const errorResponse = error;
+          console.log('errorResponse', errorResponse);
+          this._snackBar.open("Something went wrong, pls try again", "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+        }
+      )
+
+    }
   }
 
   updateAlertModal() {
@@ -174,22 +191,33 @@ export class SelfAssesementComponent  {
         const response = data;
         this.selfAssessment = response;
         this.selfAssessmentLists = this.selfAssessment.selfAssessment.questionsAnswers;
+        for (let i = 0; i < this.displayQuestions.length; i++) {
+          const element = this.displayQuestions[i].Question;
+          this.myQuest.push(element)
+        }
+        console.log('selfAssessment', this.selfAssessmentLists, this.myQuest, this.answers);
+        
       })
   }
 
   
   convertHtml() {
-    setTimeout(() => {
-      const element = this.elementRef.nativeElement.querySelector('.getResult-div');
+    // setTimeout(() => {
+      const element = this.elementRef.nativeElement.querySelector('.myres');
       const htmlCode = this.renderer2.parentNode(element).innerHTML;;
       const tempElement = document.createElement('div');
       tempElement.innerHTML = htmlCode;
+      const generatedDate = this.selfAssessment.selfAssessment.createdAt;
+      const myDate = new Date(generatedDate).toLocaleString().replace(",", " Time:");
       this.plainText = tempElement.innerText;
-    }, 1000);
+      this.copyText = `${this.resultDescription} Date of Assessment: ${myDate} ${this.selectedCategory} ${this.plainText}. Copied from Medaid `
+    // }, 1000);
   }
 
   generatePDF() {
     // this.downloadinloading = true;
+    // this.getDownloadStatus = true;
+    console.log('Hello there');
     const element = this.elementRef.nativeElement.querySelector('.myres');
     const htmlCode = this.renderer2.parentNode(element).innerHTML;;
     const tempElement = document.createElement('div');
@@ -200,17 +228,47 @@ export class SelfAssesementComponent  {
     
    if (this.contentToConvert) {
     const documentDefinition = {
+      header: {text: this.selectedCategory, bold: true},
+      // content: [
+      //   this.resultDescription,
+      //   `Date of Assessement: ${myDate}`,
+      //   this.plainText,
+      // ]
       content: [
-        this.selectedCategory,
-        this.resultDescription,
-        `Date of Assessement: ${myDate}`,
-        this.plainText,
+        {
+          layout: 'lightHorizontalLines', // optional
+          table: {
+            // headers are automatically repeated if the table spans over multiple pages
+            // you can declare how many rows should be treated as headers
+            headerRows: 1,
+            widths: [ 'auto' ],
+    
+            body: [
+             this.myQuest,
+             this.answers
+            ]
+          }
+        },
+        { text: this.resultDescription, bold: true  },
+        { text: `Date of Assessment: ${myDate}` },
+        { text: this.plainText },
       ]
     };
     pdfMake.createPdf(documentDefinition).download('sample.pdf');
     this.loading = false;
    }
   
+  }
+
+  copy() {
+    this.convertHtml();
+    this.clipboard.copy(this.copyText);
+    this._snackBar.open("Text copied to clipboard", "OK", {
+      duration: 2000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      panelClass: ['green-snackbar', 'login-snackbar'],
+    });
   }
 
   cancel() {

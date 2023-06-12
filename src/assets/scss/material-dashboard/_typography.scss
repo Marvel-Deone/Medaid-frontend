@@ -154,9 +154,9 @@ p {
   white-space: nowrap !important;
 }
 
-.text-truncate {
-  @include text-truncate();
-}
+// .text-truncate {
+//   @include text-truncate();
+// }
 
 // Weight and italics
 .font-weight-light {
