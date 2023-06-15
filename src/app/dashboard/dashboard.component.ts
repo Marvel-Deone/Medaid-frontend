@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { SelfAssessmentService } from '../services/self-assessment/self-assessment.service';
 import { MedicationReminderService } from '../services/medicationReminder/medication-reminder.service';
+import { SelfAssessmentService } from '../services/self-assessment/self-assessment.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,9 +36,18 @@ export class DashboardComponent {
     is_profileComplete: false
   };
   selfAssessments: any;
+  selfAssessment: any;
+  selfAssessmentLists: any;
+  displayQuestions: any;
+  myQuest: string[] = [];
+  getResultStatus: boolean = false;
+  downloadme: boolean = false;
+  currentSelfAssementId: any;
+  downloadResult: any;
+  selectedCategory: any;
 
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private medicationReminderService: MedicationReminderService, private selfAssessmentAnswer: SelfAssessmentService) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private medicationReminderService: MedicationReminderService, private selfAssessmentService: SelfAssessmentService, private selfAssessmentAnswer: SelfAssessmentService) { }
   ngOnInit(): void {
     this.userToken = JSON.parse(localStorage['token']);
 
@@ -85,7 +94,7 @@ export class DashboardComponent {
       this.allUsers = item.users
     })
 
-    
+
     this.medicationReminderService.getMedication().subscribe(
       (data: any) => {
         const response = data;
@@ -173,6 +182,48 @@ export class DashboardComponent {
     //     });
     //   }
     // });
+  }
+
+  getResult(id: any, selectedCategory: any) {
+    // this.showAlertModal = false;
+    this.getResultStatus = true;
+    this.currentSelfAssementId = id;
+    this.selectedCategory = selectedCategory;
+    this.selfAssessmentService.getSingleSelfAssessment(id).subscribe(
+      (data: any) => {
+        const response = data;
+        this.selfAssessment = response;
+        this.selfAssessmentLists = this.selfAssessment.selfAssessment.questionsAnswers;
+        for (let i = 0; i < this.displayQuestions.length; i++) {
+          const element = this.displayQuestions[i].Question;
+          this.myQuest.push(element)
+        }
+
+      })
+  }
+
+  generatePDF() {
+    this.downloadme = true;
+
+    console.log('long');
+    this.selfAssessmentService.downloadPDF(this.currentSelfAssementId).subscribe(data => {
+      const response = data;
+      this.downloadme = false;
+      this.downloadResult = response;
+
+      console.log('response', response);
+      console.log(response.filedirectory);
+      // window.open(window.document.location.href = this.downloadResult.filedirectory, '_blank');
+      window.location.href = this.downloadResult.filedirectory;
+    },
+      err => {
+        console.log('errorResponse', err);
+      })
+  }
+
+
+  cancel() {
+    this.getResultStatus = false;
   }
 
 

@@ -55,13 +55,13 @@
         </li>
 
         <li class="nav-item">
-      <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
-        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-          <img src="./assets/img/sos.png" alt="" width="30px">
-        </div>
-        <span class="nav-link-text ms-1">SOS</span>
-      </a>
-    </li>
+            <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
+                <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                    <img src="./assets/img/sos.png" alt="" width="30px">
+                </div>
+                <span class="nav-link-text ms-1">SOS</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="menu_active">
                 <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -144,23 +144,25 @@
                     </li>
                     <li class=" text-sm text-dark active" aria-current="page"></li>
                 </ol>
-                 <h6 class="font-weight-bolder mb-0">Hope you are feeling good today</h6>
+                <h6 class="font-weight-bolder mb-0">Hope you are feeling good today</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                  <div *ngIf="userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group input-group-outline bg-success complete_profile" style="cursor: pointer !important;">
-            <a routerLink="/profile" class="text-white">Updated Profile</a>
-            <!-- <label class="form-label">Type here...</label>
+                <div *ngIf="userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <div class="input-group input-group-outline bg-success complete_profile"
+                        style="cursor: pointer !important;">
+                        <a routerLink="/profile" class="text-white">Updated Profile</a>
+                        <!-- <label class="form-label">Type here...</label>
                         <input type="text" class="form-control"> -->
-          </div>
-        </div>
-        <div *ngIf="!userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group input-group-outline bg-danger complete_profile" style="cursor: pointer !important;">
-            <a routerLink="/profile" class="text-white">Complete your profile</a>
-            <!-- <label class="form-label">Type here...</label>
+                    </div>
+                </div>
+                <div *ngIf="!userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <div class="input-group input-group-outline bg-danger complete_profile"
+                        style="cursor: pointer !important;">
+                        <a routerLink="/profile" class="text-white">Complete your profile</a>
+                        <!-- <label class="form-label">Type here...</label>
                         <input type="text" class="form-control"> -->
-          </div>
-        </div>
+                    </div>
+                </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <a routerLink="/profile" class="nav-link text-body font-weight-bold px-0">
@@ -311,10 +313,10 @@
                 </a>
 
                 <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
-          style="color: #344767 !important;">
-          <i class="material-icons opacity-10">person</i>
-          <span>SOS</span>
-        </a>
+                    style="color: #344767 !important;">
+                    <i class="material-icons opacity-10">person</i>
+                    <span>SOS</span>
+                </a>
 
                 <a routerLink="/profile" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
@@ -602,10 +604,10 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                   <h6 class="mb-0 text-sm"> {{i + 1}}</h6>
+                                                    <h6 class="mb-0 text-sm"> {{i + 1}}</h6>
                                                 </div>
                                             </div>
-                                    </td>
+                                        </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
@@ -616,11 +618,14 @@
                                         <td>
                                             <div class="avatar-group mt-2">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{selfAssessment.createdAt | date :'medium'}}</h6>
+                                                    <h6 class="mb-0 text-sm">{{selfAssessment.createdAt | date
+                                                        :'medium'}}</h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-2" style="cursor: pointer !important; text-decoration: underline;">
+                                        <td class="align-middle text-center text-sm px-2"
+                                            style="cursor: pointer !important; text-decoration: underline;"
+                                            (click)="getResult(selfAssessment._id, selfAssessment.category)">
                                             <span class="text-xs mt-2 font-weight-bold text-primary"> Get Result</span>
                                         </td>
                                     </tr>
@@ -633,6 +638,55 @@
         </div>
 
 
+    </div>
+
+    <div *ngIf="getResultStatus" class="getResult">
+        <div class="getResult-div px-3 mb-5">
+            <h5 class="text-center mt-2">{{selectedCategory}}</h5>
+            <p class="text-center" style="font-size: 15px; font-weight: 400;">This result is based on the answers you
+                provider earlier from the self assessment</p>
+            <div class="card card-plain h-100">
+                <div class="card-body p-3">
+                    <ul class="list-group">
+
+                        <div class="row mt-2 mb-2">
+                            <!-- <div class="col-12">
+                                </div> -->
+                            <div class="col-12 col-lg-12 px-3 mt-3 d-flex justify-content-between">
+                                <label class="form-check-label text-body text-truncate w-80 mb-0 fw-bold"
+                                    style="color: #000000D9 !important;" for="flexSwitchCheckDefault">Date
+                                    of Assessment:</label>
+                                <p class="ms-1" style="color: #000000D9; font-size: 12px;">
+                                    {{selfAssessment.selfAssessment.createdAt
+                                    | date: 'medium' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-12 col-lg-12 px-3 mt-3">
+                                <div class="" *ngFor="let selfAssessmentList of selfAssessmentLists; let i = index;">
+                                    <label for="" class="form-check-label text-body w-80 mb-0 fw-bold"
+                                        style="color: #000000D9 !important; word-break: keep-all !important; line-height: 1.8 !important;">{{selfAssessmentList.question}}</label>
+                                    <p>{{selfAssessmentList.answer}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </ul>
+                    <div class="save_btn mt-2 flex gap-3">
+                        <!-- <button class="btn btn-primary mt-3 ms-2" (click)="copy()">Copy</button> -->
+                        <div>
+                            <button *ngIf="!downloadme" class="btn btn-primary mt-3 ms-2 w-96"
+                                (click)="generatePDF()">Download</button>
+                            <button *ngIf="downloadme" disabled
+                                class="btn btn-primary mt-3 ms-2 w-96 text-white">Downloading....</button>
+                        </div>
+                        <button class="btn btn-danger mt-3 ms-2" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </main>

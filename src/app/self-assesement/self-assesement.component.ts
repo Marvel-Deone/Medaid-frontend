@@ -56,10 +56,11 @@ export class SelfAssesementComponent {
   selfAssessmentLength: number = 0;
   myQuest: string[] = [];
   downloadResult: any;
+  downloadme: boolean = false;
   // contentToConvert:any;
 
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService, private clipboard: Clipboard,) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService, private clipboard: Clipboard, private renderer2: Renderer2, private elementRef: ElementRef) { }
 
   @ViewChild('contentToConvert', { static: false }) contentToConvert!: ElementRef;
 
@@ -200,44 +201,38 @@ export class SelfAssesementComponent {
 
 
   convertHtml() {
-    // setTimeout(() => {
-    // const element = this.elementRef.nativeElement.querySelector('.myres');
-    // const htmlCode = this.renderer2.parentNode(element).innerHTML;;
-    // const tempElement = document.createElement('div');
-    // tempElement.innerHTML = htmlCode;
-    // const generatedDate = this.selfAssessment.selfAssessment.createdAt;
-    // const myDate = new Date(generatedDate).toLocaleString().replace(",", " Time:");
-    // this.plainText = tempElement.innerText;
-    // this.copyText = `${this.resultDescription} Date of Assessment: ${myDate} ${this.selectedCategory} ${this.plainText}. Copied from Medaid `
-    // }, 1000);
+    setTimeout(() => {
+      const element = this.elementRef.nativeElement.querySelector('.myres');
+      const htmlCode = this.renderer2.parentNode(element).innerHTML;;
+      const tempElement = document.createElement('div');
+      tempElement.innerHTML = htmlCode;
+      const generatedDate = this.selfAssessment.selfAssessment.createdAt;
+      const myDate = new Date(generatedDate).toLocaleString().replace(",", " Time:");
+      this.plainText = tempElement.innerText;
+      this.copyText = `${this.resultDescription} Date of Assessment: ${myDate} ${this.selectedCategory} ${this.plainText}. Copied from Medaid `
+    }, 1000);
   }
 
   generatePDF() {
     // this.downloadinloading = true;
     // this.getDownloadStatus = true;
+    this.downloadme = true;
     console.log('currrentSelfAssessmentId', this.currentSelfAssementId);
 
-    const timer = setInterval(() => {
-      console.log('long');
-      this.selfAssessmentService.downloadPDF(this.currentSelfAssementId).subscribe(data => {
-        const response = data;
-        this.downloadResult = response;
+    console.log('long');
+    this.selfAssessmentService.downloadPDF(this.currentSelfAssementId).subscribe(data => {
+      const response = data;
+      this.downloadme = false;
+      this.downloadResult = response;
 
-        // console.log(this.downloadResult.fileDirectory.filename);
-        // window.open(window.document.location.href = this.downloadResult.fileDirectory.filename, '_blank');
-        console.log('response', response);
-      },
-        err => {
-          console.log('errorResponse', err);
-        })
-
-    }, 6000);
-
-    setTimeout(() => {
-      clearInterval(timer);
-
-    }, 1000);
-
+      console.log('response', response);
+      console.log(response.filedirectory);
+      // window.open(window.document.location.href = this.downloadResult.filedirectory, '_blank');
+      window.location.href = this.downloadResult.filedirectory;
+    },
+      err => {
+        console.log('errorResponse', err);
+      })
 
 
   }
