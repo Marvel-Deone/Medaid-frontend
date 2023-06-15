@@ -1,13 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Renderer2  } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
 import { SelfAssessmentService } from '../services/self-assessment/self-assessment.service';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { UserService } from '../services/user.service';
 
-(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -15,7 +12,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
   templateUrl: './self-assesement.component.html',
   styleUrls: ['./self-assesement.component.css']
 })
-export class SelfAssesementComponent  {
+export class SelfAssesementComponent {
   public role_id: any;
   public loading: boolean = false;
   public downloadinloading: boolean = false;
@@ -58,22 +55,23 @@ export class SelfAssesementComponent  {
   copyText: string = '';
   selfAssessmentLength: number = 0;
   myQuest: string[] = [];
+  downloadResult: any;
   // contentToConvert:any;
 
-  
-  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService, private elementRef: ElementRef, private renderer2: Renderer2, private clipboard: Clipboard,) { }
-  
-    @ViewChild('contentToConvert', { static: false }) contentToConvert!: ElementRef;
-    
-    // ngAfterViewInit() {
-    //   setTimeout(() => {
-    //     this.generatePDF();
-    //   }, 0);
-    // }
-  
-    
+
+  constructor(private router: Router, private _snackBar: MatSnackBar, private service: UserService, private selfAssessmentService: SelfAssessmentService, private clipboard: Clipboard,) { }
+
+  @ViewChild('contentToConvert', { static: false }) contentToConvert!: ElementRef;
+
+  // ngAfterViewInit() {
+  //   setTimeout(() => {
+  //     this.generatePDF();
+  //   }, 0);
+  // }
+
+
   ngOnInit(): void {
-    
+
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
@@ -85,7 +83,7 @@ export class SelfAssesementComponent  {
         console.log('errorResponse', errorResponse);
       }
     )
-    
+
     this.selfAssessmentService.getSelfAssessment().subscribe(
       data => {
         const response = data;
@@ -127,7 +125,7 @@ export class SelfAssesementComponent  {
       }
     }
     this.displayQuestions = selfAssessment;
-    
+
   }
 
   submit() {
@@ -135,7 +133,7 @@ export class SelfAssesementComponent  {
     this.selfAssessmentPayload.username = this.userProfile.username;
     this.selfAssessmentPayload.email = this.userProfile.email;
     this.selfAssessmentPayload.category = this.selectedCategory;
-    
+
     const questionAnswerPayload = [];
     if (this.answers.length == 0 || null) {
       this.submitloading = false;
@@ -148,12 +146,12 @@ export class SelfAssesementComponent  {
     } else {
       for (let i = 0; i < this.answers.length; i++) {
         const element = this.answers[i];
-        questionAnswerPayload.push({question: this.displayQuestions[i].Question, answer: element});
+        questionAnswerPayload.push({ question: this.displayQuestions[i].Question, answer: element });
       }
 
       this.selfAssessmentPayload.questionsAnswers = questionAnswerPayload;
       this.selfAssessmentLength = this.selfAssessmentPayload.questionsAnswers.length;
-      
+
       this.selfAssessmentService.saveSelfAssessmentAnswers(this.selfAssessmentPayload).subscribe(
         data => {
           const response = data;
@@ -196,68 +194,52 @@ export class SelfAssesementComponent  {
           this.myQuest.push(element)
         }
         console.log('selfAssessment', this.selfAssessmentLists, this.myQuest, this.answers);
-        
+
       })
   }
 
-  
+
   convertHtml() {
     // setTimeout(() => {
-      const element = this.elementRef.nativeElement.querySelector('.myres');
-      const htmlCode = this.renderer2.parentNode(element).innerHTML;;
-      const tempElement = document.createElement('div');
-      tempElement.innerHTML = htmlCode;
-      const generatedDate = this.selfAssessment.selfAssessment.createdAt;
-      const myDate = new Date(generatedDate).toLocaleString().replace(",", " Time:");
-      this.plainText = tempElement.innerText;
-      this.copyText = `${this.resultDescription} Date of Assessment: ${myDate} ${this.selectedCategory} ${this.plainText}. Copied from Medaid `
+    // const element = this.elementRef.nativeElement.querySelector('.myres');
+    // const htmlCode = this.renderer2.parentNode(element).innerHTML;;
+    // const tempElement = document.createElement('div');
+    // tempElement.innerHTML = htmlCode;
+    // const generatedDate = this.selfAssessment.selfAssessment.createdAt;
+    // const myDate = new Date(generatedDate).toLocaleString().replace(",", " Time:");
+    // this.plainText = tempElement.innerText;
+    // this.copyText = `${this.resultDescription} Date of Assessment: ${myDate} ${this.selectedCategory} ${this.plainText}. Copied from Medaid `
     // }, 1000);
   }
 
   generatePDF() {
     // this.downloadinloading = true;
     // this.getDownloadStatus = true;
-    console.log('Hello there');
-    const element = this.elementRef.nativeElement.querySelector('.myres');
-    const htmlCode = this.renderer2.parentNode(element).innerHTML;;
-    const tempElement = document.createElement('div');
-    tempElement.innerHTML = htmlCode;
-    this.plainText = tempElement.innerText;
-    const generatedDate = this.selfAssessment.selfAssessment.createdAt;
-    const myDate = new Date(generatedDate).toLocaleString().replace(",", " Time:");
-    
-   if (this.contentToConvert) {
-    const documentDefinition = {
-      header: {text: this.selectedCategory, bold: true},
-      // content: [
-      //   this.resultDescription,
-      //   `Date of Assessement: ${myDate}`,
-      //   this.plainText,
-      // ]
-      content: [
-        {
-          layout: 'lightHorizontalLines', // optional
-          table: {
-            // headers are automatically repeated if the table spans over multiple pages
-            // you can declare how many rows should be treated as headers
-            headerRows: 1,
-            widths: [ 'auto' ],
-    
-            body: [
-             this.myQuest,
-             this.answers
-            ]
-          }
-        },
-        { text: this.resultDescription, bold: true  },
-        { text: `Date of Assessment: ${myDate}` },
-        { text: this.plainText },
-      ]
-    };
-    pdfMake.createPdf(documentDefinition).download('sample.pdf');
-    this.loading = false;
-   }
-  
+    console.log('currrentSelfAssessmentId', this.currentSelfAssementId);
+
+    const timer = setInterval(() => {
+      console.log('long');
+      this.selfAssessmentService.downloadPDF(this.currentSelfAssementId).subscribe(data => {
+        const response = data;
+        this.downloadResult = response;
+
+        // console.log(this.downloadResult.fileDirectory.filename);
+        // window.open(window.document.location.href = this.downloadResult.fileDirectory.filename, '_blank');
+        console.log('response', response);
+      },
+        err => {
+          console.log('errorResponse', err);
+        })
+
+    }, 6000);
+
+    setTimeout(() => {
+      clearInterval(timer);
+
+    }, 1000);
+
+
+
   }
 
   copy() {
@@ -275,5 +257,5 @@ export class SelfAssesementComponent  {
     this.getResultStatus = false;
   }
 
-  
+
 }

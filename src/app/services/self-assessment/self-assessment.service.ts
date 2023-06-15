@@ -11,6 +11,7 @@ export class SelfAssessmentService {
   private uriseg = environment.baseUrl;
   header: any;
   selfAssessment: any;
+  downloadResult: any;
 
   constructor(private http: HttpClient) { }
 
@@ -32,7 +33,7 @@ export class SelfAssessmentService {
       return this.selfAssessment;
     }));
   }
-  
+
   saveSelfAssessmentAnswers(inputdata: any) {
     const URI = this.uriseg + '/selfAssessment/answer';
     const token = JSON.parse(localStorage['token']);
@@ -41,7 +42,7 @@ export class SelfAssessmentService {
       return response;
     }));
   }
-  
+
 
   getSingleSelfAssessment(id: any) {
     const URI = this.uriseg + '/selfAssessment/answer/' + id;
@@ -58,6 +59,16 @@ export class SelfAssessmentService {
 
     return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
       return response;
+    }));
+  }
+
+  downloadPDF(id: any) {
+    const URI = this.uriseg + '/selfAssessment/downloadResult/' + id;
+    const token = JSON.parse(localStorage['token']);
+
+    return this.http.get(URI, { headers: { Authorization: `${token}` } }).pipe(map(response => {
+      this.downloadResult = response;
+      return this.downloadResult;
     }));
   }
 
