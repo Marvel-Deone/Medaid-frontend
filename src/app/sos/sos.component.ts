@@ -21,6 +21,7 @@ export class SosComponent {
     username: '',
     selectedJob: '',
     sosContact: [],
+    is_profileComplete: ''
   };
   sosContactPayload: any = {
     username: '',
@@ -30,6 +31,8 @@ export class SosComponent {
       contact_number: '',
     },
   };
+
+  profile_complete: boolean = false;
 
   singleSosContact: any;
   public emergencyContacts: any;
@@ -61,29 +64,36 @@ export class SosComponent {
     private service: UserService,
     private http: HttpClient
   ) {}
-  ngOnInit(): void {
+  async ngOnInit (): Promise<void> {
     this.service.GetProfile().subscribe(
-      (data) => {
+      data => {
         const response = data;
-        console.log('response', response);
-        this.userProfile = response.profile;
-        this.role_id = this.userProfile.role_id;
-        this.firstName = this.userProfile.firstName;
-        this.lastName = this.userProfile.lastName;
+        // this.userProfile = response.profile;
+        this.userProfile._id = response.profile._id;
+        this.userProfile.username = response.profile.username;
+        this.userProfile.firstName = response.profile.firstName;
+        this.userProfile.lastName = response.profile.lastName;
+        this.userProfile.middleName = response.profile.middleName;
+        this.userProfile.selectedJob = response.profile.selectedJob;
+        this.userProfile.sosContact = response.profile.sosContact;
+        this.userProfile.is_profileComplete = response.profile.is_profileComplete;
+        this.profile_complete = this.userProfile.is_profileComplete;
+        this.role_id = response.profile.role_id;
+
+        this.startCountdown();
+
       },
-      (error) => {
+      error => {
         const errorResponse = error;
         console.log('errorResponse', errorResponse);
+
       }
     );
     this.service.getSosContact().subscribe(
       (data) => {
         const response = data;
-        console.log('myRes', response);
-
         if (response.sosContacts !== null) {
           this.emergencyContacts = response.sosContacts;
-          console.log('sosContacts', this.emergencyContacts);
         }
       },
       (error) => {
@@ -91,7 +101,6 @@ export class SosComponent {
         console.log('errorResponse', errorResponse);
       }
     );
-    this.startCountdown();
   }
 
   changeMenuStatus() {
@@ -99,26 +108,25 @@ export class SosComponent {
     // alert(this.showmenu);
   }
   startCountdown(): void {
+    if (this.userProfile.is_profileComplete) {
     this.countdownInterval = setInterval(() => {
       this.countdown--;
 
       if (this.countdown <= 0) {
         this.countdownReached = true;
         clearInterval(this.countdownInterval);
-        console.log('Emergency');
 
         this.callNow();
       }
     }, 1000);
   }
+  }
   stopCountdown(): void {
     clearInterval(this.countdownInterval);
   }
   callNow() {
-    console.log(this.userProfile.firstName);
     this.emergencyContacts.forEach((contact: any) => {
-      const messageText = `URGENT: Attention ${contact.sosContact.contact_name}!! ${contact.firstName} ${contact.lastName} [${contact.username}] requires immediate assistance! An urgent situation has arisen. Please contact them at ${contact.phone} for immediate help!!! MedAidSaveOurSoul`;
-      console.log(messageText);
+      const messageText = `URGENT: Attention ${contact.sosContact.contact_name}!! ${this.userProfile.firstName  } ${contact.lastName} [${contact.username}] requires immediate assistance! An urgent situation has arisen. Please contact them at ${contact.phone} for immediate help!!! MedAidSaveOurSoul`;
       const url = 'https://api.ebulksms.com:8080/sendsms';
       const headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -140,7 +148,6 @@ export class SosComponent {
         .request('get', url, { ...options, responseType: 'text' })
         .subscribe(
           (response: any) => {
-            console.log(response);
             this._snackBar.open('SOS message sent successfully', 'OK', {
               duration: 3000,
               horizontalPosition: 'right',
@@ -178,7 +185,6 @@ export class SosComponent {
           ? this.textAreaValue
           : this.selectedCondition;
       const messageText = `URGENT: Attention ${contact.sosContact.contact_name}!! ${contact.firstName} ${contact.lastName} [${contact.username}] requires immediate assistance! An urgent situation has arisen due to ${selectedEmergency} emergency. Please contact them at ${contact.phone} for immediate help!!! MedAidSaveOurSoul`;
-      console.log(messageText);
 
       const url = 'https://api.ebulksms.com:8080/sendsms';
       const headers = new HttpHeaders({
@@ -201,7 +207,6 @@ export class SosComponent {
         .request('get', url, { ...options, responseType: 'text' })
         .subscribe(
           (response: any) => {
-            console.log(response);
             this._snackBar.open('SOS message sent successfully', 'OK', {
               duration: 3000,
               horizontalPosition: 'right',

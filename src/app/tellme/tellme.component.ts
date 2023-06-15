@@ -29,8 +29,6 @@ export class TellmeComponent {
     this.quoteService.Getquote().subscribe((res: any) => {
       this.quotes = res.data;
       this.selectedQuote = this.quotes[Math.floor(Math.random() * this.quotes.length)];
-      console.log(this.quotes);
-      
     });
 
     this.userToken = JSON.parse(localStorage['token']);

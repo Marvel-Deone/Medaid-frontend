@@ -32,7 +32,8 @@ export class NotificationComponent {
     past_medical_condition: '',
     allergies: '',
     medication: '',
-    medical_note: ''
+    medical_note: '',
+    is_profileComplete: ''
   };
 
   ngOnInit(): void {
@@ -43,6 +44,7 @@ export class NotificationComponent {
       
         
         this.userProfile.username = response.profile.username;
+        this.userProfile.is_profileComplete = response.profile.is_profileComplete;
         this.role_id = response.profile.role_id;
         this.currentUserId= response.profile._id
       }, 

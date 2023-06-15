@@ -26,7 +26,6 @@ export class SidebarsideComponent {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response ', response);
  
         this.userProfile.username = response.profile.username;
         this.userProfile._id=response.profile._id

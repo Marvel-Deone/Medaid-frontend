@@ -158,8 +158,6 @@ export class SignUpComponent {
         console.log(errorResponse);
         const errorMessage =
           errorResponse.error.message || 'An error occurred. Please try again.';
-        console.log('Registration Failed:', errorMessage);
-
         this._snackBar.open(errorMessage, 'OK', {
           duration: 3000,
           horizontalPosition: 'right',
@@ -286,7 +284,6 @@ export class SignUpComponent {
           this.loading = false;
           this.errorMessage = errorResponse.error.message;
           this.status = errorResponse.error.status;
-          console.log('Registration Failed', errorResponse.error.message);
           this.errorMessage
             ? this._snackBar.open(this.errorMessage, 'OK', {
                 duration: 3000,

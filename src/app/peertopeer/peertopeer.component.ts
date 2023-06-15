@@ -64,7 +64,6 @@ export class PeertopeerComponent {
 
     this.service.GetAllUser(this.currentUserEmail).subscribe((item: any) => {
       this.allUsers = item.users;
-      console.log(this.allUsers);
       this.service
         .GetCurrentUser(this.currentUserEmail)
         .subscribe((item: any) => {
@@ -201,7 +200,6 @@ export class PeertopeerComponent {
       const callData: any = (await callDoc.get()).data();
 
       const offerDescription = callData.offer;
-      console.log(offerDescription);
 
       await this.peerConnection.setRemoteDescription(
         new RTCSessionDescription(offerDescription)
@@ -220,7 +218,6 @@ export class PeertopeerComponent {
 
       offerCandidates.onSnapshot((snapshot: any) => {
         snapshot.docChanges().forEach((change: any) => {
-          console.log();
           if (change.type === 'added') {
             let data = change.doc.data();
 

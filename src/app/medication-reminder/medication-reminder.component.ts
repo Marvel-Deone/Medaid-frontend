@@ -55,12 +55,7 @@ export class MedicationReminderComponent {
     this.service.GetProfile().subscribe(
       data => {
         const response = data;
-        console.log('response', response);
-
         this.userProfile = response.profile;
-
-        console.log('userProfile', this.userProfile);
-
         this.role_id = this.userProfile.role_id;
       },
       error => {
@@ -73,11 +68,8 @@ export class MedicationReminderComponent {
     this.medicationReminderService.getMedication().subscribe(
       data => {
         const response = data;
-        console.log('myRes', response);
-
         if (response.medications !== null) {
           this.medications = response.medications;
-          console.log('medications', response);
         }
       },
       error => {
@@ -90,11 +82,9 @@ export class MedicationReminderComponent {
     this.medicationReminderService.getReminder().subscribe(
       data => {
         const response = data;
-        console.log('myRes', response);
 
         if (response.reminder !== null) {
           this.reminders = response.reminders;
-          console.log('medications', response);
         }
       },
       error => {
@@ -126,7 +116,6 @@ export class MedicationReminderComponent {
   }
 
   saveMedication() {
-    console.log('MedicationPayload', this.medicationPayload);
 
     if (this.medicationPayload.medication.drug_name == null || this.medicationPayload.medication.dose == null || this.medicationPayload.medication.daily == null) {
       this.loading = false;
@@ -168,7 +157,6 @@ export class MedicationReminderComponent {
         this.medicationPayload.medication.interval.is_afternoon = true;
         this.medicationPayload.medication.interval.is_night = true;
       }
-      console.log('medication:', this.medicationPayload);
 
 
       this.medicationReminderService.createMedication(this.medicationPayload).subscribe(
@@ -181,7 +169,6 @@ export class MedicationReminderComponent {
             verticalPosition: 'bottom',
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-          console.log('MedicationPayload', this.medicationPayload);
           this.ngOnInit();
 
           this.medicationPayload.medication.drug_name = "";
@@ -204,58 +191,11 @@ export class MedicationReminderComponent {
     }
   }
 
-  saveReminder() {
-    console.log('MedicationPayload', this.medicationPayload);
-
-    if (this.reminderPayload.reminder.title == null || this.reminderPayload.reminder.time == null) {
-      this.loading = false;
-      this._snackBar.open("All the fields must be filled", "OK", {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'bottom',
-        panelClass: ['green-snackbar', 'login-snackbar'],
-      });
-    } else {
-      this.reminderPayload.username = this.userProfile.username;
-      this.reminderPayload.email = this.userProfile.email;
-
-      this.medicationReminderService.createReminder(this.reminderPayload).subscribe(
-        data => {
-          const response = data;
-          this.loading = false;
-          this._snackBar.open("Reminder added successfully", "OK", {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            panelClass: ['green-snackbar', 'login-snackbar'],
-          });
-
-          this.ngOnInit();
-
-          this.reminderPayload.reminder.title = "";
-          this.reminderPayload.reminder.date = "",
-          this.reminderPayload.reminder.time = "";
-        },
-        errorResponse => {
-          this.loading = false;
-          this.errorMessage = errorResponse.error.message;
-          console.log('errorMessage', this.errorMessage);
-
-          this._snackBar.open("Something went wrong, pls try again", "OK", {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            panelClass: ['green-snackbar', 'login-snackbar'],
-          });
-        })
-    }
-  }
 
   getSingleMedication(id: any) {
     this.medicationReminderService.getSingleMedication(id).subscribe(
       data => {
         const response = data;
-        console.log('singleMedication', response);
         this.singleMedication = response;
         
         this.medicationPayload.medication.drug_name = this.singleMedication.medication.medication.drug_name;
@@ -332,6 +272,52 @@ export class MedicationReminderComponent {
           panelClass: ['green-snackbar', 'login-snackbar'],
         });
       })
+  }
+
+  
+  saveReminder() {
+    if (this.reminderPayload.reminder.title == null || this.reminderPayload.reminder.time == null) {
+      this.loading = false;
+      this._snackBar.open("All the fields must be filled", "OK", {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['green-snackbar', 'login-snackbar'],
+      });
+    } else {
+      this.reminderPayload.username = this.userProfile.username;
+      this.reminderPayload.email = this.userProfile.email;
+
+      this.medicationReminderService.createReminder(this.reminderPayload).subscribe(
+        data => {
+          const response = data;
+          this.loading = false;
+          this._snackBar.open("Reminder added successfully", "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+
+          this.ngOnInit();
+
+          this.reminderPayload.reminder.title = "";
+          this.reminderPayload.reminder.date = "",
+          this.reminderPayload.reminder.time = "";
+        },
+        errorResponse => {
+          this.loading = false;
+          this.errorMessage = errorResponse.error.message;
+          console.log('errorMessage', this.errorMessage);
+
+          this._snackBar.open("Something went wrong, pls try again", "OK", {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['green-snackbar', 'login-snackbar'],
+          });
+        })
+    }
   }
 
   getSingleReminder(id: any) {

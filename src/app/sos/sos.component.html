@@ -53,14 +53,14 @@
                 <span class="nav-link-text ms-1">Emergency Information</span>
             </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
                     <a class="nav-link text-dark" routerLink="/sos" routerLinkActive="menu_active">
                         <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <span class="nav-link-text ms-1">SOS</span>
                     </a>
-                </li>
+                </li> -->
         <li class="nav-item">
             <a class="nav-link text-dark" routerLink="/profile" routerLinkActive="menu_active">
                 <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -139,19 +139,27 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class=""><a class=" text-dark">Hi, {{ userProfile?.username}}</a>
+                    <li class=""><a class=" text-dark">Hi, {{ userProfile.username}}</a>
                     </li>
                     <li class=" text-sm text-dark active" aria-current="page"></li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">How are you feeling today?</h6>
+                 <h6 class="font-weight-bolder mb-0">Hope you are feeling good today</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group input-group-outline">
-                        <label class="form-label">Type here...</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
+                 <div *ngIf="userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group input-group-outline bg-success complete_profile" style="cursor: pointer !important;">
+            <a routerLink="/profile" class="text-white">Updated Profile</a>
+            <!-- <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control"> -->
+          </div>
+        </div>
+        <div *ngIf="!userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group input-group-outline bg-danger complete_profile" style="cursor: pointer !important;">
+            <a routerLink="/profile" class="text-white">Complete your profile</a>
+            <!-- <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control"> -->
+          </div>
+        </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <a routerLink="/profile" class="nav-link text-body font-weight-bold px-0">
@@ -279,34 +287,40 @@
                     <i class="material-icons opacity-10">dashboard</i>
                     <span>Dashboard</span>
                 </a>
-    
+
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8 mb-2">Personal
                 </h6>
-    
+
                 <a routerLink="/self-assessement" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="fa fa-comment material-icons opacity-10" aria-hidden="true"></i>
                     <span>Self Assesment</span>
                 </a>
-    
+
                 <a routerLink="/medication-reminder" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="fa fa-hospital-o material-icons opacity-10" aria-hidden="true"></i>
                     <span>Medication & Reminder</span>
                 </a>
-    
+
                 <a routerLink="/emergency-information" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10 fa fa-info-circle" aria-hidden="true"></i>
                     <span>Emergency Information</span>
                 </a>
-    
+
+                <a routerLink="/sos" routerLinkActive="menu_active" class="px-2 py-3 d-flex gap-2 align-items-center"
+                    style="color: #344767 !important;">
+                    <img src="./assets/img/sos-white.png" alt="" width="28px">
+                    <span>SOS</span>
+                </a>
+
                 <a routerLink="/profile" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
                     <span>Profile</span>
                 </a>
-    
+
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account
                 </h6>
     
@@ -322,32 +336,32 @@
                         style="font-size: 18px !important;"></i>
                     <span>Forum</span>
                 </a>
-    
+
                 <a routerLink="/consultation" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
                     <span>Consultation</span>
                 </a>
-    
+
                 <a routerLink="/admin/blog" routerLinkActive="menu_active"
                     class="px-1 py-3 d-flex gap-2 align-items-center ms-2" style="color: #344767 !important;">
                     <i class="fa fa-pencil-square-o material-icons opacity-10" style="font-size: 16px !important;"
                         aria-hidden="true"></i>
                     <span>Blog</span>
                 </a>
-    
+
                 <a routerLink="/tell-me" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                     <span>Tell me</span>
                 </a>
-    
+
                 <a routerLink="/notifications" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
                     <span>Notification</span>
                 </a>
-    
+
                 <div class="sidenav-footer w-100 bottom-0" style="font-size: 14px !important;">
                     <div>
                         <a class="btn bg-gradient-primary mt-4 w-100 text-capitalize" type="button" (click)="logout()">
@@ -364,11 +378,11 @@
     </div>
     <!-- End Navbar -->
 
-    <div class="container-fluid">
+    <div class="container-fluid" *ngIf="!userProfile.is_profileComplete">
         <!-- MiniNav -->
         <nav class="navbar navbar-expand-lg px-0 mb-3 shadow-none" id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid px-3 d-flex align-items-center">
-               
+
                 <div>
                     <button class="btn btn-primary mt-4"><a routerLink="/profile" class="text-white">AB+</a></button>
                 </div>
@@ -377,7 +391,38 @@
 
         <!-- cards -->
         <div class="row gap-5 px-4">
-            <a  class="col-12 col-md-3 px-3 py-1 d-flex"
+            <div class="col-12">
+                <img src="./assets/img/access_denied.svg" class="w-50 h-50 d-flex mx-auto mt-4" alt="">
+                <p class="text-center mt-4 text-danger fw-bold">Before you can have access to this page, you need to update/complete your profile first with your surname and first name</p>
+            </div>
+            <!-- <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
+                style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
+                <div class="d-flex gap-2 align-items-center">
+                    <i class="material-icons opacity-10">dashboard</i>
+                    <span>Direction</span>
+                </div>
+                <div style="transform: translateY(15%);">
+                    <button class="btn btn-primary" style="font-size: 10px;">Get Now</button>
+                </div>
+            </a> -->
+        </div>
+
+    </div>
+
+    <div class="container-fluid" *ngIf="userProfile.is_profileComplete">
+        <!-- MiniNav -->
+        <nav class="navbar navbar-expand-lg px-0 mb-3 shadow-none" id="navbarBlur" navbar-scroll="true">
+            <div class="container-fluid px-3 d-flex align-items-center">
+
+                <div>
+                    <button class="btn btn-primary mt-4"><a routerLink="/profile" class="text-white">AB+</a></button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- cards -->
+        <div class="row gap-5 px-4">
+            <a class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
                 <div class="d-flex gap-2 align-items-center">
                     <i class="material-icons opacity-10">dashboard</i>
@@ -387,7 +432,7 @@
                     <button class="btn btn-primary" style="font-size: 10px;" (click)="callNow()">Call Now</button>
                 </div>
             </a>
-            <a  class="col-12 col-md-3 px-3 py-1 d-flex"
+            <a class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
                 <div class="d-flex gap-2 align-items-center">
                     <i class="material-icons opacity-10">dashboard</i>
@@ -396,32 +441,28 @@
                 <div style="transform: translateY(15%);">
                     <button class="btn btn-primary" style="font-size: 10px;" (click)="showChatArea()">Chat Now</button>
                 </div>
-                
-            </a> 
-          <div  *ngIf="showChatDiv" >
-              <mat-form-field class="col-12 col-md-3 d-flex justify-content-center">
-                  <mat-label>Pick your Condition</mat-label>
-                  <mat-select (selectionChange)="onConditionSelected($event.value)" [(ngModel)]="selectedCondition">
-                    <mat-option *ngFor="let condition of conditions" [value]="condition.value">
-                      {{condition.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                
-                <textarea name="" id="" cols="30" rows="10" *ngIf="showTextArea" [(ngModel)]="textAreaValue"></textarea>
-  
-              
-             
-                <div style="transform: translateY(15%);">
-                    <button class="btn btn-primary " style="font-size: 10px;" (click)="logButtonClicked()" [disabled]="selectedCondition==''">Chat Now</button>
-                </div>
-                
 
-          </div>
-        
-        
-              
-            
+            </a>
+            <div *ngIf="showChatDiv">
+                <mat-form-field class="col-12 col-md-3 d-flex justify-content-center">
+                    <mat-label>Pick your Condition</mat-label>
+                    <mat-select (selectionChange)="onConditionSelected($event.value)" [(ngModel)]="selectedCondition">
+                        <mat-option *ngFor="let condition of conditions" [value]="condition.value">
+                            {{condition.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <textarea name="" id="" cols="30" rows="10" *ngIf="showTextArea" [(ngModel)]="textAreaValue"></textarea>
+
+
+
+                <div style="transform: translateY(15%);">
+                    <button class="btn btn-primary " style="font-size: 10px;" (click)="logButtonClicked()"
+                        [disabled]="selectedCondition==''">Chat Now</button>
+                </div>
+
+            </div>
 
             <!-- <a routerLink="/dashboard" class="col-12 col-md-3 px-3 py-1 d-flex"
                 style="color: #344767 !important; border: 1px solid #d2d6da; border-radius: 0.5rem; justify-content: space-between;">
@@ -463,27 +504,23 @@
                 <h4>List of Emergency Contacts</h4>
                 <table class="table">
                     <thead>
-                      <tr>
-                        <th scope="col">S/N</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Contact</th>
-                     
-                      </tr>
+                        <tr>
+                            <th scope="col">S/N</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Contact</th>
+
+                        </tr>
                     </thead>
-                    <tbody >
-                      <tr *ngFor="let contact of emergencyContacts; let i= index">
-                        <th scope="row">{{i+1}}</th>
-                        <td>{{contact.sosContact.contact_name
+                    <tbody>
+                        <tr *ngFor="let contact of emergencyContacts; let i= index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{contact.sosContact.contact_name}}</td>
+                            <td>{{contact.sosContact.contact_number}}</td>
 
+                        </tr>
 
-                        }}</td>
-                        <td>{{contact.sosContact.contact_number
-                        }}</td>
-                     
-                      </tr>
-                    
                     </tbody>
-                  </table>
+                </table>
                 <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 px-0 me-sm-6 me-5 d-flex flex-column">
                     <li class="fw-bolder">Adegbile Isreal</li>
                     <li> <strong style="font-size: 12px; font-weight: bolder;">08082882882</strong><a routerLink="/profile"

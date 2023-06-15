@@ -143,15 +143,23 @@
                     </li>
                     <li class=" text-sm text-dark active" aria-current="page"></li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">How are you feeling today?</h6>
+                 <h6 class="font-weight-bolder mb-0">Hope you are feeling good today</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group input-group-outline">
-                        <label class="form-label">Type here...</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
+                  <div *ngIf="userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group input-group-outline bg-success complete_profile" style="cursor: pointer !important;">
+            <a routerLink="/profile" class="text-white">Updated Profile</a>
+            <!-- <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control"> -->
+          </div>
+        </div>
+        <div *ngIf="!userProfile.is_profileComplete" class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group input-group-outline bg-danger complete_profile" style="cursor: pointer !important;">
+            <a routerLink="/profile" class="text-white">Complete your profile</a>
+            <!-- <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control"> -->
+          </div>
+        </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <a routerLink="/profile" class="nav-link text-body font-weight-bold px-0">
@@ -301,6 +309,12 @@
                     <span>Emergency Information</span>
                 </a>
 
+                <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
+          style="color: #344767 !important;">
+          <i class="material-icons opacity-10">person</i>
+          <span>SOS</span>
+        </a>
+
                 <a routerLink="/profile" routerLinkActive="menu_active"
                     class="px-2 py-2 d-flex gap-2 align-items-center" style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
@@ -310,11 +324,11 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Account
                 </h6>
 
-                <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
+                <!-- <a routerLink="/sos" routerLinkActive="menu_active" class="px-1 py-3 d-flex gap-2 align-items-center"
                     style="color: #344767 !important;">
                     <i class="material-icons opacity-10">person</i>
                     <span>SOS</span>
-                </a>
+                </a> -->
 
                 <a routerLink="/chat" class="px-2 py-2 d-flex gap-2 align-items-center"
                     style="color: #344767 !important;">
