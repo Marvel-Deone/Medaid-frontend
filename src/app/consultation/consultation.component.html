@@ -143,7 +143,7 @@
                     </li>
                     <li class=" text-sm text-dark active" aria-current="page"></li>
                 </ol>
-                 <h6 class="font-weight-bolder mb-0">Hope you are feeling good today</h6>
+                <h6 class="font-weight-bolder mb-0">Hope you are feeling good today</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -367,73 +367,73 @@
     <div class="container-fluid py-4 mt-5" style="margin-top: 9% !important;">
         <div class="card card-body mx-3 mx-md-4 mt-n6">
             <div class="row gx-4 mb-2">
-               
+
                 <h4 class="text-center mt-2">Consultation</h4>
                 <div class="container">
                     <div class="row" *ngIf="role_id==1">
-                      <div class="col-12">
-                        <h2 class="mb-4">Suggested Experts</h2>
-                      </div>
-                      <div class="col-12">
-                        <div class="expert-card" *ngFor="let expert  of allExperts, let i =index">
-                          <div class="expert-avatar">
-                            <img src="../../assets/img/dommy.png" alt="Expert Avatar">
-                          </div>
-                          <div class="expert-details">
-                            <div class="expert-info">
-                              <h5 class="expert-username mb-1">{{expert.username}}</h5>
-                              <h6 class="expert-fullname mb-2">{{expert.firstname}} {{expert.lastname}} </h6>
-                              <p class="expert-bio mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor libero nec felis tincidunt, non mattis orci bibendum.</p>
-                            </div>
-                            <div class="expert-actions">
-                              <button class="btn btn-primary btn-sm" (click)="consult(i)">Consult</button>
-                            </div>
-                          </div>
+                        <div class="col-12">
+                            <h2 class="mb-4">Suggested Experts</h2>
                         </div>
-                      </div>
+                        <div class="col-12">
+                            <div class="expert-card" *ngFor="let expert  of allExperts, let i =index">
+                                <div class="expert-avatar">
+                                    <img src="../../assets/img/dommy.png" alt="Expert Avatar">
+                                </div>
+                                <div class="expert-details">
+                                    <div class="expert-info">
+                                        <h5 class="expert-username mb-1">{{expert.username}}</h5>
+                                        <h6 class="expert-fullname mb-2">{{expert.firstname}} {{expert.lastname}} </h6>
+                                        <p class="expert-bio mb-2">{{expert.bio}}</p>
+                                    </div>
+                                    <div class="expert-actions">
+                                        <button class="btn btn-primary btn-sm" (click)="consult(i)">Consult</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
                     <div class="row" *ngIf="role_id==2">
                         <div class="col-12">
-                          <h2 class="mb-4">Consultation Request</h2>
+                            <h2 class="mb-4">Consultation Request</h2>
                         </div>
                         <div class="col-12">
-                          <div class="expert-card" *ngFor="let request of allConsultReq , let i =index">
-                            <div class="expert-avatar">
-                              <img src="../assets/img/bruce-mars.jpg" alt="Expert Avatar">
+                            <div class="expert-card" *ngFor="let request of allConsultReq , let i =index">
+                                <div class="expert-avatar">
+                                    <img src="../assets/img/bruce-mars.jpg" alt="Expert Avatar">
+                                </div>
+                                <div class="expert-details">
+                                    <div class="expert-info">
+                                        <h5 class="expert-username mb-1">{{request.senderUserName
+                                            }}</h5>
+
+
+                                    </div>
+                                    <div class="expert-actions">
+                                        <button class="btn btn-primary btn-sm m-1" (click)="accept(i)">Accept</button>
+                                        <button class="btn btn-primary btn-sm m-1" (click)="decline(i)">Decline</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="expert-details">
-                              <div class="expert-info">
-                                <h5 class="expert-username mb-1">{{request.senderUserName
-                                }}</h5>
-                               
-                               
-                              </div>
-                              <div class="expert-actions">
-                                <button class="btn btn-primary btn-sm m-1" (click)="accept(i)">Accept</button>
-                                <button class="btn btn-primary btn-sm m-1" (click)="decline(i)">Decline</button>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
 
-                  </div>
-                  
+                </div>
 
-              
 
-             
+
+
+
             </div>
 
-           
-          
-            </div>
 
-           
-            
 
-               
         </div>
+
+
+
+
+
+    </div>
 </main>
