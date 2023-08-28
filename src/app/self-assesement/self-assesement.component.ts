@@ -194,8 +194,6 @@ export class SelfAssesementComponent {
           const element = this.displayQuestions[i].Question;
           this.myQuest.push(element)
         }
-        console.log('selfAssessment', this.selfAssessmentLists, this.myQuest, this.answers);
-
       })
   }
 
